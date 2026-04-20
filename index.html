@@ -1,1716 +1,1787 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Community OS — Research</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-:root {
-  --navy: #0c2340;
-  --navy-mid: #153550;
-  --navy-light: #1e4a6e;
-  --teal: #00857c;
-  --teal-mid: #006b63;
-  --teal-light: #e0f5f3;
-  --teal-xlight: #f2faf9;
-  --sky: #0099cc;
-  --sky-light: #e5f5fb;
-  --gold: #d4923a;
-  --gold-light: #fdf3e0;
-  --sage: #4a7c6f;
-  --sage-light: #eaf3f0;
-  --stone: #f5f3ee;
-  --stone-mid: #ede9e1;
-  --white: #ffffff;
-  --text-dark: #0c1e2e;
-  --text-mid: #2c4058;
-  --text-muted: #5c7a94;
-  --border: #d8e4ed;
-  --border-light: #eef3f7;
-  --font-serif: 'DM Serif Display', Georgia, serif;
-  --font-sans: 'DM Sans', system-ui, sans-serif;
-  --font-mono: 'DM Mono', monospace;
-  --radius: 10px;
-  --radius-lg: 16px;
-}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Community OS — Research Hub | Isabela de Basilan</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #0c2340;
+      --navy-mid: #153550;
+      --navy-light: #1e4a6e;
+      --teal: #00857c;
+      --teal-mid: #006b63;
+      --teal-light: #e0f5f3;
+      --teal-xlight: #f2faf9;
+      --sky: #0099cc;
+      --sky-light: #e5f5fb;
+      --gold: #d4923a;
+      --gold-light: #fdf3e0;
+      --sage: #4a7c6f;
+      --sage-light: #eaf3f0;
+      --stone: #f5f3ee;
+      --stone-mid: #ede9e1;
+      --white: #ffffff;
+      --text-dark: #0c1e2e;
+      --text-mid: #2c4058;
+      --text-muted: #5c7a94;
+      --success: #2d8659;
+      --warning: #d4923a;
+      --danger: #a13c3c;
+      --border: #d8e4ed;
+      --border-light: #eef3f7;
+      --font-serif: 'DM Serif Display', Georgia, serif;
+      --font-sans: 'DM Sans', system-ui, sans-serif;
+      --font-mono: 'DM Mono', monospace;
+      --radius: 10px;
+      --radius-lg: 16px;
+    }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
 
-body {
-  font-family: var(--font-sans);
-  background: var(--stone);
-  color: var(--text-dark);
-  font-size: 15px;
-  line-height: 1.65;
-}
+    body {
+      font-family: var(--font-sans);
+      background: linear-gradient(135deg, var(--stone) 0%, var(--teal-xlight) 100%);
+      color: var(--text-dark);
+      font-size: 15px;
+      line-height: 1.65;
+      min-height: 100vh;
+    }
 
-/* ── NAV ── */
-nav {
-  background: var(--navy);
-  position: sticky;
-  top: 0;
-  z-index: 200;
-  border-bottom: 2px solid var(--teal);
-}
-.nav-inner {
-  max-width: 1280px;
-  margin: 0 auto;
-  display: flex;
-  align-items: stretch;
-  min-height: 52px;
-}
-.nav-brand {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 0 24px;
-  border-right: 1px solid rgba(255,255,255,0.12);
-  flex-shrink: 0;
-  text-decoration: none;
-}
-.nav-brand-dot {
-  width: 28px; height: 28px;
-  background: var(--teal);
-  border-radius: 6px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 13px; font-weight: 700; color: var(--white);
-  font-family: var(--font-mono);
-  flex-shrink: 0;
-}
-.nav-brand-text {
-  display: flex; flex-direction: column; line-height: 1.1;
-}
-.nav-brand-main {
-  font-size: 13px; font-weight: 600; color: var(--white); letter-spacing: 0.02em;
-}
-.nav-brand-sub {
-  font-size: 10px; color: rgba(255,255,255,0.5); letter-spacing: 0.06em; text-transform: uppercase;
-}
-.nav-links {
-  display: flex; gap: 0; overflow-x: auto; scrollbar-width: none; flex: 1;
-}
-.nav-links a {
-  color: rgba(255,255,255,0.65);
-  text-decoration: none;
-  font-size: 12px; font-weight: 500;
-  padding: 0 16px;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  display: flex; align-items: center;
-  border-right: 1px solid rgba(255,255,255,0.07);
-  transition: color 0.2s, background 0.2s;
-  white-space: nowrap;
-}
-.nav-links a:hover { color: var(--white); background: rgba(255,255,255,0.06); }
-.nav-links a.active { color: var(--teal); border-bottom: 2px solid var(--teal); }
-.nav-external {
-  display: flex; align-items: center; gap: 12px; padding: 0 20px;
-  border-left: 1px solid rgba(255,255,255,0.12);
-}
-.nav-external a {
-  font-size: 11px; color: rgba(255,255,255,0.5); text-decoration: none;
-  letter-spacing: 0.04em;
-  transition: color 0.2s;
-}
-.nav-external a:hover { color: rgba(255,255,255,0.9); }
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-image: 
+        linear-gradient(45deg, transparent 48%, rgba(0, 133, 124, 0.02) 49%, rgba(0, 133, 124, 0.02) 51%, transparent 52%),
+        linear-gradient(-45deg, transparent 48%, rgba(212, 146, 58, 0.015) 49%, rgba(212, 146, 58, 0.015) 51%, transparent 52%);
+      background-size: 120px 120px;
+      pointer-events: none;
+      z-index: -1;
+    }
 
-/* ── ALERT BANNER ── */
-.alert-banner {
-  background: #fffbf0;
-  border-bottom: 2px solid #e8a800;
-  padding: 10px 24px;
-}
-.alert-banner-inner {
-  max-width: 1280px; margin: 0 auto;
-  display: flex; align-items: center; gap: 10px;
-  font-size: 13px; color: #5a3e00;
-}
-.alert-banner strong { font-weight: 600; }
+    /* ── TOP NAVIGATION TABS ── */
+    .top-nav {
+      background: var(--white);
+      border-bottom: 2px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 4px rgba(12, 35, 64, 0.06);
+    }
 
-/* ── HERO ── */
-.hero {
-  background: var(--navy);
-  position: relative;
-  overflow: hidden;
-  padding: 80px 24px 72px;
-}
-.hero-bg {
-  position: absolute; inset: 0;
-  background: linear-gradient(135deg, #0c2340 0%, #153550 40%, #1a5570 100%);
-}
-.hero-accent {
-  position: absolute; right: 0; top: 0; bottom: 0; width: 40%;
-  background: linear-gradient(180deg, rgba(0,133,124,0.18) 0%, rgba(0,153,204,0.08) 100%);
-  clip-path: polygon(15% 0, 100% 0, 100% 100%, 0% 100%);
-}
-.hero-inner {
-  max-width: 1280px; margin: 0 auto; position: relative;
-  display: grid; grid-template-columns: 1fr 380px; gap: 48px; align-items: center;
-}
-.hero-eyebrow {
-  display: flex; align-items: center; gap: 10px; margin-bottom: 20px;
-}
-.hero-pill {
-  display: inline-flex; align-items: center; gap: 6px;
-  background: rgba(0,133,124,0.25);
-  border: 1px solid rgba(0,133,124,0.5);
-  color: #5ee8de;
-  font-size: 11px; font-weight: 600;
-  letter-spacing: 0.08em; text-transform: uppercase;
-  padding: 5px 12px; border-radius: 20px;
-}
-.hero-pill-dot {
-  width: 6px; height: 6px; border-radius: 50%;
-  background: #5ee8de; animation: pulse 2s infinite;
-}
-@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
-.hero-title {
-  font-family: var(--font-serif);
-  font-size: 48px; line-height: 1.1;
-  color: var(--white); margin-bottom: 6px;
-}
-.hero-title em { color: #5ee8de; font-style: normal; }
-.hero-subtitle {
-  font-size: 17px; color: rgba(255,255,255,0.55);
-  font-weight: 300; margin-bottom: 28px; letter-spacing: 0.02em;
-}
-.hero-desc {
-  font-size: 15px; color: rgba(255,255,255,0.75);
-  line-height: 1.7; max-width: 560px; margin-bottom: 32px;
-}
-.hero-tags {
-  display: flex; flex-wrap: wrap; gap: 8px;
-}
-.hero-tag {
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.15);
-  color: rgba(255,255,255,0.7);
-  font-size: 12px; padding: 5px 12px; border-radius: 20px;
-}
-.hero-tag strong { color: rgba(255,255,255,0.95); font-weight: 500; }
+    .top-nav-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      gap: 0;
+      padding: 0;
+      flex-wrap: wrap;
+    }
 
-/* hero sidebar */
-.hero-sidebar {
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.12);
-  border-radius: var(--radius-lg);
-  padding: 24px;
-}
-.hero-sidebar-title {
-  font-size: 10px; font-weight: 600; color: rgba(255,255,255,0.4);
-  letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 16px;
-}
-.hero-stat {
-  display: flex; align-items: flex-start; gap: 14px;
-  padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.08);
-}
-.hero-stat:last-child { border-bottom: none; padding-bottom: 0; }
-.hero-stat-num {
-  font-family: var(--font-serif); font-size: 26px; color: #5ee8de; line-height: 1; flex-shrink: 0;
-}
-.hero-stat-label {
-  font-size: 12px; color: rgba(255,255,255,0.6); line-height: 1.4; padding-top: 2px;
-}
-.hero-stat-sub {
-  font-size: 11px; color: rgba(255,255,255,0.35); margin-top: 2px;
-}
+    .top-nav-tab {
+      padding: 14px 22px;
+      background: var(--white);
+      color: var(--text-muted);
+      border: none;
+      font-family: var(--font-sans);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      transition: all 0.3s;
+      border-bottom: 3px solid transparent;
+      white-space: nowrap;
+    }
 
-/* ── WRAPPER ── */
-.wrap {
-  max-width: 1280px; margin: 0 auto; padding: 0 24px;
-}
+    .top-nav-tab:hover {
+      color: var(--teal);
+      background: var(--teal-xlight);
+    }
 
-/* ── SECTION ── */
-.section {
-  padding: 64px 24px;
-}
-.section-white { background: var(--white); }
-.section-stone { background: var(--stone); }
-.section-navy { background: var(--navy); }
-.section-teal-x { background: var(--teal-xlight); }
+    .top-nav-tab.active {
+      color: var(--teal);
+      border-bottom-color: var(--teal);
+    }
 
-.section-inner { max-width: 1280px; margin: 0 auto; }
+    /* ── ROLE SELECTOR ── */
+    .role-selector {
+      background: linear-gradient(180deg, var(--white) 0%, rgba(255,255,255,0.95) 100%);
+      border-bottom: 2px solid var(--teal);
+      padding: 16px 24px;
+      display: none;
+    }
+    .role-selector.show { display: block; }
 
-.eyebrow {
-  font-size: 11px; font-weight: 600;
-  letter-spacing: 0.1em; text-transform: uppercase;
-  color: var(--teal); margin-bottom: 8px;
-  display: flex; align-items: center; gap: 8px;
-}
-.eyebrow::before { content:''; display:block; width:20px; height:2px; background:var(--teal); flex-shrink:0; }
+    .role-selector-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
 
-.section-title {
-  font-family: var(--font-serif);
-  font-size: 34px; color: var(--navy); line-height: 1.2; margin-bottom: 12px;
-}
-.section-title-white { color: var(--white); }
-.section-intro {
-  font-size: 16px; color: var(--text-mid); max-width: 760px;
-  line-height: 1.7; margin-bottom: 40px;
-}
-.section-intro-white { color: rgba(255,255,255,0.75); }
+    .role-selector-label {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+    }
 
-/* ── CARDS ── */
-.grid { display: grid; gap: 20px; }
-.g2 { grid-template-columns: repeat(2,1fr); }
-.g3 { grid-template-columns: repeat(3,1fr); }
-.g4 { grid-template-columns: repeat(4,1fr); }
+    .role-buttons { display: flex; gap: 12px; flex-wrap: wrap; }
 
-.card {
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: 24px;
-  transition: border-color 0.2s, box-shadow 0.2s;
-}
-.card:hover { border-color: var(--teal); box-shadow: 0 4px 20px rgba(0,133,124,0.1); }
+    .role-btn {
+      padding: 10px 18px;
+      border: 2px solid var(--border);
+      background: var(--white);
+      color: var(--text-mid);
+      font-family: var(--font-sans);
+      font-size: 13px;
+      font-weight: 600;
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: all 0.3s;
+    }
 
-.card-navy {
-  background: var(--navy);
-  border: 1px solid rgba(255,255,255,0.1);
-  border-radius: var(--radius-lg);
-  padding: 24px;
-}
-.card-teal {
-  background: var(--teal);
-  border-radius: var(--radius-lg);
-  padding: 24px;
-}
-.card-teal-light {
-  background: var(--teal-light);
-  border: 1px solid rgba(0,133,124,0.2);
-  border-radius: var(--radius-lg);
-  padding: 24px;
-}
-.card-stone {
-  background: var(--stone);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: 24px;
-}
+    .role-btn:hover {
+      border-color: var(--teal);
+      color: var(--teal);
+      transform: translateY(-2px);
+    }
 
-.card-icon {
-  width: 42px; height: 42px; border-radius: 10px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 18px; margin-bottom: 14px;
-}
-.ic-teal { background: var(--teal-light); }
-.ic-sky { background: var(--sky-light); }
-.ic-gold { background: var(--gold-light); }
-.ic-sage { background: var(--sage-light); }
-.ic-navy { background: rgba(12,35,64,0.08); }
+    .role-btn.active {
+      background: linear-gradient(135deg, var(--teal) 0%, var(--teal-mid) 100%);
+      color: var(--white);
+      border-color: transparent;
+      box-shadow: 0 4px 12px rgba(0, 133, 124, 0.2);
+    }
 
-.card-label {
-  font-size: 10px; font-weight: 700; letter-spacing: 0.1em;
-  text-transform: uppercase; color: var(--teal); margin-bottom: 6px;
-}
-.card-title { font-weight: 600; font-size: 15px; color: var(--navy); margin-bottom: 8px; }
-.card-title-white { color: var(--white); }
-.card-body { font-size: 13.5px; color: var(--text-mid); line-height: 1.65; }
-.card-body-white { color: rgba(255,255,255,0.7); }
+    .language-toggle { display: flex; gap: 8px; margin-left: auto; }
 
-.card-link {
-  display: inline-flex; align-items: center; gap: 5px;
-  font-size: 12.5px; font-weight: 600; color: var(--teal);
-  text-decoration: none; margin-top: 12px;
-  transition: gap 0.2s;
-}
-.card-link:hover { gap: 8px; }
-.card-link::after { content: '→'; }
+    .lang-btn {
+      padding: 8px 14px;
+      border: 1px solid var(--border);
+      background: var(--white);
+      color: var(--text-mid);
+      font-size: 12px;
+      font-weight: 500;
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
 
-/* ── ROOT CARDS (PEAR) ── */
-.root-card {
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--border);
-  background: var(--white);
-  overflow: hidden;
-  transition: box-shadow 0.2s;
-}
-.root-card:hover { box-shadow: 0 6px 24px rgba(0,133,124,0.12); }
-.root-header {
-  background: var(--navy);
-  padding: 18px 22px;
-  display: flex; align-items: center; gap: 12px;
-}
-.root-num {
-  width: 32px; height: 32px; border-radius: 8px;
-  background: var(--teal);
-  display: flex; align-items: center; justify-content: center;
-  font-family: var(--font-serif); font-size: 17px; color: var(--white); flex-shrink: 0;
-}
-.root-header-text { flex: 1; }
-.root-header-title { font-weight: 600; font-size: 14.5px; color: var(--white); }
-.root-header-tag { font-size: 10.5px; color: rgba(255,255,255,0.45); letter-spacing: 0.05em; margin-top: 2px; }
-.root-body { padding: 20px 22px 22px; }
-.root-body p { font-size: 13.5px; color: var(--text-mid); line-height: 1.65; }
+    .lang-btn.active {
+      background: var(--navy);
+      color: var(--white);
+      border-color: var(--navy);
+    }
 
-/* ── ECSOM COLUMNS ── */
-.ecsom-grid {
-  display: grid; grid-template-columns: repeat(3,1fr); gap: 0;
-  border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden;
-}
-.ecsom-col { padding: 24px; }
-.ecsom-col + .ecsom-col { border-left: 1px solid var(--border); }
-.ecsom-col-1 { background: var(--sage-light); }
-.ecsom-col-2 { background: var(--sky-light); }
-.ecsom-col-3 { background: var(--gold-light); }
-.ecsom-col-title { font-weight: 700; font-size: 13px; color: var(--navy); margin-bottom: 3px; }
-.ecsom-col-sub { font-size: 11.5px; color: var(--text-muted); font-style: italic; margin-bottom: 14px; }
-.ecsom-item {
-  font-size: 13px; color: var(--text-mid);
-  padding: 5px 0; border-top: 1px solid rgba(0,0,0,0.07);
-}
-.ecsom-item:first-of-type { border-top: none; }
-.ecsom-bottom {
-  margin-top: 14px; padding: 8px 10px; border-radius: 8px;
-  font-size: 12px; font-weight: 600;
-}
-.ecsom-col-1 .ecsom-bottom { background: rgba(74,124,111,0.18); color: var(--sage); }
-.ecsom-col-2 .ecsom-bottom { background: rgba(0,153,204,0.12); color: #005f80; }
-.ecsom-col-3 .ecsom-bottom { background: rgba(212,146,58,0.18); color: #7a5010; }
+    /* ── HEADER HERO ── */
+    .header-hero {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 50%, var(--teal) 100%);
+      color: var(--white);
+      padding: 56px 24px;
+      position: relative;
+      overflow: hidden;
+    }
 
-/* ── HYPOTHESIS BOX ── */
-.hypothesis-box {
-  background: var(--navy);
-  border-radius: var(--radius-lg);
-  padding: 40px 48px;
-  position: relative; overflow: hidden;
-}
-.hypothesis-box::before {
-  content:'"';
-  position:absolute; top:-20px; left:28px;
-  font-size: 140px; color: rgba(0,133,124,0.2);
-  font-family: var(--font-serif); line-height:1;
-  pointer-events: none;
-}
-.hypothesis-text {
-  font-family: var(--font-serif);
-  font-size: 20px; line-height: 1.6; color: var(--white); position: relative;
-}
-.hypothesis-sub {
-  font-size: 13.5px; color: rgba(255,255,255,0.55);
-  margin-top: 20px; position: relative;
-  border-top: 1px solid rgba(255,255,255,0.15);
-  padding-top: 16px; line-height: 1.65;
-}
+    .header-hero::before {
+      content: '';
+      position: absolute;
+      top: -50%; right: -10%;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+      border-radius: 50%;
+    }
 
-/* ── IRIS+ LOGIC FRAME ── */
-.logic-frame {
-  display: flex; align-items: stretch; gap: 0;
-  border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden;
-}
-.logic-col {
-  flex: 1; padding: 20px 18px; position: relative;
-}
-.logic-col + .logic-col { border-left: 1px solid var(--border); }
-.logic-arrow {
-  display: flex; align-items: center; justify-content: center;
-  width: 28px; background: var(--stone-mid); flex-shrink: 0;
-  color: var(--teal); font-size: 16px; font-weight: 700;
-}
-.logic-col-label {
-  font-size: 10px; font-weight: 700; letter-spacing: 0.1em;
-  text-transform: uppercase; color: var(--teal); margin-bottom: 10px;
-}
-.logic-col-title { font-size: 14px; font-weight: 600; color: var(--navy); margin-bottom: 8px; }
-.logic-item {
-  font-size: 12.5px; color: var(--text-mid); padding: 4px 0;
-  border-top: 1px solid var(--border-light);
-}
-.logic-item:first-of-type { border-top: none; }
+    .header-hero::after {
+      content: '';
+      position: absolute;
+      bottom: -30%; left: -5%;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(212, 146, 58, 0.15) 0%, transparent 70%);
+      border-radius: 50%;
+    }
 
-/* ── RQ LIST ── */
-.rq-item {
-  display: flex; gap: 18px; padding: 18px 0;
-  border-bottom: 1px solid var(--border); align-items: flex-start;
-}
-.rq-item:last-child { border-bottom: none; }
-.rq-num {
-  font-family: var(--font-mono); font-size: 13px; font-weight: 500;
-  color: var(--gold); min-width: 36px; padding-top: 1px; flex-shrink: 0;
-}
-.rq-text { font-size: 14.5px; color: var(--text-dark); line-height: 1.55; }
-.rq-cluster { font-size: 12px; color: var(--text-muted); font-style: italic; margin-top: 4px; }
+    .header-hero-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
 
-/* ── PHASE SCHEDULE ── */
-.phase-band {
-  display: flex; align-items: center; gap: 14px;
-  padding: 14px 20px; border-radius: var(--radius);
-  margin-bottom: 18px;
-}
-.phase-band-1 { background: var(--navy); }
-.phase-band-2 { background: var(--teal); }
-.phase-band-3 { background: var(--sage); }
-.phase-band-label {
-  font-size: 11px; font-weight: 700; letter-spacing: 0.1em;
-  text-transform: uppercase; color: rgba(255,255,255,0.6);
-}
-.phase-band-title {
-  font-family: var(--font-serif); font-size: 18px; color: var(--white);
-}
+    .header-tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 6px 12px;
+      border-radius: 20px;
+      margin-bottom: 16px;
+    }
 
-.phase-row {
-  display: grid; grid-template-columns: 96px 1fr; gap: 16px;
-  margin-bottom: 16px; align-items: start;
-}
-.phase-badge {
-  background: var(--navy); color: var(--white);
-  border-radius: var(--radius); padding: 14px 10px; text-align: center;
-}
-.phase-week {
-  font-family: var(--font-serif); font-size: 22px; color: #5ee8de; line-height: 1;
-}
-.phase-label { font-size: 9.5px; color: rgba(255,255,255,0.5); letter-spacing: 0.06em; text-transform: uppercase; margin-top: 3px; }
-.phase-badge-teal { background: var(--teal); }
-.phase-badge-gold { background: var(--gold); }
-.phase-badge-gold .phase-week { color: var(--navy); }
-.phase-badge-gold .phase-label { color: rgba(12,35,64,0.6); }
+    .header-title {
+      font-family: var(--font-serif);
+      font-size: clamp(36px, 5vw, 48px);
+      font-weight: 600;
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
 
-.phase-card {
-  background: var(--white); border: 1px solid var(--border);
-  border-radius: var(--radius-lg); padding: 20px 24px;
-}
-.phase-card-open {
-  background: #fffdf6; border: 1px dashed rgba(212,146,58,0.45);
-  border-radius: var(--radius-lg); padding: 20px 24px;
-}
-.phase-title { font-weight: 600; color: var(--navy); font-size: 15px; margin-bottom: 4px; }
-.phase-title-open { color: #7a5010; }
-.phase-cluster { font-size: 12px; color: var(--teal); font-weight: 500; margin-bottom: 12px; }
-.phase-cluster-open { color: #a07a30; margin-bottom: 12px; }
+    .header-subtitle {
+      font-size: 16px;
+      opacity: 0.92;
+      margin-bottom: 12px;
+      max-width: 600px;
+    }
 
-.act-list { list-style: none; display: flex; flex-direction: column; gap: 5px; }
-.act-list li {
-  font-size: 13px; color: var(--text-mid);
-  padding-left: 14px; position: relative; line-height: 1.5;
-}
-.act-list li::before { content:'–'; position:absolute; left:0; color:var(--teal); font-weight:600; }
+    /* ── MAIN CONTAINER ── */
+    .main-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 40px 24px;
+    }
 
-.phase-links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
-.phase-link-btn {
-  display: inline-flex; align-items: center; gap: 5px;
-  background: var(--teal-light); border: 1px solid rgba(0,133,124,0.25);
-  color: var(--teal-mid); font-size: 11.5px; font-weight: 600;
-  padding: 4px 10px; border-radius: 20px; text-decoration: none;
-  transition: background 0.2s;
-}
-.phase-link-btn:hover { background: rgba(0,133,124,0.2); }
-.phase-link-btn::after { content: '↗'; font-size: 10px; }
+    .content-view { display: none; animation: fadeIn 0.4s ease-in; }
+    .content-view.active { display: block; }
+    .role-view { display: none; animation: fadeIn 0.4s ease-in; }
+    .role-view.active { display: block; }
 
-.out-tag {
-  display: inline-block; background: var(--teal-light);
-  color: var(--sage); font-size: 11px; font-weight: 600;
-  padding: 3px 10px; border-radius: 10px;
-  margin-top: 10px; margin-right: 6px;
-}
-.out-tag-gold {
-  background: var(--gold-light); color: #7a5010;
-}
-.tbd-note {
-  font-size: 12px; color: #a07a30; font-style: italic; margin-top: 8px;
-}
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
-/* ── SYNTHESIS SIDEBAR CALLOUT ── */
-.synthesis-box {
-  background: var(--navy);
-  border-radius: var(--radius);
-  padding: 18px 20px;
-  margin-bottom: 16px;
-}
-.synthesis-box-title { font-size: 12px; font-weight: 700; color: #5ee8de; letter-spacing: 0.05em; margin-bottom: 8px; text-transform: uppercase; }
-.synthesis-box p { font-size: 13px; color: rgba(255,255,255,0.7); line-height: 1.55; }
+    /* ── LANDING PAGE: EXPLAINER CARDS ── */
+    .explainer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+      margin-bottom: 40px;
+    }
 
-/* ── ROLES ── */
-.role-card {
-  background: var(--white); border: 1px solid var(--border);
-  border-radius: var(--radius-lg); padding: 22px 24px;
-}
-.role-type {
-  font-size: 10px; font-weight: 700; letter-spacing: 0.1em;
-  text-transform: uppercase; color: var(--teal); margin-bottom: 6px;
-}
-.role-title { font-weight: 600; color: var(--navy); font-size: 15px; margin-bottom: 12px; }
-.task-list { list-style: none; display: flex; flex-direction: column; gap: 5px; }
-.task-list li {
-  font-size: 13px; color: var(--text-mid);
-  padding-left: 16px; position: relative; line-height: 1.5;
-}
-.task-list li::before { content:'▸'; position:absolute; left:0; color:var(--teal); font-size:10px; top:3px; }
+    .explainer-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
 
-/* ── RESOURCE LINKS ── */
-.res-link {
-  display: flex; align-items: flex-start; gap: 14px;
-  padding: 14px 16px;
-  background: var(--white); border: 1px solid var(--border);
-  border-radius: var(--radius); text-decoration: none;
-  transition: border-color 0.2s, box-shadow 0.2s; margin-bottom: 10px;
-}
-.res-link:hover { border-color: var(--teal); box-shadow: 0 2px 12px rgba(0,133,124,0.1); }
-.res-icon {
-  width: 38px; height: 38px; border-radius: 9px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 17px; flex-shrink: 0;
-}
-.res-title { font-weight: 600; font-size: 13.5px; color: var(--navy); line-height: 1.3; }
-.res-desc { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
-.res-tag {
-  display: inline-block; background: var(--border-light); color: var(--text-mid);
-  font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 8px;
-  margin-top: 4px; letter-spacing: 0.04em; text-transform: uppercase;
-}
+    .explainer-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--teal), var(--gold));
+    }
 
-/* ── CHECKLIST ── */
-.checklist { list-style: none; }
-.checklist li {
-  display: flex; gap: 10px; align-items: flex-start;
-  padding: 8px 0; border-bottom: 1px solid var(--border-light);
-  font-size: 13.5px; color: var(--text-mid);
-}
-.checklist li:last-child { border-bottom: none; }
-.check-box {
-  width: 18px; height: 18px; border: 2px solid var(--border);
-  border-radius: 4px; flex-shrink: 0; margin-top: 1px;
-}
+    .explainer-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0, 133, 124, 0.12);
+      border-color: var(--teal);
+    }
 
-/* ── ALERT ── */
-.alert {
-  border-radius: var(--radius); padding: 14px 18px;
-  display: flex; gap: 12px; align-items: flex-start; margin-bottom: 16px;
-}
-.alert-warn { background: #fffbf0; border: 1px solid rgba(232,168,0,0.35); }
-.alert-info { background: var(--sky-light); border: 1px solid rgba(0,153,204,0.25); }
-.alert-text { font-size: 13.5px; color: var(--text-dark); }
-.alert-text strong { font-weight: 600; }
+    .explainer-code {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--teal);
+      letter-spacing: 0.1em;
+      margin-bottom: 8px;
+    }
 
-/* ── SEP BANNER ── */
-.sep-banner {
-  background: var(--teal);
-  padding: 22px 24px;
-}
-.sep-inner {
-  max-width: 1280px; margin: 0 auto;
-  display: flex; align-items: center; gap: 16px;
-}
-.sep-title { font-weight: 700; color: var(--white); font-size: 16px; }
-.sep-sub { font-size: 13px; color: rgba(255,255,255,0.75); }
+    .explainer-title {
+      font-family: var(--font-serif);
+      font-size: 18px;
+      color: var(--navy);
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
 
-/* ── DOC TABLE ── */
-.doc-table { width: 100%; border-collapse: collapse; font-size: 13px; }
-.doc-table thead tr { background: var(--navy); color: var(--white); }
-.doc-table th { padding: 12px 16px; text-align: left; font-weight: 600; font-size: 12px; letter-spacing: 0.04em; }
-.doc-table td { padding: 11px 16px; border-bottom: 1px solid var(--border); color: var(--text-dark); }
-.doc-table tbody tr:nth-child(even) { background: var(--stone); }
+    .explainer-desc {
+      font-size: 13px;
+      color: var(--text-mid);
+      line-height: 1.6;
+      margin-bottom: 14px;
+    }
 
-.badge {
-  display: inline-block; font-size: 10.5px; font-weight: 700;
-  padding: 2px 8px; border-radius: 10px; letter-spacing: 0.04em;
-}
-.badge-teal { background: var(--teal-light); color: var(--sage); }
-.badge-sky { background: var(--sky-light); color: #005f80; }
-.badge-gold { background: var(--gold-light); color: #7a5010; }
-.badge-navy { background: rgba(12,35,64,0.1); color: var(--navy); }
+    .explainer-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--teal);
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+    }
 
-/* ── FOOTER ── */
-footer {
-  background: var(--navy); color: rgba(255,255,255,0.5);
-  text-align: center; padding: 28px 24px;
-  font-size: 12.5px; border-top: 2px solid var(--teal);
-}
-footer strong { color: rgba(255,255,255,0.85); }
-footer a { color: rgba(255,255,255,0.5); text-decoration: none; }
-footer a:hover { color: #5ee8de; }
+    .explainer-link:hover { color: var(--teal-mid); }
 
-/* ── RESPONSIVE ── */
-@media (max-width: 1000px) {
-  .hero-inner { grid-template-columns: 1fr; }
-  .hero-sidebar { display: none; }
-  .g3, .g4 { grid-template-columns: 1fr 1fr; }
-  .ecsom-grid { grid-template-columns: 1fr; }
-  .logic-frame { flex-direction: column; }
-  .logic-arrow { width: 100%; height: 28px; }
-}
-@media (max-width: 640px) {
-  .g2, .g3, .g4 { grid-template-columns: 1fr; }
-  .hero-title { font-size: 34px; }
-  .phase-row { grid-template-columns: 1fr; }
-  .hypothesis-box { padding: 28px 24px; }
-}
-</style>
+    /* ── KEY FINDINGS BANNER ── */
+    .findings-banner {
+      background: linear-gradient(135deg, var(--gold-light) 0%, var(--teal-xlight) 100%);
+      border: 2px solid var(--gold);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      margin-bottom: 40px;
+    }
+
+    .findings-banner h3 {
+      font-family: var(--font-serif);
+      font-size: 22px;
+      color: var(--navy);
+      margin-bottom: 16px;
+    }
+
+    .findings-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .finding-item {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      border-left: 4px solid var(--gold);
+    }
+
+    .finding-metric {
+      font-family: var(--font-mono);
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--teal);
+      margin-bottom: 4px;
+    }
+
+    .finding-label {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    /* ── DASHBOARD GRID ── */
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+
+    @media (max-width: 768px) {
+      .dashboard-grid { grid-template-columns: 1fr; }
+    }
+
+    .dashboard-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .dashboard-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--teal), var(--gold));
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .dashboard-card:hover {
+      border-color: var(--teal);
+      box-shadow: 0 8px 24px rgba(0, 133, 124, 0.12);
+      transform: translateY(-4px);
+    }
+    .dashboard-card:hover::before { opacity: 1; }
+
+    .card-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      gap: 12px;
+    }
+
+    .card-title {
+      font-family: var(--font-serif);
+      font-size: 18px;
+      color: var(--navy);
+      font-weight: 600;
+    }
+
+    .card-badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 6px 10px;
+      border-radius: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .badge-success { background: rgba(45, 134, 89, 0.15); color: var(--success); }
+    .badge-warning { background: rgba(212, 146, 58, 0.15); color: var(--warning); }
+    .badge-danger { background: rgba(161, 60, 60, 0.15); color: var(--danger); }
+
+    .card-description {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .status-indicator {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 6px 12px;
+      border-radius: 20px;
+      background: var(--gold-light);
+      color: var(--text-dark);
+      margin-top: 12px;
+    }
+
+    .status-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--warning);
+      animation: pulse 2s infinite;
+    }
+
+    .status-dot.complete { background: var(--success); animation: none; }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.6; }
+    }
+
+    .checklist { list-style: none; margin-top: 16px; }
+    .checklist li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border-light);
+      font-size: 14px;
+    }
+    .checklist li:last-child { border-bottom: none; }
+
+    .check-box {
+      width: 18px; height: 18px;
+      border: 2px solid var(--border);
+      border-radius: 4px;
+      flex-shrink: 0;
+      margin-top: 2px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .checklist li:hover .check-box { border-color: var(--teal); }
+
+    .quick-links-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+
+    .quick-link {
+      display: flex;
+      flex-direction: column;
+      padding: 16px;
+      background: linear-gradient(135deg, var(--white) 0%, var(--teal-xlight) 100%);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      text-decoration: none;
+      color: var(--navy);
+      font-weight: 500;
+      font-size: 14px;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .quick-link:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 16px rgba(0, 133, 124, 0.15);
+      border-color: var(--teal);
+    }
+
+    /* ── PROSUMER ── */
+    .prosumer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+
+    .prosumer-card {
+      background: var(--white);
+      border: 2px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      transition: all 0.3s;
+    }
+
+    .prosumer-card:hover {
+      border-color: var(--teal);
+      box-shadow: 0 6px 16px rgba(0, 133, 124, 0.1);
+      transform: translateY(-2px);
+    }
+
+    .prosumer-code {
+      display: inline-block;
+      background: var(--teal);
+      color: var(--white);
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .prosumer-title {
+      font-family: var(--font-serif);
+      font-size: 16px;
+      color: var(--navy);
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .prosumer-description {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* ── GANTT CHART ── */
+    .gantt-section {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 32px 24px;
+      margin-bottom: 40px;
+    }
+
+    .section-title {
+      font-family: var(--font-serif);
+      font-size: 24px;
+      color: var(--navy);
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    .section-subtitle {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+
+    .gantt-controls {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+
+    .gantt-filter {
+      padding: 10px 16px;
+      border: 1px solid var(--border);
+      background: var(--white);
+      border-radius: var(--radius);
+      font-size: 13px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .gantt-filter.active {
+      background: var(--teal);
+      color: var(--white);
+      border-color: var(--teal);
+    }
+
+    .gantt-chart { overflow-x: auto; padding: 16px 0; margin-bottom: 16px; }
+
+    .gantt-timeline {
+      display: flex;
+      gap: 1px;
+      min-width: 100%;
+      position: relative;
+    }
+
+    .gantt-phase {
+      flex: 1;
+      min-width: 160px;
+    }
+
+    .phase-label {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--navy);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      padding: 8px 12px;
+      border-bottom: 2px solid var(--border);
+      background: var(--teal-xlight);
+    }
+
+    .phase-bar {
+      height: 36px;
+      background: linear-gradient(90deg, var(--teal-light) 0%, var(--sky-light) 100%);
+      border: 1px solid var(--teal);
+      border-radius: 4px;
+      margin: 8px 8px;
+      position: relative;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .phase-bar:hover {
+      background: linear-gradient(90deg, var(--teal) 0%, var(--sky) 100%);
+      box-shadow: 0 2px 8px rgba(0, 133, 124, 0.2);
+    }
+
+    .phase-bar:hover .phase-name { color: var(--white); }
+
+    .phase-bar.complete {
+      background: linear-gradient(90deg, var(--success) 0%, rgba(45, 134, 89, 0.4) 100%);
+      border-color: var(--success);
+    }
+
+    .phase-bar.current {
+      background: linear-gradient(90deg, var(--gold) 0%, var(--gold-light) 100%);
+      border-color: var(--gold);
+    }
+
+    .phase-name {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--navy);
+      position: absolute;
+      top: 50%;
+      left: 8px;
+      transform: translateY(-50%);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 90%;
+      transition: color 0.2s;
+    }
+
+    /* ── PRESENTATION CARDS ── */
+    .presentation-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+
+    .presentation-card {
+      background: linear-gradient(135deg, var(--white) 0%, var(--teal-xlight) 100%);
+      border: 2px solid var(--teal);
+      border-radius: var(--radius-lg);
+      padding: 32px 24px;
+      text-align: center;
+      transition: all 0.3s;
+    }
+
+    .presentation-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 32px rgba(0, 133, 124, 0.2);
+    }
+
+    .presentation-icon { font-size: 48px; margin-bottom: 16px; }
+
+    .presentation-title {
+      font-family: var(--font-serif);
+      font-size: 20px;
+      color: var(--navy);
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    .presentation-description {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+
+    .presentation-btn {
+      display: inline-block;
+      padding: 12px 24px;
+      background: linear-gradient(135deg, var(--teal) 0%, var(--teal-mid) 100%);
+      color: var(--white);
+      text-decoration: none;
+      border-radius: var(--radius);
+      font-weight: 600;
+      font-size: 13px;
+      transition: all 0.3s;
+    }
+
+    .presentation-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 16px rgba(0, 133, 124, 0.2);
+    }
+
+    /* ── DOCUMENT TABLE ── */
+    .doc-category {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 28px 24px;
+      margin-bottom: 32px;
+    }
+
+    .doc-category-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 20px;
+      padding-bottom: 16px;
+      border-bottom: 2px solid var(--teal-light);
+    }
+
+    .doc-category-icon {
+      width: 44px; height: 44px;
+      background: linear-gradient(135deg, var(--teal) 0%, var(--teal-mid) 100%);
+      color: var(--white);
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+
+    .doc-category-title {
+      font-family: var(--font-serif);
+      font-size: 20px;
+      color: var(--navy);
+      font-weight: 600;
+      line-height: 1.3;
+    }
+
+    .doc-category-sub {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .doc-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    .doc-table thead {
+      background: var(--teal-xlight);
+      border-bottom: 2px solid var(--teal);
+    }
+
+    .doc-table th {
+      padding: 12px 14px;
+      text-align: left;
+      font-weight: 700;
+      color: var(--navy);
+    }
+
+    .doc-table td {
+      padding: 11px 14px;
+      border-bottom: 1px solid var(--border-light);
+      vertical-align: middle;
+    }
+
+    .doc-table tr:hover { background: var(--teal-xlight); }
+
+    .badge {
+      display: inline-block;
+      padding: 5px 10px;
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .badge-navy { background: var(--navy); color: var(--white); }
+    .badge-sky { background: var(--sky-light); color: var(--sky); }
+    .badge-teal { background: var(--teal-light); color: var(--teal); }
+
+    /* ── DYNAMIC LINKS SECTION ── */
+    .dynamic-links-section {
+      background: linear-gradient(135deg, var(--teal-xlight) 0%, var(--sky-light) 100%);
+      border: 2px solid var(--teal);
+      border-radius: var(--radius-lg);
+      padding: 32px 24px;
+      margin-bottom: 40px;
+    }
+
+    .dynamic-links-note {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+      font-style: italic;
+    }
+
+    .links-group {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+    .link-item {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px;
+      transition: all 0.2s;
+    }
+
+    .link-item:hover {
+      box-shadow: 0 4px 12px rgba(0, 133, 124, 0.1);
+      border-color: var(--teal);
+    }
+
+    .link-label {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--teal);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 8px;
+    }
+
+    .link-item a {
+      display: block;
+      color: var(--navy);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 14px;
+      word-break: break-word;
+    }
+
+    .link-item a:hover { color: var(--teal); }
+
+    /* ── RATIONALE / TOC / RQ ── */
+    .rationale-section {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 36px 28px;
+      margin-bottom: 40px;
+    }
+
+    .rationale-section h3 {
+      font-family: var(--font-serif);
+      font-size: 22px;
+      color: var(--navy);
+      margin-top: 28px;
+      margin-bottom: 14px;
+      font-weight: 600;
+      border-top: 1px solid var(--border-light);
+      padding-top: 24px;
+    }
+
+    .rationale-section h3:first-of-type {
+      border-top: none;
+      margin-top: 0;
+      padding-top: 0;
+    }
+
+    .rationale-section p {
+      margin-bottom: 14px;
+      line-height: 1.8;
+      color: var(--text-mid);
+    }
+
+    .toc-block {
+      background: var(--teal-xlight);
+      border-left: 4px solid var(--teal);
+      padding: 20px 24px;
+      margin: 20px 0;
+      border-radius: 0 var(--radius) var(--radius) 0;
+    }
+
+    .toc-block p { margin-bottom: 10px; }
+    .toc-block p:last-child { margin-bottom: 0; }
+
+    .rq-list {
+      list-style: none;
+      counter-reset: rq;
+      margin: 16px 0;
+    }
+
+    .rq-list li {
+      counter-increment: rq;
+      padding: 14px 16px 14px 52px;
+      position: relative;
+      background: var(--stone);
+      border-radius: var(--radius);
+      margin-bottom: 10px;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .rq-list li::before {
+      content: "RQ" counter(rq);
+      position: absolute;
+      left: 14px;
+      top: 14px;
+      background: var(--navy);
+      color: var(--white);
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--navy);
+      color: var(--white);
+      padding: 32px 24px;
+      text-align: center;
+      border-top: 2px solid var(--teal);
+    }
+
+    footer p {
+      font-size: 13px;
+      margin-bottom: 8px;
+      opacity: 0.85;
+    }
+
+    footer a {
+      color: var(--gold);
+      text-decoration: none;
+    }
+
+    footer a:hover { opacity: 0.7; }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .header-title { font-size: 32px; }
+      .role-selector-inner { flex-direction: column; align-items: stretch; }
+      .role-buttons { width: 100%; }
+      .role-btn { flex: 1; text-align: center; }
+      .language-toggle { width: 100%; }
+      .top-nav-inner { flex-wrap: wrap; }
+      .top-nav-tab { flex: 1; text-align: center; padding: 12px 14px; font-size: 12px; }
+    }
+
+    .tagalog-only { display: none; }
+    .tagalog-only.show { display: block; }
+    .english-only.hide { display: none; }
+  </style>
 </head>
 <body>
 
-<!-- ETHICAL GATE BANNER -->
-<div class="alert-banner">
-  <div class="alert-banner-inner">
-    <span>⚠</span>
-    <p><strong>Ethical Gate Active:</strong> No Phase 2 primary data collection may commence until written ethical clearance is confirmed and documented. Programme Coordinators are responsible for this pathway. Phase 1 co-design and ethical review processes are currently underway.</p>
+<!-- TOP NAVIGATION TABS -->
+<div class="top-nav">
+  <div class="top-nav-inner">
+    <button class="top-nav-tab active" onclick="switchSection('main')">🏠 Main</button>
+    <button class="top-nav-tab" onclick="switchSection('rationale')">📖 Rationale, ToC & RQs</button>
+    <button class="top-nav-tab" onclick="switchSection('dashboard')">📊 Dashboard</button>
+    <button class="top-nav-tab" onclick="switchSection('calendar')">📅 Calendar</button>
+    <button class="top-nav-tab" onclick="switchSection('presentations')">🎤 Presentations</button>
+    <button class="top-nav-tab" onclick="switchSection('resources')">📚 Resources</button>
   </div>
 </div>
 
-<!-- NAV -->
-<nav>
-  <div class="nav-inner">
-    <a class="nav-brand" href="#">
-      <div class="nav-brand-dot">OS</div>
-      <div class="nav-brand-text">
-        <span class="nav-brand-main">Community OS</span>
-        <span class="nav-brand-sub">Research · Isabela de Basilan</span>
-      </div>
-    </a>
-    <div class="nav-links">
-      <a href="#about" class="active">About</a>
-      <a href="#methodology">Methodology</a>
-      <a href="#ecsom">ECSOM</a>
-      <a href="#rationale">Rationale</a>
-      <a href="#schedule">Schedule</a>
-      <a href="#team">Team</a>
-      <a href="#resources">Resources</a>
-      <a href="#repository">Repository</a>
+<!-- ROLE SELECTOR -->
+<div id="role-selector" class="role-selector">
+  <div class="role-selector-inner">
+    <span class="role-selector-label">🎯 Select Your Role</span>
+    <div class="role-buttons">
+      <button class="role-btn active" onclick="switchRole('field')">🗺️ Field Researcher</button>
+      <button class="role-btn" onclick="switchRole('institutional')">🏛️ Institutional Partner</button>
+      <button class="role-btn" onclick="switchRole('community')">👥 Community Member</button>
     </div>
-    <div class="nav-external">
-      <a href="https://www.thelab.ph/" target="_blank">LAB.PH</a>
-      <a href="https://isabelacity.gov.ph/about-us/" target="_blank">Isabela City</a>
-    </div>
-  </div>
-</nav>
-
-<!-- HERO -->
-<div class="hero" id="about">
-  <div class="hero-bg"></div>
-  <div class="hero-accent"></div>
-  <div class="hero-inner" style="max-width:1280px; margin:0 auto; position:relative;">
-    <div>
-      <div class="hero-eyebrow">
-        <div class="hero-pill">
-          <span class="hero-pill-dot"></span>
-          Research Active · Phase 1
-        </div>
-      </div>
-      <div class="hero-title">Community OS<br><em>Research</em></div>
-      <div class="hero-subtitle">Participatory Emancipatory Action Research — Isabela de Basilan</div>
-      <p class="hero-desc">A 21-week participatory research programme building community economic agency through PEAR-ECSOM methodology in Isabela de Basilan — co-designed, co-owned, and co-authored with communities across Basilan Island's four indigenous peoples.</p>
-      <div class="hero-tags">
-        <div class="hero-tag"><strong>Site:</strong> Isabela de Basilan, Basilan Province</div>
-        <div class="hero-tag"><strong>Duration:</strong> 21 Weeks · 2 Phases · 6 Clusters</div>
-        <div class="hero-tag"><strong>Framework:</strong> PEAR-ECSOM · CEESAM 240×240</div>
-        <div class="hero-tag"><strong>Partners:</strong> LAB.PH · Roxas-Kalaw Foundation · SKR Institute</div>
-      </div>
-    </div>
-    <div class="hero-sidebar">
-      <div class="hero-sidebar-title">Programme at a glance</div>
-      <div class="hero-stat">
-        <div class="hero-stat-num">21</div>
-        <div><div class="hero-stat-label">Weeks of participatory field research</div><div class="hero-stat-sub">2 Phases · 6 Workshop Clusters</div></div>
-      </div>
-      <div class="hero-stat">
-        <div class="hero-stat-num">240</div>
-        <div><div class="hero-stat-label">CEESAM economic sectors mapped</div><div class="hero-stat-sub">IO Matrix for Isabela de Basilan</div></div>
-      </div>
-      <div class="hero-stat">
-        <div class="hero-stat-num">4</div>
-        <div><div class="hero-stat-label">Intellectual roots driving methodology</div><div class="hero-stat-sub">PEAR · ECSOM · Sikolohiyang Pilipino · Community Psychology</div></div>
-      </div>
-      <div class="hero-stat">
-        <div class="hero-stat-num">4</div>
-        <div><div class="hero-stat-label">Indigenous communities engaged</div><div class="hero-stat-sub">Yakan · Tausug · Sama Banguingui · Sama Dilaut</div></div>
-      </div>
+    <div class="language-toggle">
+      <button class="lang-btn active english-only" onclick="setLanguage('en')">English</button>
+      <button class="lang-btn" id="taglang" style="display:none;" onclick="setLanguage('tl')">Tagalog</button>
     </div>
   </div>
 </div>
 
-<!-- ═══════ ABOUT: COMMUNITY OS + LAB.PH ═══════ -->
-<div class="section section-white" id="overview">
-  <div class="section-inner">
-    <div class="eyebrow">For External Stakeholders</div>
-    <h2 class="section-title">About the Programme</h2>
-    <p class="section-intro">This page focuses on the research component of the Community OS initiative. Below you'll find explainers for the broader project, the research context, and key concepts for new and external readers.</p>
-
-    <div class="grid g3">
-      <div class="card">
-        <div class="card-icon ic-teal">🌐</div>
-        <div class="card-label">The Project</div>
-        <div class="card-title">What is Community OS?</div>
-        <div class="card-body">Community OS is an intuitive economic development approach for data-driven, data-derived smart communities. It uses the ECSOM canvas as a community balance sheet — mapping what a community <em>has</em>, <em>is</em>, and <em>does</em> — to co-design Win-Win-Win investment priorities. This research is the participatory validation and intervention design pilot of that system.</div>
-        <a class="card-link" href="https://www.thelab.ph/post/community-os" target="_blank">Read the Community OS overview</a>
-      </div>
-      <div class="card">
-        <div class="card-icon ic-navy">🔬</div>
-        <div class="card-label">The Implementing Laboratory</div>
-        <div class="card-title">What is LAB.PH?</div>
-        <div class="card-body">LAB.PH is the implementing laboratory for Community OS — operating at the intersection of citizen social science, technology, and community development. It builds replicable models of participatory smart-economy development for Philippine communities, anchored in the Roxas-Kalaw Foundation and SKR Institute.</div>
-        <a class="card-link" href="https://www.thelab.ph/" target="_blank">Visit LAB.PH</a>
-      </div>
-      <div class="card">
-        <div class="card-icon ic-sky">🏝</div>
-        <div class="card-label">The Research Site</div>
-        <div class="card-title">Isabela de Basilan</div>
-        <div class="card-body">Isabela de Basilan is the sole city of Basilan Island — a frontier maritime territory at the confluence of the Sulu Archipelago, Sabah, and the Celebes Sea. Home to 130,000+ residents across four indigenous communities with immense ecological and cultural assets, yet facing deep structural economic inequity driven by colonial trade circuits.</div>
-        <a class="card-link" href="https://isabelacity.gov.ph/about-us/" target="_blank">Isabela City official site</a>
-      </div>
-    </div>
+<!-- HEADER HERO -->
+<div class="header-hero">
+  <div class="header-hero-inner">
+    <span class="header-tag">Participatory Emancipatory Research</span>
+    <h1 class="header-title">Community OS</h1>
+    <p class="header-subtitle">Isabela de Basilan | Basilan Province | BARMM</p>
   </div>
 </div>
 
-<!-- ═══════ PEAR METHODOLOGY ═══════ -->
-<div class="section section-stone" id="methodology">
-  <div class="section-inner">
-    <div class="eyebrow">Research Approach</div>
-    <h2 class="section-title">PEAR Methodology Explained</h2>
-    <p class="section-intro">Participatory Emancipatory Action Research holds that knowledge production and social transformation are inseparable. Research here is not extractive — it does not take data from a community and return findings to an academic audience elsewhere. The community is the co-producer of knowledge, the co-designer of change, and the co-owner of all outputs.</p>
+<!-- MAIN CONTAINER -->
+<div class="main-container">
 
-    <div class="hypothesis-box" style="margin-bottom: 36px;">
-      <p class="hypothesis-text">The communities most affected by structural inequity are the best positioned to understand and transform it — if given the tools, language, and legitimacy to do so.</p>
-      <p class="hypothesis-sub">This programme applies Haklay's (2013) taxonomy of participation at its highest level — "extreme citizen science" — where community members define the research agenda, collect and interpret data, and co-author all outputs. Every research instrument was co-designed; every finding goes back to the community for validation before it goes anywhere else.</p>
-    </div>
+  <!-- ========== MAIN / LANDING ========== -->
+  <div id="main-section" class="content-view active">
 
-    <div class="grid g2" style="margin-bottom: 20px;">
-      <div class="root-card">
-        <div class="root-header">
-          <div class="root-num">1</div>
-          <div class="root-header-text">
-            <div class="root-header-title">PEAR / Citizen Social Science</div>
-            <div class="root-header-tag">Jallad et al. (2021) · UCL RELIEF Centre</div>
-          </div>
-        </div>
-        <div class="root-body">
-          <p>Participatory Emancipatory Action Research positions the community not as an object of study but as an active co-producer of knowledge. The Hamra Prosperity Model — developed in Lebanon — provides the methodological template: communities define prosperity on their own terms, identify their own structural barriers, and co-design their own interventions. This programme applies that logic to Isabela de Basilan, grounded in the citizen social science tradition that recognises local knowledge as legitimate and rigorous evidence.</p>
-          <a class="card-link" href="https://drive.google.com/file/d/1EqUTb762rjDZwPP3D6bSlOXqXVobqSOd/view?usp=sharing" target="_blank">Read the foundational paper</a>
-        </div>
+    <h2 class="section-title">Welcome to Community OS</h2>
+    <p class="section-subtitle">A quick tour of the core concepts, current findings, and where to go next.</p>
+
+    <!-- CORE CONCEPTS EXPLAINERS -->
+    <h3 style="font-family:var(--font-serif); font-size:20px; color:var(--navy); margin: 24px 0 16px;">🧭 Core Concepts — Quick Explainers</h3>
+
+    <div class="explainer-grid">
+      <div class="explainer-card">
+        <div class="explainer-code">CORE · 01</div>
+        <div class="explainer-title">Community OS</div>
+        <div class="explainer-desc">A participatory research "operating system" that equips communities with tools, data, and decision-making frameworks to co-design their own development pathways.</div>
+        <a href="#" class="explainer-link" onclick="switchSectionByName('presentations'); return false;">Learn more →</a>
       </div>
-      <div class="root-card">
-        <div class="root-header">
-          <div class="root-num">2</div>
-          <div class="root-header-text">
-            <div class="root-header-title">ECSOM / CEESAM</div>
-            <div class="root-header-tag">Dr. Sixto K. Roxas III · FCOMT 1984 → Community OS 2026</div>
-          </div>
-        </div>
-        <div class="root-body">
-          <p>Where conventional economics asks "How profitable is the enterprise?", ECSOM asks "How well is the community sustaining itself — ecologically, economically, socially, and culturally — across generations?" CEESAM is the quantitative instrument that makes this operational: a structured accounting matrix that captures all major flows and stocks in a community's life — economic production, ecological footprints, social equity, and cultural heritage — in one integrated system. Three-column canvas: <strong>Ecosystem · Community · Sustainability</strong>.</p>
-          <a class="card-link" href="https://docs.google.com/document/d/1a8IybkPPGDwvFrFA5wy6Y2ZJgn334bwYE-5UcqbfpsU/edit?tab=t.0" target="_blank">Read the ECSOM/CEESAM explainer</a>
-        </div>
+
+      <div class="explainer-card">
+        <div class="explainer-code">CORE · 02</div>
+        <div class="explainer-title">ECSOM</div>
+        <div class="explainer-desc">Ecosystem · Community · Sustainability (Dr. Sixto K. Roxas III). A three-column canvas that maps how ecological, social, and economic systems interact in a place.</div>
+        <a href="#" class="explainer-link">Open ECSOM Canvas →</a>
       </div>
-      <div class="root-card">
-        <div class="root-header">
-          <div class="root-num">3</div>
-          <div class="root-header-text">
-            <div class="root-header-title">Sikolohiyang Pilipino</div>
-            <div class="root-header-tag">Enriquez (1975) · Indigenous Filipino Psychology</div>
-          </div>
-        </div>
-        <div class="root-body">
-          <p>The research is grounded in the ethical and relational framework of indigenous Filipino psychology. The concept of <em>kapwa</em> — shared identity, the recognition of the self in the other — orients all researcher-community relationships. Knowledge flows from within the culture, not toward it. All sessions are conducted in Filipino and the local vernacular. <em>Talakayan</em> — structured communal dialogue aimed at collective discernment — is the primary workshop format throughout the programme.</p>
-          <a class="card-link" href="https://docs.google.com/document/d/16Wu2sbNp7nh4XBGlhk9iVZkP68_uSe8z/edit?usp=sharing" target="_blank">Read the Sikolohiyang Pilipino explainer</a>
-        </div>
+
+      <div class="explainer-card">
+        <div class="explainer-code">CORE · 03</div>
+        <div class="explainer-title">CEESAM</div>
+        <div class="explainer-desc">Comprehensive Ecosystem-Economy Social Accounting Matrix (240 × 240). A data instrument showing how value and resources flow between sectors in Isabela de Basilan.</div>
+        <a href="#" class="explainer-link">Open CEESAM Workbook →</a>
       </div>
-      <div class="root-card">
-        <div class="root-header">
-          <div class="root-num">4</div>
-          <div class="root-header-text">
-            <div class="root-header-title">Community Psychology</div>
-            <div class="root-header-tag">Bronfenbrenner · SAMHSA · Deci & Ryan SDT</div>
-          </div>
-        </div>
-        <div class="root-body">
-          <p>Community Psychology is the science of understanding how social, economic, and environmental conditions shape wellbeing — and how communities can work together to change those conditions. It brings together research and action, community members and experts, local knowledge and evidence, to build communities that are more just, more resilient, and more capable of shaping their own futures. Bronfenbrenner's ecological systems model frames the nested contexts of Isabela de Basilan's communities. SAMHSA trauma-informed principles apply given BARMM's post-conflict history.</p>
-          <a class="card-link" href="https://docs.google.com/document/d/1iqXHnyEqZn5sNi2V4IspubWwGWxgqVwg/edit?usp=drive_link" target="_blank">Read the Community Psychology explainer</a>
-        </div>
+
+      <div class="explainer-card">
+        <div class="explainer-code">CORE · 04</div>
+        <div class="explainer-title">PEAR</div>
+        <div class="explainer-desc">Participatory Emancipatory Action Research (Jallad et al., 2021). The ethical and methodological spine: communities are co-researchers, not subjects. Co-authorship is a right.</div>
+        <a href="#" class="explainer-link">Read methodology →</a>
       </div>
     </div>
 
-    <!-- KEY CONCEPTS -->
-    <h3 style="font-family:var(--font-serif);font-size:22px;color:var(--navy);margin:36px 0 16px;">Key Concepts</h3>
-    <div class="grid g3">
-      <div class="card">
-        <div class="card-label">Sikolohiyang Pilipino</div>
-        <div class="card-title">Kapwa</div>
-        <div class="card-body">Shared identity — the recognition of the self in the other. The relational and ethical foundation of all researcher-community interactions. Researchers are not neutral outsiders but co-members of the community of inquiry.</div>
+    <!-- KEY CONCEPTS (NEW) -->
+    <h3 style="font-family:var(--font-serif); font-size:20px; color:var(--navy); margin: 32px 0 16px;">🔑 Key Concepts & External References</h3>
+    <p style="font-size:13px; color:var(--text-muted); margin-bottom:16px;">External frameworks actively referenced in our design and analysis work.</p>
+
+    <div class="explainer-grid">
+      <div class="explainer-card">
+        <div class="explainer-code">REF · 01</div>
+        <div class="explainer-title">Aligning Capital (UNDP)</div>
+        <div class="explainer-desc">UNDP's framework for aligning private finance with the SDGs. Guides how Win-Win-Win priorities link community outcomes to capital flows.</div>
+        <a href="https://sdgprivatefinance.undp.org/aligning-capital" target="_blank" class="explainer-link">Open UNDP resource ↗</a>
       </div>
-      <div class="card">
-        <div class="card-label">Community Dialogue</div>
-        <div class="card-title">Talakayan</div>
-        <div class="card-body">Structured communal dialogue aimed at collective discernment. The primary workshop format throughout the 21-week programme — replacing lecture or presentation with shared sensemaking.</div>
+
+      <div class="explainer-card">
+        <div class="explainer-code">REF · 02</div>
+        <div class="explainer-title">Design Thinking (Stanford d.school)</div>
+        <div class="explainer-desc">Human-centred design tools used in our co-design workshops — empathy maps, prototyping, journey mapping, and ambiguity navigation.</div>
+        <a href="https://dschool.stanford.edu/innovate/tools" target="_blank" class="explainer-link">Open d.school tools ↗</a>
       </div>
-      <div class="card">
-        <div class="card-label">ECSOM Investment Logic</div>
-        <div class="card-title">Win-Win-Win</div>
-        <div class="card-body">Every proposed intervention must simultaneously benefit the community (people), the ecosystem (planet), and the local economy (sustainability). No single-axis optimisation — all three columns of the ECSOM canvas must show positive movement.</div>
+
+      <div class="explainer-card">
+        <div class="explainer-code">REF · 03</div>
+        <div class="explainer-title">Sikolohiyang Pilipino</div>
+        <div class="explainer-desc">Filipino psychology (Sta. Maria, 1996). Grounds our approach in <em>kapwa</em>, <em>pakikipagkuwentuhan</em>, and conscientización.</div>
+        <a href="#" class="explainer-link">See full references →</a>
       </div>
-      <div class="card">
-        <div class="card-label">CEESAM Typology</div>
-        <div class="card-title">ProSumer</div>
-        <div class="card-body">Producer-Consumer — the CEESAM's core unit of analysis. Every household and group is simultaneously a producer of goods, services, or ecological value and a consumer of resources. Eight ProSumer typologies are mapped across Isabela de Basilan.</div>
-      </div>
-      <div class="card">
-        <div class="card-label">Freirean Foundation</div>
-        <div class="card-title">Conscientização</div>
-        <div class="card-body">Freire's critical consciousness — the process by which communities understand the structural forces shaping their lives and develop the agency to transform them. Embedded in Paaralang Kapuluan orientation workshops.</div>
-      </div>
-      <div class="card">
-        <div class="card-label">Regional Context</div>
-        <div class="card-title">BIMP-EAGA</div>
-        <div class="card-body">Brunei-Indonesia-Malaysia-Philippines East ASEAN Growth Area — a $1.34 trillion regional economy. Isabela de Basilan sits at its maritime heart. Seaweed, Halal food, fisheries, and cultural sectors connect directly to BIMP-EAGA's five development pillars and ASEAN alignment.</div>
+
+      <div class="explainer-card">
+        <div class="explainer-code">REF · 04</div>
+        <div class="explainer-title">Community Psychology</div>
+        <div class="explainer-desc">Bronfenbrenner's ecological systems, Deci &amp; Ryan's self-determination theory, and Liberation Psychology grounding individual agency in systemic context.</div>
+        <a href="#" class="explainer-link">See full references →</a>
       </div>
     </div>
+
+    <!-- QUICK ECSOM FINDINGS -->
+    <div class="findings-banner">
+      <h3>📊 Quick ECSOM Findings — Isabela de Basilan</h3>
+      <p style="font-size:14px; color:var(--text-mid);">Preliminary indicators from the ECSOM Canvas Narrative v2 (March 2026). These are <strong>desktop-derived baselines</strong> and are subject to community validation in Weeks 2–11.</p>
+
+      <div class="findings-grid">
+        <div class="finding-item">
+          <div class="finding-metric">3.84</div>
+          <div class="finding-label">Fisheries Location Quotient — highly specialised export base</div>
+        </div>
+        <div class="finding-item">
+          <div class="finding-metric">₱1.512B</div>
+          <div class="finding-label">Sector 6 Trade output (annual)</div>
+        </div>
+        <div class="finding-item">
+          <div class="finding-metric">3.06×</div>
+          <div class="finding-label">Plantation agriculture multiplier (Leontief)</div>
+        </div>
+        <div class="finding-item">
+          <div class="finding-metric">195,000 gha</div>
+          <div class="finding-label">Total biocapacity (incl. marine block)</div>
+        </div>
+        <div class="finding-item">
+          <div class="finding-metric">4 Nations</div>
+          <div class="finding-label">Yakan · Sama Banguingui · Sama Dilaut · Tausug</div>
+        </div>
+        <div class="finding-item">
+          <div class="finding-metric">100%</div>
+          <div class="finding-label">Diesel-dependent grid (a blocking condition)</div>
+        </div>
+      </div>
+
+      <p style="font-size:12px; color:var(--text-muted); margin-top:20px; font-style:italic;">Full canvas and workbook are in the <strong>Resources</strong> tab.</p>
+    </div>
+
+    <!-- QUICK LINKS TO EVERYTHING -->
+    <h3 style="font-family:var(--font-serif); font-size:20px; color:var(--navy); margin: 32px 0 16px;">⚡ Where to go next</h3>
+    <div class="quick-links-grid">
+      <a href="#" class="quick-link" onclick="switchSectionByName('rationale'); return false;">📖 Read the research rationale</a>
+      <a href="#" class="quick-link" onclick="switchSectionByName('dashboard'); return false;">📊 Open my dashboard</a>
+      <a href="#" class="quick-link" onclick="switchSectionByName('calendar'); return false;">📅 See upcoming events</a>
+      <a href="#" class="quick-link" onclick="switchSectionByName('presentations'); return false;">🎤 View the decks</a>
+      <a href="#" class="quick-link" onclick="switchSectionByName('resources'); return false;">📚 Download instruments</a>
+    </div>
+
   </div>
-</div>
 
-<!-- ═══════ ECSOM FINDINGS ═══════ -->
-<div class="section section-white" id="ecsom">
-  <div class="section-inner">
-    <div class="eyebrow">Secondary Data Analysis — Baseline</div>
-    <h2 class="section-title">ECSOM Findings — Isabela de Basilan</h2>
-    <p class="section-intro">The ECSOM analysis, built from secondary data, structures Isabela de Basilan into its three-column canvas. These findings constitute the baseline that community-based field research will validate, interrogate, and extend.</p>
+  <!-- ========== RATIONALE / TOC / RESEARCH QUESTIONS ========== -->
+  <div id="rationale-section" class="content-view">
 
-    <div class="ecsom-grid" style="margin-bottom: 24px;">
-      <div class="ecsom-col ecsom-col-1">
-        <div class="ecsom-col-title">Column 1 · Ecosystem</div>
-        <div class="ecsom-col-sub">What the community HAS</div>
-        <div class="ecsom-item">22,507 ha across 5 land-use categories</div>
-        <div class="ecsom-item">Marine biocapacity: ~55,500 gha (Basilan Strait)</div>
-        <div class="ecsom-item">19 mangrove species · 2,698 fishing vessels registered</div>
-        <div class="ecsom-item">BASELCO grid: 44/45 barangays (100% diesel ₱14/kWh)</div>
-        <div class="ecsom-item">JS Alano Memorial Hospital + 3 RHUs · IC Market · ISAWAD water system</div>
-        <div class="ecsom-bottom">⚠ Biocapacity 195,000 gha available vs. 376,000 gha demand → ecological deficit of ~181,000 gha</div>
+    <div class="rationale-section">
+
+      <h3>📖 Research Rationale</h3>
+      <p>Isabela de Basilan sits at the intersection of four realities: deep indigenous ecological knowledge, a highly specialised fisheries economy (LQ 3.84), full diesel dependency, and two CADTs still pending for three ICCs. Economic analysis that <em>observes</em> these conditions without being co-built with the communities living them cannot produce durable, legitimate interventions.</p>
+      <p>Dr. Sixto K. Roxas III put it sharply: <em>"Economists should build economies. Not observe them — build them."</em> That is the stance of this research. Community OS treats Isabela as Pilot Community #1 of 250 — not as a data point, but as a co-designing partner whose knowledge is a <strong>primary source</strong>, not a supplementary one.</p>
+      <p>The rationale is therefore threefold:</p>
+      <ol style="margin-left:22px; margin-bottom:14px; line-height:1.9;">
+        <li><strong>Empirical</strong> — existing PSA 240-sector data, BFAR, BASELCO/BAPCO, and LGU BDIP records give a credible baseline, but none of them describe the informal economy (T9) or traditional ecological knowledge (T7). CEESAM 240×240 validated with community input closes that gap.</li>
+        <li><strong>Methodological</strong> — PEAR plus ECSOM plus Sikolohiyang Pilipino plus Community Psychology is, to our knowledge, a novel four-root synthesis in Philippine participatory research. Isabela is where that synthesis is stress-tested.</li>
+        <li><strong>Ethical &amp; political</strong> — FPIC, IPRA, and co-authorship rights are not compliance checkboxes. They are the operating conditions under which this research is legitimate at all.</li>
+      </ol>
+
+      <h3>🔄 Theory of Change</h3>
+      <div class="toc-block">
+        <p><strong>IF</strong> the four indigenous nations of Isabela de Basilan co-design and validate a CEESAM Input-Output matrix, co-author the ECSOM Canvas Narrative, and co-own the intervention prototypes that follow,</p>
+        <p><strong>THEN</strong> the resulting evidence base will reveal Win-Win-Win investment priorities (Solar RE, Seaweed SRC, Cold Chain + Halal Cluster, CADT Fast-Track, Digital Economy) that are simultaneously ecologically sustainable, economically productive, and culturally grounded,</p>
+        <p><strong>BECAUSE</strong> community validation produces interventions that withstand political cycles, attract aligned capital (see UNDP Aligning Capital framework), and are legible to both institutional and indigenous governance systems,</p>
+        <p><strong>SO THAT</strong> the Community OS model can be replicated across 250 pilot communities nationally and translated into BIMP-EAGA regional integration frameworks — with co-authorship as a right, not a bonus.</p>
       </div>
-      <div class="ecsom-col ecsom-col-2">
-        <div class="ecsom-col-title">Column 2 · Community</div>
-        <div class="ecsom-col-sub">Who the community IS</div>
-        <div class="ecsom-item">Population: 130,379 (2020) · est. 151,880 by 2025</div>
-        <div class="ecsom-item">Yakan 42.1% · Tausug 23.4% · Sama 10.4% · Chavacano 20.5%</div>
-        <div class="ecsom-item">~800 seaweed farmers · ~2,457 registered fisherfolk</div>
-        <div class="ecsom-item">~500 Yakan weaving artisans · pending CADTs (Sama Dilaut)</div>
-        <div class="ecsom-item">BPO employment multiplier: 28.4 jobs/₱M — no BPO facility exists</div>
-        <div class="ecsom-bottom">Equity contradiction: Sama are primary biocapacity stewards yet structurally most vulnerable</div>
-      </div>
-      <div class="ecsom-col ecsom-col-3">
-        <div class="ecsom-col-title">Column 3 · Sustainability</div>
-        <div class="ecsom-col-sub">What the community DOES</div>
-        <div class="ecsom-item">Gross output: ₱4,821M across 126 of 240 PSA sectors active</div>
-        <div class="ecsom-item">Exports: ₱1,247M (seaweed raw, copra, rubber, fish)</div>
-        <div class="ecsom-item">Imports: ₱2,134M (diesel ₱894M · chicken 100% · eggs 97.3%)</div>
-        <div class="ecsom-item">Trade deficit: ₱887M · carbon overshoot: 2,083%</div>
-        <div class="ecsom-item">Seaweed LQ 3.84 · Marine LQ 3.84 — high comparative advantage, zero local processing</div>
-        <div class="ecsom-bottom">Colonial circuit: Sama produce highest-LQ raw material; value extracted to Zamboanga before local retention is possible</div>
-      </div>
+
+      <h3>❓ Research Questions</h3>
+      <p>The overarching question is: <strong>How can a participatory, four-root research architecture produce an evidence base that communities themselves recognise as their own — and that institutional actors treat as authoritative?</strong></p>
+      <p>This breaks down into five operational research questions:</p>
+
+      <ol class="rq-list">
+        <li>How does the Isabela de Basilan economy actually function across its 240 sectors when informal, household, and indigenous-knowledge activities are made visible alongside the formal economy?</li>
+        <li>Which Win-Win-Win intervention priorities do the four indigenous nations recognise as legitimate — and how do their priorities align or diverge from the desktop-derived shortlist?</li>
+        <li>What governance and ethical conditions (FPIC, CADT, co-authorship protocols) need to be institutionalised for community validation to be durable beyond a single project cycle?</li>
+        <li>How does co-designing intervention prototypes in Weeks 12–20 change the structure and confidence of the CEESAM findings established in Weeks 2–11?</li>
+        <li>What elements of the Community OS toolkit transfer to the other 249 pilot communities — and what has to be re-invented locally in each?</li>
+      </ol>
+
+      <h3>🧪 Research Overview</h3>
+      <p>The programme runs across <strong>20 weeks</strong>, organised around two major arcs:</p>
+      <p><strong>Weeks 1–11 · Evidence &amp; Validation.</strong> CEESAM validation ideally begins in Week 2 or Week 3 and is <strong>continuous</strong> through Week 11. This window includes desktop triangulation, administrative KIIs, FPIC documentation, community KIIs, FGDs, photovoice sessions, and co-verification of the CEESAM matrix. <strong>By the end of Week 11, the analysis and the preliminary report must be ready for presentation.</strong></p>
+      <p><strong>Weeks 12–20 · Knowledge Mobilisation &amp; Co-Design.</strong> Beginning with community research exhibits and a town hall, the second arc is where the evidence becomes action:</p>
+      <ul class="checklist" style="margin: 10px 0 18px;">
+        <li><div class="check-box"></div><strong>Community research exhibits + town hall</strong> — findings returned to the community first, before any institutional audience</li>
+        <li><div class="check-box"></div><strong>CMC (Community Management Council) critical-components assessment</strong> — what governance infrastructure needs to be in place for interventions to hold?</li>
+        <li><div class="check-box"></div><strong>Co-designing intervention prototypes</strong> — workshops with each of the four nations separately, then jointly</li>
+        <li><div class="check-box"></div><strong>Intervention design workshops</strong> — refinement, costing, and alignment with UNDP Aligning Capital framework</li>
+        <li><div class="check-box"></div><strong>Policy briefs</strong> — for LGU, BARMM, and BIMP-EAGA audiences</li>
+        <li><div class="check-box"></div><strong>Final exhibit and CMC launch</strong> — handover to the community-led governance body</li>
+      </ul>
+      <p>The gate between the two arcs — the Week 11 presentation — is where the community decides whether and how the research continues into Phase 2.</p>
+
     </div>
 
-    <div class="alert alert-info">
-      <span>🔗</span>
-      <p class="alert-text"><strong>BIMP-EAGA &amp; ASEAN alignment:</strong> Seaweed, Halal food, marine products, Yakan cultural production, and renewable energy map directly to BIMP-EAGA Vision 2025 and ASEAN priority sectors. The CEESAM data is structured to serve as the evidence base for regional advocacy.</p>
-    </div>
   </div>
-</div>
 
-<!-- ═══════ RATIONALE, HYPOTHESIS, IRIS+, RQs ═══════ -->
-<div class="section section-stone" id="rationale">
-  <div class="section-inner">
-    <div class="eyebrow">Research Foundations</div>
-    <h2 class="section-title">Rationale, Theory of Change & Research Questions</h2>
+  <!-- ========== DASHBOARD ========== -->
+  <div id="dashboard-section" class="content-view">
 
-    <!-- RATIONALE -->
-    <h3 style="font-family:var(--font-serif);font-size:22px;color:var(--navy);margin-bottom:14px;">Research Rationale</h3>
-    <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:28px 32px;margin-bottom:36px;max-width:900px;">
-      <p style="font-size:15px;color:var(--text-mid);line-height:1.75;margin-bottom:14px;">Isabela de Basilan presents a concentrated case study in unrealised endogenous potential: substantial ecological and cultural capital, demonstrated comparative advantage in seaweed and marine sectors, yet persistent poverty sustained by trade structures that channel value away from local communities before it can be retained and reinvested.</p>
-      <p style="font-size:15px;color:var(--text-mid);line-height:1.75;margin-bottom:14px;">Conventional development approaches have treated communities as recipients of programmes designed elsewhere. The PEAR-ECSOM approach inverts this: communities become the architects of their own economic systems, building the internal capacities — analytical, institutional, and productive — needed to direct their own development trajectories. The CEESAM IO Matrix serves as the quantitative instrument that shows communities precisely where value circulates, where it dissipates, and where local retention is structurally achievable.</p>
-      <p style="font-size:15px;color:var(--text-mid);line-height:1.75;">The Isabela pilot tests whether this integrated model — combining rigorous quantitative accounting with participatory emancipatory methodology — can strengthen community economic agency in ways that are replicable across BARMM and beyond. The framework is designed to be transferable to other municipalities and island economies with comparable structural profiles, wherever communities seek to build the internal capacity to manage their own ecological and economic systems.</p>
-    </div>
+    <!-- FIELD RESEARCHER -->
+    <div id="field-view" class="role-view active">
+      <h2 class="section-title" style="margin-bottom: 32px;">🗺️ Field Researcher Dashboard</h2>
 
-    <!-- HYPOTHESIS -->
-    <h3 style="font-family:var(--font-serif);font-size:22px;color:var(--navy);margin-bottom:14px;">Core Hypothesis</h3>
-    <div class="hypothesis-box" style="margin-bottom:36px;">
-      <p class="hypothesis-text">If communities are equipped with accurate data about their own economic system — and participate fully in designing interventions — they will generate more durable, equitable, and ecologically viable development outcomes than externally imposed programmes.</p>
-      <p class="hypothesis-sub">The CEESAM validation process tests whether secondary-data estimates of production flows, ecological deficits, and livelihood multipliers hold up under community scrutiny — and whether community-generated primary data changes the picture in ways that alter intervention priorities.</p>
-    </div>
-
-    <!-- LOGIC FRAMEWORK / THEORY OF CHANGE (IRIS+) -->
-    <h3 style="font-family:var(--font-serif);font-size:22px;color:var(--navy);margin-bottom:8px;">Logic Framework &amp; Theory of Change</h3>
-    <p style="font-size:14px;color:var(--text-muted);margin-bottom:20px;font-style:italic;">Aligned with the IRIS+ framework (thegiin.org). Updated after community validation in Phase 3.</p>
-    <div class="logic-frame" style="margin-bottom:36px;">
-      <div class="logic-col" style="background:#f8f4ef;">
-        <div class="logic-col-label">Inputs</div>
-        <div class="logic-col-title">What we invest</div>
-        <div class="logic-item">Research team (coordinators, field researchers, citizen scientists)</div>
-        <div class="logic-item">CEESAM IO Matrix 240×240 (secondary data baseline)</div>
-        <div class="logic-item">21-week programme design and instruments</div>
-        <div class="logic-item">BIMP-EAGA institutional relationships</div>
-        <div class="logic-item">LGU and SKR Institute partnerships</div>
-      </div>
-      <div class="logic-arrow">→</div>
-      <div class="logic-col" style="background:var(--teal-xlight);">
-        <div class="logic-col-label">Activities</div>
-        <div class="logic-col-title">What we do</div>
-        <div class="logic-item">6 workshop clusters (Prosperity → Knowledge Mobilisation)</div>
-        <div class="logic-item">Photovoice, KIIs, FGDs, root cause analysis</div>
-        <div class="logic-item">CEESAM community validation (continuous)</div>
-        <div class="logic-item">Intervention design workshops (CMC co-design)</div>
-        <div class="logic-item">Paaralang Kapuluan orientation and assembly</div>
-      </div>
-      <div class="logic-arrow">→</div>
-      <div class="logic-col" style="background:var(--sky-light);">
-        <div class="logic-col-label">Outputs</div>
-        <div class="logic-col-title">What we produce</div>
-        <div class="logic-item">Community Prosperity Model (Filipino)</div>
-        <div class="logic-item">Validated CEESAM 240×240 IO Matrix</div>
-        <div class="logic-item">Governance and stakeholder map</div>
-        <div class="logic-item">6 Win-Win-Win intervention designs</div>
-        <div class="logic-item">Community OS Research Report v2.0</div>
-        <div class="logic-item">6 Policy Briefs + BIMP-EAGA advocacy package</div>
-      </div>
-      <div class="logic-arrow">→</div>
-      <div class="logic-col" style="background:#eef7f0;">
-        <div class="logic-col-label">Outcomes</div>
-        <div class="logic-col-title">Short to medium-term change</div>
-        <div class="logic-item">Strengthened community economic agency</div>
-        <div class="logic-item">Community co-ownership of development data</div>
-        <div class="logic-item">Validated CMC enterprise concepts per sector</div>
-        <div class="logic-item">LGU policy alignment with community priorities</div>
-        <div class="logic-item">Replicable methodology for other BARMM territories</div>
-      </div>
-      <div class="logic-arrow">→</div>
-      <div class="logic-col" style="background:var(--gold-light);">
-        <div class="logic-col-label">Impact</div>
-        <div class="logic-col-title">Long-term systemic change</div>
-        <div class="logic-item">Reduced structural economic inequity in Isabela de Basilan</div>
-        <div class="logic-item">Value retained locally across seaweed, marine, cultural sectors</div>
-        <div class="logic-item">Ecological deficit reduction through CMC circular economy</div>
-        <div class="logic-item">Transferable model for island community development</div>
-      </div>
-    </div>
-
-    <!-- RQs -->
-    <h3 style="font-family:var(--font-serif);font-size:22px;color:var(--navy);margin-bottom:16px;">Research Questions</h3>
-    <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:8px 24px;">
-      <div class="rq-item">
-        <span class="rq-num">RQ1</span>
-        <div>
-          <p class="rq-text">What does prosperity mean to residents of Isabela de Basilan — across gender, age, ethnic community, and sector — and how does that definition compare to the ECSOM secondary-data baseline?</p>
-          <p class="rq-cluster">Cluster A — Prosperity Mapping · Weeks 3–5</p>
-        </div>
-      </div>
-      <div class="rq-item">
-        <span class="rq-num">RQ2</span>
-        <div>
-          <p class="rq-text">What are the structural root causes of livelihood insecurity and ecological degradation in Isabela de Basilan, as identified by community members through participatory root cause analysis?</p>
-          <p class="rq-cluster">Cluster B — Root Cause Analysis · Weeks 6–11</p>
-        </div>
-      </div>
-      <div class="rq-item">
-        <span class="rq-num">RQ3</span>
-        <div>
-          <p class="rq-text">How do existing governance structures and institutional arrangements in Isabela de Basilan support or obstruct community-controlled economic development — particularly for indigenous communities?</p>
-          <p class="rq-cluster">Cluster C — Governance Mapping · Weeks 12–14</p>
-        </div>
-      </div>
-      <div class="rq-item">
-        <span class="rq-num">RQ4</span>
-        <div>
-          <p class="rq-text">Does the CEESAM 240×240 IO Matrix accurately reflect Isabela de Basilan's actual economic flows, and what adjustments does community-generated primary data require?</p>
-          <p class="rq-cluster">Continuous CEESAM Validation — Weeks 1–21</p>
-        </div>
-      </div>
-      <div class="rq-item">
-        <span class="rq-num">RQ5</span>
-        <div>
-          <p class="rq-text">To what extent is the Community OS methodology — PEAR-ECSOM integrated — replicable across BARMM territories and applicable as a community development model in comparable island economies?</p>
-          <p class="rq-cluster">Replicability & Scale — Programme-level</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ═══════ SEPARATOR ═══════ -->
-<div class="sep-banner">
-  <div class="sep-inner">
-    <span style="font-size:24px;">🗂</span>
-    <div>
-      <div class="sep-title">Research Team Section</div>
-      <div class="sep-sub">Schedule, roles, tools, journals, and repository — for field researchers and programme coordinators</div>
-    </div>
-  </div>
-</div>
-
-<!-- ═══════ SCHEDULE ═══════ -->
-<div class="section section-white" id="schedule">
-  <div class="section-inner">
-    <div class="eyebrow">Field Research Team</div>
-    <h2 class="section-title">21-Week Programme Schedule</h2>
-    <p class="section-intro">Phase 1 (Weeks 1–2) is relational groundwork and ethical co-design — no primary instruments deployed. Phase 2 (Weeks 3–21) is six thematic research clusters with CEESAM validation running continuously. Weeks 12–21 include provision for notes and will be refined following Phase 1 co-design feedback.</p>
-
-    <!-- SYNTHESIS CADENCE -->
-    <div class="grid g2" style="margin-bottom:32px;">
-      <div class="synthesis-box">
-        <div class="synthesis-box-title">Weekly Synthesis — Field Research Team</div>
-        <p>Internal synthesis session every week with the full field research team. Reviews field observations, emerging themes, instrument performance, and CEESAM data updates. Reflexivity journals reviewed. <a href="#" style="color:#5ee8de;">[Add link to notes template]</a></p>
-      </div>
-      <div class="synthesis-box">
-        <div class="synthesis-box-title">Fortnightly Synthesis — SKRI Core Team</div>
-        <p>Synthesis session every two weeks with the broader SKR Institute core team. Reviews progress against schedule, ethical considerations, emerging findings, and programme adjustments. <a href="#" style="color:#5ee8de;">[Add link to meeting notes template]</a></p>
-      </div>
-    </div>
-
-    <div class="alert alert-warn" style="margin-bottom:32px;">
-      <span>⚠</span>
-      <p class="alert-text"><strong>Schedule status:</strong> Weeks 1–11 are confirmed. Weeks 12–21 are provisionally structured pending co-design feedback from Phase 1. Notes slots are open throughout for updates. Schedule will be refined in discussion with the full team.</p>
-    </div>
-
-    <!-- PHASE 1 -->
-    <div class="phase-band phase-band-1" style="margin-bottom:18px;">
-      <div>
-        <div class="phase-band-label">Phase 1</div>
-        <div class="phase-band-title">Groundwork: Meeting, Listening, and Co-Designing</div>
-      </div>
-    </div>
-
-    <div class="phase-row">
-      <div class="phase-badge">
-        <div class="phase-week">1–2</div>
-        <div class="phase-label">Weeks</div>
-      </div>
-      <div class="phase-card">
-        <div class="phase-title">Relational Foundation, Ethical Co-Design & Research Training Needs Assessment</div>
-        <div class="phase-cluster">No primary instruments deployed · Ethics gate · Co-design of research agenda</div>
-        <ul class="act-list">
-          <li>Formal stakeholder introductions — City Mayor's Office, City Agriculture, CPDO, CSWD, TESDA, BFAR, interfaith institutions</li>
-          <li>Community listening sessions (Talakayan) in each identified barangay cluster — open format, team presents itself, then listens</li>
-          <li>Ethical review and approval integrated into the co-design process — written clearance required before Phase 2</li>
-          <li>FPIC processes with Yakan, Sama Banguingui, Sama Dilaut, and Tausug communities per RA 8371 / IPRA, coordinated with NCIP</li>
-          <li>Paaralang Kapuluan orientation: community introduction to PEAR framework and Community OS goals in Filipino and vernacular</li>
-          <li>Vision, Mission, and Objectives co-authorship with community; Mutual Commitment Form</li>
-          <li>Half-day co-design workshop: community review and modification of draft research instruments and schedule</li>
-          <li>Research &amp; Training Needs Assessment Survey (field researchers and community participants)</li>
-          <li>MOA finalisation — ways of working, contact persons, cadence meetings, turnaround times, feedback mechanisms</li>
-          <li>Initial CEESAM sector scoping — identify contested or least-evidenced sectors from secondary data</li>
-        </ul>
-        <div>
-          <span class="out-tag">Stakeholder map</span>
-          <span class="out-tag">Co-designed research protocol</span>
-          <span class="out-tag">FPIC documentation</span>
-          <span class="out-tag">Ethical consent framework</span>
-          <span class="out-tag">Research &amp; Training Needs Assessment</span>
-          <span class="out-tag">MOA (signed)</span>
-          <span class="out-tag">Vision, Mission &amp; Objectives statement</span>
-        </div>
-        <div class="phase-links" style="margin-top:14px;">
-          <a class="phase-link-btn" href="https://docs.google.com/document/d/1GXiqCbO7Ol2uzxN8YcXDGN8bG0o6ekSP/edit?usp=drive_link&ouid=112881937996314874224&rtpof=true&sd=true" target="_blank">Researcher Journal</a>
-          <a class="phase-link-btn" href="https://docs.google.com/document/d/1Aq75STVA43DVPoozsddBJAdAtqbI8bDt/edit?usp=drive_link&ouid=112881937996314874224&rtpof=true&sd=true" target="_blank">Research Concepts</a>
-          <a class="phase-link-btn" href="https://docs.google.com/document/d/1j2DwfKfdBdClSjm1k0Glo6h4IueeLv1C/edit?usp=drive_link&ouid=112881937996314874224&rtpof=true&sd=true" target="_blank">Templates &amp; Tools</a>
-          <a class="phase-link-btn" href="https://docs.google.com/document/d/1E3Enhlu3-cJSfYpEO4tTLe_fcK1ZLEkA/edit?usp=drive_link&ouid=112881937996314874224&rtpof=true&sd=true" target="_blank">MOA Template</a>
-          <a class="phase-link-btn" href="https://docs.google.com/document/d/1oGGSLISImOCBwxKzUnMY2x5BCzOgrm1e/edit?usp=drive_link&ouid=112881937996314874224&rtpof=true&sd=true" target="_blank">FPIC Kit</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- PHASE 2 -->
-    <div class="phase-band phase-band-2" style="margin:24px 0 18px;">
-      <div>
-        <div class="phase-band-label">Phase 2</div>
-        <div class="phase-band-title">Participatory Research and Intervention Design</div>
-      </div>
-    </div>
-
-    <!-- Weeks 3-5 -->
-    <div class="phase-row">
-      <div class="phase-badge phase-badge-teal">
-        <div class="phase-week">3–5</div>
-        <div class="phase-label">Weeks</div>
-      </div>
-      <div class="phase-card">
-        <div class="phase-title">Cluster A — Prosperity Mapping &amp; Community Identity</div>
-        <div class="phase-cluster">Workshops A1 (Photovoice · SHOWed) · A2 (Paaralang Kapuluan) · Research Commitment · Governance Mapping</div>
-        <ul class="act-list">
-          <li>Photovoice cycles using SHOWed method — 6 thematic prompts in Filipino; participants document their own definitions of prosperity</li>
-          <li>Hamra-style prosperity model co-design per barangay cluster</li>
-          <li>Ecological and Socio-Economic Governance Mapping: IAD framework · Iceberg activity (CResT) · Stakeholder mapping</li>
-          <li>Problem Diagnosis — Iceberg activity (CResT); Issue Mapping (without Causal Loop Diagram at this stage)</li>
-          <li>CEESAM data validation sessions — continuous throughout all clusters</li>
-        </ul>
-        <div>
-          <span class="out-tag">Community Prosperity Model (Filipino)</span>
-          <span class="out-tag">Photovoice dataset (min. 6 images/participant/cluster)</span>
-          <span class="out-tag">Governance and Institutional Map (IAD framework)</span>
-        </div>
-        <div class="phase-links" style="margin-top:14px;">
-          <a class="phase-link-btn" href="https://drive.google.com/drive/folders/1zu2IYzQ_yavJbPm9Ts5LEv3HHUryOlLB?usp=drive_link" target="_blank">Photovoice Folder</a>
-          <a class="phase-link-btn" href="https://docs.google.com/document/d/1j2DwfKfdBdClSjm1k0Glo6h4IueeLv1C/edit?usp=drive_link&ouid=112881937996314874224&rtpof=true&sd=true" target="_blank">WS A1 Worksheet</a>
-          <a class="phase-link-btn" href="https://docs.google.com/document/d/1GXiqCbO7Ol2uzxN8YcXDGN8bG0o6ekSP/edit?usp=drive_link&ouid=112881937996314874224&rtpof=true&sd=true" target="_blank">Researcher Journal</a>
-          <a class="phase-link-btn" href="https://docs.google.com/document/d/1j2DwfKfdBdClSjm1k0Glo6h4IueeLv1C/edit?usp=drive_link&ouid=112881937996314874224&rtpof=true&sd=true" target="_blank">SHOWed Template</a>
-          <a class="phase-link-btn" href="https://docs.google.com/document/d/1Aq75STVA43DVPoozsddBJAdAtqbI8bDt/edit?usp=drive_link&ouid=112881937996314874224&rtpof=true&sd=true" target="_blank">Research Concepts</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Weeks 6-8 -->
-    <div class="phase-row">
-      <div class="phase-badge phase-badge-teal">
-        <div class="phase-week">6–8</div>
-        <div class="phase-label">Weeks</div>
-      </div>
-      <div class="phase-card">
-        <div class="phase-title">Cluster B — Root Cause Analysis &amp; Systems Understanding</div>
-        <div class="phase-cluster">Workshop B1 (Problem &amp; Objective Tree · 5 Whys) · Climate Fresk · Action Pentahelix Workshop</div>
-        <ul class="act-list">
-          <li>Climate Fresk — participatory systems thinking workshop on climate change (per barangay/cluster)</li>
-          <li>Problem Tree and Objective Tree analysis using 5 Whys protocol — per sector cluster</li>
-          <li>Root cause mapping — from description of problems to structural cause analysis; ECSOM extraction circuit applied</li>
-          <li>Action Pentahelix Workshop — identify cross-sector gaps and opportunities (government, civil society, community, private sector, academe)</li>
-          <li>CEESAM validation sessions — continuous</li>
-        </ul>
-        <div>
-          <span class="out-tag">Root cause maps per cluster</span>
-          <span class="out-tag">Priority problem statements</span>
-          <span class="out-tag">Expanded socio-ecological-governance systems map</span>
-          <span class="out-tag">Pentahelix opportunity matrix</span>
-        </div>
-        <div class="phase-links" style="margin-top:14px;">
-          <a class="phase-link-btn" href="https://docs.google.com/document/d/1GXiqCbO7Ol2uzxN8YcXDGN8bG0o6ekSP/edit?usp=drive_link&ouid=112881937996314874224&rtpof=true&sd=true" target="_blank">Researcher Journal</a>
-          <a class="phase-link-btn" href="https://docs.google.com/document/d/1c0hckenISyoYStHr19Et-tivc1Iu-0nV/edit?usp=drive_link&ouid=112881937996314874224&rtpof=true&sd=true" target="_blank">Root Cause Template</a>
-          <a class="phase-link-btn" href="https://docs.google.com/document/d/1Aq75STVA43DVPoozsddBJAdAtqbI8bDt/edit?usp=drive_link&ouid=112881937996314874224&rtpof=true&sd=true" target="_blank">Research Concepts</a>
-          <a class="phase-link-btn" href="https://docs.google.com/document/d/1j2DwfKfdBdClSjm1k0Glo6h4IueeLv1C/edit?usp=drive_link&ouid=112881937996314874224&rtpof=true&sd=true" target="_blank">Templates &amp; Tools</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Weeks 9-11 -->
-    <div class="phase-row">
-      <div class="phase-badge phase-badge-teal">
-        <div class="phase-week">9–11</div>
-        <div class="phase-label">Weeks</div>
-      </div>
-      <div class="phase-card">
-        <div class="phase-title">Cluster B (cont.) — Deep Listening: KIIs and FGDs</div>
-        <div class="phase-cluster">Workshop B2 (Key Informant Interviews · Focus Group Discussions)</div>
-        <ul class="act-list">
-          <li>KIIs across all sectors — minimum 30 interviews · semi-structured · sex-disaggregated</li>
-          <li>FGDs with 8 cohort types: children 8–14 · youth female/male 15–24 · adult women · adult men · elders · IP council leaders · enterprise operators</li>
-          <li>Priority respondents: LGU officials; City Agriculture, Fisheries, Social Welfare; BARMM agencies; religious leaders; IP leaders</li>
-          <li>Synthesis every 2 weeks with SKRI core team; thematic analysis using Braun &amp; Clarke 6-phase framework</li>
-          <li>ECSOM and CEESAM matrix updates from validated field data</li>
-        </ul>
-        <div>
-          <span class="out-tag">Validated KII/FGD transcripts</span>
-          <span class="out-tag">Thematic analysis (Braun &amp; Clarke)</span>
-          <span class="out-tag">CEESAM matrix update</span>
-        </div>
-        <div class="phase-links" style="margin-top:14px;">
-          <a class="phase-link-btn" href="https://docs.google.com/document/d/1GXiqCbO7Ol2uzxN8YcXDGN8bG0o6ekSP/edit?usp=drive_link&ouid=112881937996314874224&rtpof=true&sd=true" target="_blank">Researcher Journal</a>
-          <a class="phase-link-btn" href="https://docs.google.com/document/d/1u77OkkBLuxpmJYMKNv3R5z3UXtDuMNrV/edit?usp=drive_link&ouid=112881937996314874224&rtpof=true&sd=true" target="_blank">KII Guide</a>
-          <a class="phase-link-btn" href="https://docs.google.com/document/d/1mZNC8w6AZ2ZhJb9M4AKElPP0YC2mrc9c/edit?usp=drive_link&ouid=112881937996314874224&rtpof=true&sd=true" target="_blank">FGD Guide</a>
-          <a class="phase-link-btn" href="https://docs.google.com/document/d/1j2DwfKfdBdClSjm1k0Glo6h4IueeLv1C/edit?usp=drive_link&ouid=112881937996314874224&rtpof=true&sd=true" target="_blank">Templates &amp; Tools</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Weeks 12-14 -->
-    <div class="phase-row">
-      <div class="phase-badge" style="background:rgba(12,35,64,0.45);">
-        <div class="phase-week">12–14</div>
-        <div class="phase-label">Weeks</div>
-      </div>
-      <div class="phase-card-open">
-        <div class="phase-title phase-title-open">Cluster C — Co-Analysis &amp; Validation</div>
-        <div class="phase-cluster-open">Talakayan (Community Townhall) · CEESAM Validation · To be refined after Phase 1</div>
-        <ul class="act-list">
-          <li>Talakayan townhall — community presentation of research findings for validation</li>
-          <li>CEESAM matrix final validation sessions (community-verified sector flows)</li>
-          <li>Win-Win-Win investment scenario community endorsement</li>
-          <li>Update to logic framework and theory of change if required based on validated findings</li>
-        </ul>
-        <div>
-          <span class="out-tag">Community-validated research manuscript (draft)</span>
-          <span class="out-tag">Updated logic framework &amp; theory of change</span>
-          <span class="out-tag">Validated CEESAM matrix</span>
-        </div>
-        <div class="phase-links" style="margin-top:14px;">
-          <a class="phase-link-btn" href="https://docs.google.com/document/d/1GXiqCbO7Ol2uzxN8YcXDGN8bG0o6ekSP/edit?usp=drive_link&ouid=112881937996314874224&rtpof=true&sd=true" target="_blank">Researcher Journal</a>
-          <a class="phase-link-btn" href="https://docs.google.com/document/d/1mZNC8w6AZ2ZhJb9M4AKElPP0YC2mrc9c/edit?usp=drive_link&ouid=112881937996314874224&rtpof=true&sd=true" target="_blank">Governance Worksheet</a>
-          <a class="phase-link-btn" href="https://docs.google.com/document/d/1Aq75STVA43DVPoozsddBJAdAtqbI8bDt/edit?usp=drive_link&ouid=112881937996314874224&rtpof=true&sd=true" target="_blank">CEESAM Validation Sheet</a>
-        </div>
-        <div class="tbd-note">📝 Notes slot — to be updated following Phase 1 outputs</div>
-      </div>
-    </div>
-
-    <!-- Weeks 15-20 -->
-    <div class="phase-row">
-      <div class="phase-badge" style="background:rgba(12,35,64,0.45);">
-        <div class="phase-week">15–20</div>
-        <div class="phase-label">Weeks</div>
-      </div>
-      <div class="phase-card-open">
-        <div class="phase-title phase-title-open">Clusters D &amp; E — Systems Thinking, Intervention Design &amp; CMC Co-Design</div>
-        <div class="phase-cluster-open">Workshops D1–D3 · CMC Critical Components · BIMP-EAGA Alignment · To be refined after Phase 1</div>
-        <ul class="act-list">
-          <li>CMC critical components identification per sector — with BIMP-EAGA Vision 2025 and ASEAN alignment</li>
-          <li><strong>Lens workshops:</strong> Intersectionality (GEDSI) · Climate Change &amp; Just Transition · AI and Cybersecurity</li>
-          <li>Systems Thinking — Causal Loop Diagram (introduced here, building on Cluster B)</li>
-          <li>Circular Economy Collage (Climate Fresk Philippines) — participatory card-based circular economy workshop</li>
-          <li>Sustainable Value Chain Mapping (AQO Partners methodology)</li>
-          <li>Design Thinking — Leontief multiplier What-If simulations communicated to community</li>
-          <li>Win-Win-Win investment scenarios stress-tested through community deliberation</li>
-          <li>Prototype intervention designs per priority sector — community endorsed</li>
-        </ul>
-        <div>
-          <span class="out-tag">Intervention designs per priority sector</span>
-          <span class="out-tag">CMC enterprise concepts (Win-Win-Win validated)</span>
-          <span class="out-tag">Sustainable value chain maps</span>
-          <span class="out-tag">BIMP-EAGA alignment brief</span>
-        </div>
-        <div class="phase-links" style="margin-top:14px;">
-          <a class="phase-link-btn" href="https://docs.google.com/document/d/1GXiqCbO7Ol2uzxN8YcXDGN8bG0o6ekSP/edit?usp=drive_link&ouid=112881937996314874224&rtpof=true&sd=true" target="_blank">Researcher Journal</a>
-          <a class="phase-link-btn" href="https://docs.google.com/document/d/1Aq75STVA43DVPoozsddBJAdAtqbI8bDt/edit?usp=drive_link&ouid=112881937996314874224&rtpof=true&sd=true" target="_blank">Research Concepts</a>
-          <a class="phase-link-btn" href="https://docs.google.com/document/d/1j2DwfKfdBdClSjm1k0Glo6h4IueeLv1C/edit?usp=drive_link&ouid=112881937996314874224&rtpof=true&sd=true" target="_blank">Templates &amp; Tools</a>
-        </div>
-        <div class="tbd-note">📝 Notes slot — to be refined following Cluster B and C outputs. Suggested workshops listed above.</div>
-      </div>
-    </div>
-
-    <!-- Week 21 -->
-    <div class="phase-row">
-      <div class="phase-badge phase-badge-gold">
-        <div class="phase-week">21</div>
-        <div class="phase-label">Week</div>
-      </div>
-      <div class="phase-card" style="border: 2px solid var(--gold);">
-        <div class="phase-title">Cluster F — Knowledge Mobilisation: Paaralang Kapuluan Assembly</div>
-        <div class="phase-cluster">Full Community Graduation Fiesta · Photovoice Exhibition · Intervention Design Exhibit</div>
-        <ul class="act-list">
-          <li>Paaralang Kapuluan graduation fiesta — community presentation of the full research journey</li>
-          <li>Photovoice exhibition — community-produced images, narratives, and captions</li>
-          <li>Community OS Research Report v2.0 formal presentation and community endorsement</li>
-          <li>Intervention Design Exhibit — Win-Win-Win proposals presented to LGU, BARMM stakeholders, and BIMP-EAGA partners</li>
-          <li>Six policy briefs (one per intervention cluster) formally handed over</li>
-          <li>Community co-authorship formally recognised; knowledge mobilisation plan activated</li>
-        </ul>
-        <div>
-          <span class="out-tag">Community OS Research Report v2.0</span>
-          <span class="out-tag">6 Policy Briefs</span>
-          <span class="out-tag">BIMP-EAGA Advocacy Package</span>
-          <span class="out-tag">Photovoice Exhibition</span>
-          <span class="out-tag">Intervention Design Exhibit</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ═══════ TEAM ═══════ -->
-<div class="section section-stone" id="team">
-  <div class="section-inner">
-    <div class="eyebrow">Field Research Team</div>
-    <h2 class="section-title">Roles and Responsibilities</h2>
-    <p class="section-intro">Names are not assigned here. Roles and task responsibilities are described below. Co-authorship of research outputs is a right, not a bonus — formalised in the Field Researcher TOR.</p>
-
-    <div class="grid g3">
-      <div class="role-card">
-        <div class="role-type">Programme · Manila</div>
-        <div class="role-title">Research Coordinators (×2)</div>
-        <ul class="task-list">
-          <li>Overall programme design, oversight, and adaptive management</li>
-          <li>Ethical review confirmation and compliance gate</li>
-          <li>Stakeholder relations — institutional partners, BIMP-EAGA</li>
-          <li>CEESAM IO Matrix management and quantitative analysis</li>
-          <li>Document suite production and version control</li>
-          <li>Swim-lane planning and schedule management</li>
-          <li>Field team coordination and bi-weekly synthesis facilitation</li>
-          <li>Co-authorship of Community OS Research Report v2.0</li>
-        </ul>
-      </div>
-      <div class="role-card">
-        <div class="role-type">Field · Mindanao</div>
-        <div class="role-title">Field Research Coordinator</div>
-        <ul class="task-list">
-          <li>Primary field deployment across all barangay clusters</li>
-          <li>Workshop facilitation (A1–F1) in Filipino and vernacular</li>
-          <li>Community relationship management and social license maintenance</li>
-          <li>FPIC facilitation with IP communities (NCIP coordination)</li>
-          <li>CEESAM field validation recording and entry</li>
-          <li>Weekly synthesis lead with field research team</li>
-          <li>Daily field journals and reflexivity entries</li>
-          <li>Field logistics and safety protocol management</li>
-        </ul>
-      </div>
-      <div class="role-card">
-        <div class="role-type">Field · Mindanao</div>
-        <div class="role-title">Field Researchers (×2)</div>
-        <ul class="task-list">
-          <li>Support facilitation of all workshops across all clusters</li>
-          <li>KII and FGD facilitation, note-taking, and audio management</li>
-          <li>Photovoice facilitation and participant coaching (SHOWed method)</li>
-          <li>Barangay-level data collection (ecological, demographic)</li>
-          <li>CEESAM sector verification sessions per cluster</li>
-          <li>Reflexivity journal maintenance — weekly submission</li>
-          <li>Informed consent documentation per session</li>
-          <li>Preliminary thematic coding (Braun &amp; Clarke 6-phase)</li>
-        </ul>
-      </div>
-      <div class="role-card" style="border-color:rgba(0,133,124,0.3);background:var(--teal-xlight);">
-        <div class="role-type" style="color:var(--teal-mid);">Community · Isabela de Basilan</div>
-        <div class="role-title">Citizen Scientists</div>
-        <ul class="task-list">
-          <li>Co-researchers recruited from the community — co-authorship of all outputs</li>
-          <li>Trained in photovoice facilitation and SHOWed method pre-deployment</li>
-          <li>Participate fully in defining and refining the research agenda (Weeks 1–2)</li>
-          <li>Lead photovoice data collection in their own barangay</li>
-          <li>Validate findings and CEESAM matrix estimates in community sessions</li>
-          <li>Co-present findings at Paaralang Kapuluan Assembly (Week 21)</li>
-          <li>Receive transportation and communication allowances as distinct line items</li>
-        </ul>
-      </div>
-      <div class="role-card" style="grid-column: span 2;">
-        <div class="role-type">All Roles</div>
-        <div class="role-title">Shared Commitments Across the Team</div>
-        <ul class="task-list" style="columns:2; gap:20px;">
-          <li>Trauma-informed facilitation practice at all times</li>
-          <li>Sex-disaggregated data collection as non-negotiable standard</li>
-          <li>FPIC compliance and cultural sensitivity with all IP communities</li>
-          <li>Weekly reflexivity journal entries submitted every Sunday</li>
-          <li>Participation in weekly field team synthesis and fortnightly SKRI synthesis</li>
-          <li>Confidentiality and data protection per programme protocols</li>
-          <li>Adaptive leadership — programme adjusts based on co-design feedback</li>
-          <li>Community co-authorship rights respected in all outputs</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ═══════ RESOURCES ═══════ -->
-<div class="section section-white" id="resources">
-  <div class="section-inner">
-    <div class="eyebrow">Research Team · Knowledge Base</div>
-    <h2 class="section-title">Foundational Resources &amp; Research Methods</h2>
-    <p class="section-intro">Links to foundational literature, method guides, tools, and reflexivity journals. All field researchers review core readings before deployment. Links open programme-specific explainers prepared for this research context.</p>
-
-    <div class="grid g2" style="margin-bottom:32px;">
-      <div>
-        <div style="font-size:12px;font-weight:700;color:var(--teal);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:8px;"><span style="display:block;width:20px;height:2px;background:var(--teal);"></span>Research Principles &amp; Philosophy</div>
-
-        <a class="res-link" href="https://drive.google.com/file/d/1EqUTb762rjDZwPP3D6bSlOXqXVobqSOd/view?usp=sharing" target="_blank">
-          <div class="res-icon ic-teal">📚</div>
-          <div>
-            <div class="res-title">PEAR / Citizen Social Science</div>
-            <div class="res-desc">Jallad et al. (2021) — Hamra Prosperity Model. Participation at highest level of Haklay's taxonomy. Foundational paper for the programme's citizen science approach.</div>
-            <span class="res-tag">Core Reading · Drive</span>
+      <div class="dashboard-grid">
+        <div class="dashboard-card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Safety Checklist</div>
+              <div class="card-description" style="margin-top: 4px;">Before each field day</div>
+            </div>
+            <span class="card-badge badge-warning">6/8</span>
           </div>
-        </a>
-
-        <a class="res-link" href="https://docs.google.com/document/d/1a8IybkPPGDwvFrFA5wy6Y2ZJgn334bwYE-5UcqbfpsU/edit?tab=t.0" target="_blank">
-          <div class="res-icon ic-navy">⚖</div>
-          <div>
-            <div class="res-title">ECSOM / CEESAM Framework Explainer</div>
-            <div class="res-desc">Dr. Sixto K. Roxas III. Community ecological-economic-social accounting — the quantitative instrument that makes the three-column canvas operational.</div>
-            <span class="res-tag">Core Reading · Drive</span>
-          </div>
-        </a>
-
-        <a class="res-link" href="https://docs.google.com/document/d/16Wu2sbNp7nh4XBGlhk9iVZkP68_uSe8z/edit?usp=sharing" target="_blank">
-          <div class="res-icon ic-gold">🤝</div>
-          <div>
-            <div class="res-title">Sikolohiyang Pilipino</div>
-            <div class="res-desc">Enriquez (1975). Kapwa, pakikipagkuwentuhan, and the relational ethics of indigenous Filipino psychology. Knowledge flows from within the culture.</div>
-            <span class="res-tag">Core Reading · Drive</span>
-          </div>
-        </a>
-
-        <a class="res-link" href="https://docs.google.com/document/d/1iqXHnyEqZn5sNi2V4IspubWwGWxgqVwg/edit?usp=drive_link" target="_blank">
-          <div class="res-icon ic-sage">🌱</div>
-          <div>
-            <div class="res-title">Community Psychology Explainer</div>
-            <div class="res-desc">The science of how social, economic, and environmental conditions shape wellbeing — and how communities can work together to change those conditions.</div>
-            <span class="res-tag">Core Reading · Drive</span>
-          </div>
-        </a>
-
-        <a class="res-link" href="https://docs.google.com/document/d/10KLZrEk2XZpmhxYcoz3SNcCCvNriOEDj/edit?usp=drive_link" target="_blank">
-          <div class="res-icon ic-sky">🌳</div>
-          <div>
-            <div class="res-title">Bronfenbrenner — Ecological Systems Theory</div>
-            <div class="res-desc">Nested contexts (microsystem → macrosystem) framing how community conditions are shaped at multiple levels — from household to regional policy.</div>
-            <span class="res-tag">Theory · Drive</span>
-          </div>
-        </a>
-
-        <a class="res-link" href="https://docs.google.com/document/d/1AT8BFPzZMTZt2OsnYLpPOGe_aWwjq2l0/edit?usp=drive_link" target="_blank">
-          <div class="res-icon ic-teal">✊</div>
-          <div>
-            <div class="res-title">Paulo Freire — Conscientização, Pedagogy &amp; Guinea-Bissau</div>
-            <div class="res-desc">Critical consciousness, Pedagogy of the Oppressed, and the Guinea-Bissau literacy programme — the Freirean foundation for Paaralang Kapuluan design.</div>
-            <span class="res-tag">Theory · Drive</span>
-          </div>
-        </a>
-      </div>
-
-      <div>
-        <div style="font-size:12px;font-weight:700;color:var(--teal);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:8px;"><span style="display:block;width:20px;height:2px;background:var(--teal);"></span>Research Methods &amp; Field Tools</div>
-
-        <a class="res-link" href="https://drive.google.com/drive/folders/1zu2IYzQ_yavJbPm9Ts5LEv3HHUryOlLB?usp=drive_link" target="_blank">
-          <div class="res-icon ic-teal">📷</div>
-          <div>
-            <div class="res-title">Photovoice / SHOWed Method — Full Folder</div>
-            <div class="res-desc">Wang &amp; Burris (1997). Participatory visual storytelling — all session materials, thematic prompts, facilitation guide, and consent forms.</div>
-            <span class="res-tag">Workshop A1 · Drive Folder</span>
-          </div>
-        </a>
-
-        <a class="res-link" href="https://ctb.ku.edu/en/table-of-contents/analyze/analyze-community-problems-and-solutions/root-cause-analysis/main" target="_blank">
-          <div class="res-icon ic-navy">🌳</div>
-          <div>
-            <div class="res-title">Root Cause / Problem Tree Analysis</div>
-            <div class="res-desc">Community Tool Box (University of Kansas). 5 Whys + Problem/Objective Tree facilitation template — used in Cluster B workshops.</div>
-            <span class="res-tag">Workshop B1 · Community Tool Box</span>
-          </div>
-        </a>
-
-        <a class="res-link" href="https://iris.thegiin.org/" target="_blank">
-          <div class="res-icon ic-gold">📊</div>
-          <div>
-            <div class="res-title">IRIS+ Framework — Impact Measurement</div>
-            <div class="res-desc">Global Impact Investing Network. Logic framework and theory of change structure — used to frame programme inputs, activities, outputs, outcomes, and impact.</div>
-            <span class="res-tag">Impact Framework · GIIN</span>
-          </div>
-        </a>
-
-        <a class="res-link" href="https://climateclarity.co.uk/circular-economy-collage" target="_blank">
-          <div class="res-icon ic-sage">♻</div>
-          <div>
-            <div class="res-title">Circular Economy Collage — Climate Fresk Philippines</div>
-            <div class="res-desc">Participatory card-based systems thinking workshop on circular economy — used in Cluster D, Workshop D1.</div>
-            <span class="res-tag">Workshop D1</span>
-          </div>
-        </a>
-
-        <a class="res-link" href="https://dschool.stanford.edu/resources" target="_blank">
-          <div class="res-icon ic-sky">💡</div>
-          <div>
-            <div class="res-title">Stanford d.school — Design Thinking</div>
-            <div class="res-desc">Adapted for community intervention prototyping — human-centred design process applied to CMC enterprise design in Cluster D.</div>
-            <span class="res-tag">Workshop D3</span>
-          </div>
-        </a>
-
-        <a class="res-link" href="https://docs.google.com/document/d/1GXiqCbO7Ol2uzxN8YcXDGN8bG0o6ekSP/edit?usp=drive_link&ouid=112881937996314874224&rtpof=true&sd=true" target="_blank">
-          <div class="res-icon ic-teal">📔</div>
-          <div>
-            <div class="res-title">Braun &amp; Clarke — Reflexive Thematic Analysis</div>
-            <div class="res-desc">Six-phase qualitative analysis framework used for all KII and FGD data. Braun &amp; Clarke (2006; 2021). All field researchers trained pre-deployment.</div>
-            <span class="res-tag">Analysis Method · [Add Drive link]</span>
-          </div>
-        </a>
-
-        <!-- REFLEXIVITY JOURNALS -->
-        <div style="background:var(--navy);border-radius:var(--radius);padding:18px 20px;margin-top:10px;">
-          <div style="font-size:12px;font-weight:700;color:#5ee8de;letter-spacing:0.05em;text-transform:uppercase;margin-bottom:8px;">📔 Reflexivity Journals</div>
-          <p style="font-size:13px;color:rgba(255,255,255,0.7);line-height:1.55;margin-bottom:10px;">Each field researcher maintains a structured weekly reflexivity journal — recording field observations, positionality reflections, emerging themes, instrument performance notes, and CEESAM validation entries. Submitted every Sunday. Reviewed by Programme Coordinator bi-weekly.</p>
-          <div style="display:flex;flex-wrap:wrap;gap:8px;">
-            <a class="phase-link-btn" href="https://docs.google.com/document/d/1GXiqCbO7Ol2uzxN8YcXDGN8bG0o6ekSP/edit?usp=drive_link&ouid=112881937996314874224&rtpof=true&sd=true" target="_blank">Journal Template</a>
-            <a class="phase-link-btn" href="https://docs.google.com/document/d/1GXiqCbO7Ol2uzxN8YcXDGN8bG0o6ekSP/edit?usp=drive_link&ouid=112881937996314874224&rtpof=true&sd=true" target="_blank">Submission Portal</a>
-            <a class="phase-link-btn" href="https://docs.google.com/document/d/1GXiqCbO7Ol2uzxN8YcXDGN8bG0o6ekSP/edit?usp=drive_link&ouid=112881937996314874224&rtpof=true&sd=true" target="_blank">Sample Entries</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ═══════ REPOSITORY ═══════ -->
-<div class="section section-stone" id="repository">
-  <div class="section-inner">
-    <div class="eyebrow">Research Team · Document Hub</div>
-    <h2 class="section-title">Repository, Gantt Chart &amp; Checklists</h2>
-    <p class="section-intro">All programme documents, instruments, and field materials. Downloadable files are linked below — upload to the shared Drive folder and update each link. All documents follow the institutional voice of the programme document suite.</p>
-
-    <div class="grid g3" style="margin-bottom:32px;">
-      <div class="card">
-        <div style="font-size:28px;margin-bottom:10px;">📊</div>
-        <div class="card-title">21-Week Gantt Chart</div>
-        <div class="card-body" style="margin-bottom:14px;">Colour-coded workbook with milestone diamonds, ethical review gates, synthesis session markers, and phase boundaries. Updated by Research Coordinators after each fortnightly synthesis.</div>
-        <a class="card-link" href="https://docs.google.com/document/d/1Wj0tb4aRb_vxTxLnHoxJGFnn4AvJCDyr/edit?usp=drive_link&ouid=112881937996314874224&rtpof=true&sd=true" target="_blank">Download Gantt Chart</a>
-      </div>
-      <div class="card">
-        <div style="font-size:28px;margin-bottom:10px;">📋</div>
-        <div class="card-title">Research Instruments (33 sheets)</div>
-        <div class="card-body" style="margin-bottom:14px;">Master instruments workbook. Photovoice / SHOWed · KII guide · FGD guides (8 cohort types) · Root cause template · Governance mapping · CResT resilience · Ecological footprint tool · CEESAM validation recording sheet · Worksheets.</div>
-        <a class="card-link" href="https://docs.google.com/document/d/1j2DwfKfdBdClSjm1k0Glo6h4IueeLv1C/edit?usp=drive_link&ouid=112881937996314874224&rtpof=true&sd=true" target="_blank">Download Instruments</a>
-      </div>
-      <div class="card">
-        <div style="font-size:28px;margin-bottom:10px;">🗂</div>
-        <div class="card-title">CEESAM IO Matrix</div>
-        <div class="card-body" style="margin-bottom:14px;">Isabela de Basilan CEESAM 72×72 (active sectors). 240×240 national-to-local adjustment workbook. PSA 240 sectors classification reference.</div>
-        <a class="card-link" href="https://docs.google.com/document/d/1Aq75STVA43DVPoozsddBJAdAtqbI8bDt/edit?usp=drive_link&ouid=112881937996314874224&rtpof=true&sd=true" target="_blank">Download CEESAM Matrix</a>
-      </div>
-    </div>
-
-    <!-- DOWNLOADABLE KITS -->
-    <h3 style="font-family:var(--font-serif);font-size:22px;color:var(--navy);margin-bottom:20px;">Downloadable Field Kits</h3>
-    <div class="grid g3" style="margin-bottom:36px;">
-      <div class="card-teal-light">
-        <div style="font-size:24px;margin-bottom:10px;">📄</div>
-        <div class="card-title">FPIC Kit</div>
-        <div class="card-body" style="margin-bottom:14px;">Free, Prior and Informed Consent documentation. Covers all four IP communities. Bilingual (Filipino + local vernacular). Per RA 8371 / IPRA.</div>
-        <a class="card-link" href="https://docs.google.com/document/d/1oGGSLISImOCBwxKzUnMY2x5BCzOgrm1e/edit?usp=drive_link&ouid=112881937996314874224&rtpof=true&sd=true" target="_blank">Download FPIC Kit</a>
-      </div>
-      <div class="card-teal-light">
-        <div style="font-size:24px;margin-bottom:10px;">🤝</div>
-        <div class="card-title">MOA Template</div>
-        <div class="card-body" style="margin-bottom:14px;">Memorandum of Agreement — includes ways of working, contact persons, cadence meetings, turnaround times, and feedback mechanisms.</div>
-        <a class="card-link" href="https://docs.google.com/document/d/1E3Enhlu3-cJSfYpEO4tTLe_fcK1ZLEkA/edit?usp=drive_link&ouid=112881937996314874224&rtpof=true&sd=true" target="_blank">Download MOA</a>
-      </div>
-      <div class="card-teal-light">
-        <div style="font-size:24px;margin-bottom:10px;">📝</div>
-        <div class="card-title">Worksheets</div>
-        <div class="card-body" style="margin-bottom:14px;">Bilingual participant-ready worksheets for all workshop clusters. Printable, A4 format. Includes photovoice prompts, root cause templates, and governance mapping sheets.</div>
-        <a class="card-link" href="https://docs.google.com/document/d/1j2DwfKfdBdClSjm1k0Glo6h4IueeLv1C/edit?usp=drive_link&ouid=112881937996314874224&rtpof=true&sd=true" target="_blank">Download Worksheets</a>
-      </div>
-      <div class="card-teal-light">
-        <div style="font-size:24px;margin-bottom:10px;">📔</div>
-        <div class="card-title">Field Researcher Journals</div>
-        <div class="card-body" style="margin-bottom:14px;">21-week structured reflexivity journal template. Weekly sections for observations, positionality, emerging patterns, ethical notes, and CEESAM field entries.</div>
-        <a class="card-link" href="https://docs.google.com/document/d/1GXiqCbO7Ol2uzxN8YcXDGN8bG0o6ekSP/edit?usp=drive_link&ouid=112881937996314874224&rtpof=true&sd=true" target="_blank">Download Journal</a>
-      </div>
-      <div class="card-teal-light">
-        <div style="font-size:24px;margin-bottom:10px;">📅</div>
-        <div class="card-title">Gantt Chart</div>
-        <div class="card-body" style="margin-bottom:14px;">Editable 21-week programme Gantt. Excel workbook with milestone tracking, ethical gate flags, and synthesis session markers.</div>
-        <a class="card-link" href="https://docs.google.com/document/d/1Wj0tb4aRb_vxTxLnHoxJGFnn4AvJCDyr/edit?usp=drive_link&ouid=112881937996314874224&rtpof=true&sd=true" target="_blank">Download Gantt</a>
-      </div>
-      <div class="card-teal-light">
-        <div style="font-size:24px;margin-bottom:10px;">✅</div>
-        <div class="card-title">Field Checklists</div>
-        <div class="card-body" style="margin-bottom:14px;">Administrative · Research tools · Workshop materials · Personal/safety kit checklists. One per field session type. Printable.</div>
-        <a class="card-link" href="https://docs.google.com/document/d/1f_3Miw1tJrLrFJTad3frP-4hC1IyuWMp/edit?usp=drive_link&ouid=112881937996314874224&rtpof=true&sd=true" target="_blank">Admin Kit</a>
-        <a class="card-link" style="margin-top:6px;" href="https://docs.google.com/document/d/1otOyBp_ulMG9ZKZ6ZiHflcK9w_p5ki17/edit?usp=drive_link&ouid=112881937996314874224&rtpof=true&sd=true" target="_blank">Research Tools</a>
-        <a class="card-link" style="margin-top:6px;" href="https://docs.google.com/document/d/1MHMpuq-pW-A4hlqJwklA4b_eqiJ1-ECT/edit?usp=drive_link&ouid=112881937996314874224&rtpof=true&sd=true" target="_blank">Workshop Materials</a>
-        <a class="card-link" style="margin-top:6px;" href="https://docs.google.com/document/d/1iWlvzWuz2vBcKtPhki8PN6ioQKn3VAu8/edit?usp=drive_link&ouid=112881937996314874224&rtpof=true&sd=true" target="_blank">Personal Safety</a>
-      </div>
-    </div>
-
-    <!-- CHECKLISTS INLINE -->
-    <h3 style="font-family:var(--font-serif);font-size:22px;color:var(--navy);margin-bottom:20px;">Field Kit Checklists</h3>
-    <div class="grid g2" style="margin-bottom:32px;">
-      <div>
-        <div class="card" style="margin-bottom:16px;">
-          <div class="card-title" style="margin-bottom:12px;">Administrative Kit</div>
-          <ul class="checklist">
-            <li><div class="check-box"></div>Programme introduction letter (signed)</li>
-            <li><div class="check-box"></div>LGU endorsement / barangay clearance</li>
-            <li><div class="check-box"></div>FPIC documentation set (per community)</li>
-            <li><div class="check-box"></div>Informed consent forms (adult + minor versions)</li>
-            <li><div class="check-box"></div>Photo/video consent forms (per participant)</li>
-            <li><div class="check-box"></div>MOA (signed copy)</li>
-            <li><div class="check-box"></div>Field researcher identification cards</li>
-            <li><div class="check-box"></div>NCIP coordination letter (IP communities)</li>
-            <li><div class="check-box"></div>Data protection briefing sheet (per session)</li>
+          <ul class="checklist" style="margin-top: 0;">
+            <li><div class="check-box"></div>Charged phone + powerbank</li>
+            <li><div class="check-box"></div>Audio recorders tested</li>
+            <li><div class="check-box"></div>FPIC letters signed</li>
+            <li><div class="check-box"></div>Emergency contact card</li>
+            <li><div class="check-box"></div>KII guide (printed + translated)</li>
+            <li><div class="check-box"></div>Field journal (blank)</li>
           </ul>
         </div>
-        <div class="card">
-          <div class="card-title" style="margin-bottom:12px;">Personal / Safety Kit</div>
-          <ul class="checklist">
-            <li><div class="check-box"></div>Weather-appropriate gear (rain/sun)</li>
-            <li><div class="check-box"></div>First aid kit</li>
-            <li><div class="check-box"></div>Power banks (min. 2 per researcher)</li>
-            <li><div class="check-box"></div>Emergency contact list</li>
-            <li><div class="check-box"></div>Local SIM (Globe + DITO for island coverage)</li>
-            <li><div class="check-box"></div>Offline map downloads (Malamawi island, all barangays)</li>
-          </ul>
+
+        <div class="dashboard-card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Research Instruments</div>
+              <div class="card-description" style="margin-top: 4px;">Download & print</div>
+            </div>
+          </div>
+          <a href="#" style="display:block; padding:10px; background:var(--sky-light); color:var(--sky); text-decoration:none; border-radius:6px; margin-bottom:8px; font-weight:500; text-align:center;">📄 KII Guide (Tagalog)</a>
+          <a href="#" style="display:block; padding:10px; background:var(--teal-light); color:var(--teal); text-decoration:none; border-radius:6px; margin-bottom:8px; font-weight:500; text-align:center;">📊 FGD Worksheet</a>
+          <a href="#" style="display:block; padding:10px; background:var(--gold-light); color:var(--gold); text-decoration:none; border-radius:6px; font-weight:500; text-align:center;">📸 Photovoice Prompt</a>
+        </div>
+
+        <div class="dashboard-card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Reflexivity Journal</div>
+              <div class="card-description" style="margin-top: 4px;">Today's prompt</div>
+            </div>
+          </div>
+          <p style="font-size:13px; line-height:1.7; background:var(--stone); padding:12px; border-radius:6px; border-left:4px solid var(--teal);">
+            <strong>Prompt:</strong> "What assumptions did I bring to today's session? What did I learn that challenged them?"
+          </p>
+          <a href="#" style="display:inline-block; margin-top:12px; padding:8px 12px; background:var(--navy); color:var(--white); text-decoration:none; border-radius:6px; font-size:12px; font-weight:600;">Download Journal</a>
+        </div>
+
+        <div class="dashboard-card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Team Capacity</div>
+              <div class="card-description" style="margin-top: 4px;">Roles &amp; responsibilities</div>
+            </div>
+          </div>
+          <div style="font-size:13px;">
+            <p style="margin-bottom:8px;">👤 <strong>Kaye</strong> <span style="color:var(--text-muted);">— Research Coordinator</span></p>
+            <p style="margin-bottom:8px;">👤 <strong>Clarence Jay Macario</strong> <span style="color:var(--text-muted);">— Field Researcher</span></p>
+            <p style="margin-bottom:8px;">👤 <strong>Laina Melendres</strong> <span style="color:var(--text-muted);">— Field Researcher</span></p>
+            <p style="margin-bottom:8px;">👤 <strong>Nisha Ma. Nimfa S. Alicer</strong> <span style="color:var(--text-muted);">— Research Project Manager</span></p>
+            <p style="margin-bottom:8px;">👤 <strong>Kristine Mae Magtubo (KM)</strong> <span style="color:var(--text-muted);">— Research Project Manager</span></p>
+          </div>
         </div>
       </div>
-      <div>
-        <div class="card" style="margin-bottom:16px;">
-          <div class="card-title" style="margin-bottom:12px;">Research Tools Kit</div>
-          <ul class="checklist">
-            <li><div class="check-box"></div>Audio recorders (min. 2, charged, tested)</li>
-            <li><div class="check-box"></div>Cameras for photovoice facilitation</li>
-            <li><div class="check-box"></div>Printed KII guides (Filipino + local vernacular)</li>
-            <li><div class="check-box"></div>Printed FGD guides (all 8 cohort types)</li>
-            <li><div class="check-box"></div>Flipchart paper + markers (coloured)</li>
-            <li><div class="check-box"></div>Sticky notes / dot stickers for dotmocracy</li>
-            <li><div class="check-box"></div>Printed CEESAM validation recording sheets</li>
-            <li><div class="check-box"></div>Community mapping base maps (barangay level)</li>
-            <li><div class="check-box"></div>Reflexivity journal (one per researcher)</li>
-            <li><div class="check-box"></div>Laptop + offline data entry templates</li>
-          </ul>
+
+      <h3 style="font-family:var(--font-serif); font-size:20px; color:var(--navy); margin-bottom:16px;">⚡ Quick Links</h3>
+      <div class="quick-links-grid">
+        <a href="#" class="quick-link">📋 Field Research Methodology v2.0</a>
+        <a href="#" class="quick-link">🗂️ CEESAM Data Entry Template</a>
+        <a href="#" class="quick-link">📝 FPIC Kit (Bilingual)</a>
+        <a href="#" class="quick-link">📸 Photovoice Guide</a>
+        <a href="#" class="quick-link">🔐 Offline Instruments Pack</a>
+        <a href="#" class="quick-link">🆘 Emergency Contact Card</a>
+      </div>
+    </div>
+
+    <!-- INSTITUTIONAL -->
+    <div id="institutional-view" class="role-view">
+      <h2 class="section-title" style="margin-bottom: 32px;">🏛️ Institutional Dashboard</h2>
+
+      <div class="dashboard-grid">
+        <div class="dashboard-card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Current Arc</div>
+              <div class="card-description" style="margin-top: 4px;">Weeks 1–11 · Evidence &amp; Validation</div>
+            </div>
+            <span class="card-badge badge-warning">Week 8</span>
+          </div>
+          <p style="font-size:13px; color:var(--text-muted);">CEESAM Validation continuous through Week 11. Analysis &amp; preliminary report due end of Week 11.</p>
+          <div class="status-indicator" style="background:var(--teal-light); color:var(--teal);">
+            <span class="status-dot complete"></span>
+            On track
+          </div>
         </div>
-        <div class="card">
-          <div class="card-title" style="margin-bottom:12px;">Workshop Materials Kit</div>
-          <ul class="checklist">
-            <li><div class="check-box"></div>Climate Fresk card set (translated)</li>
-            <li><div class="check-box"></div>Circular Economy Collage materials</li>
-            <li><div class="check-box"></div>Problem Tree / Objective Tree templates (A3)</li>
-            <li><div class="check-box"></div>Photovoice thematic prompt cards (Filipino)</li>
-            <li><div class="check-box"></div>Paaralang Kapuluan orientation materials</li>
-            <li><div class="check-box"></div>Community OS Research overview (printed, bilingual)</li>
-            <li><div class="check-box"></div>Action Pentahelix Workshop materials</li>
-          </ul>
+
+        <div class="dashboard-card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Ethical Clearance</div>
+              <div class="card-description" style="margin-top: 4px;">Critical gate</div>
+            </div>
+            <span class="card-badge badge-danger">PENDING</span>
+          </div>
+          <p style="font-size:13px; line-height:1.7;"><strong>⚠️ No primary data collection</strong> until written clearance is received.</p>
+          <p style="color:var(--text-muted); font-size:12px; margin-top:8px;">Responsible: Nisha Ma. Nimfa S. Alicer</p>
+        </div>
+
+        <div class="dashboard-card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">CADT Status</div>
+              <div class="card-description" style="margin-top: 4px;">2 CADTs pending for 3 ICCs</div>
+            </div>
+            <span class="card-badge badge-warning">Blocking</span>
+          </div>
+          <p style="font-size:13px; color:var(--text-muted);">Fast-track as a Win-Win-Win investment priority.</p>
+        </div>
+
+        <div class="dashboard-card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Key ECSOM Findings</div>
+              <div class="card-description" style="margin-top: 4px;">Desktop baseline</div>
+            </div>
+          </div>
+          <p style="font-size:12px; margin-bottom:6px;"><strong>Fisheries LQ:</strong> <span style="color:var(--teal); font-family:var(--font-mono);">3.84</span></p>
+          <p style="font-size:12px; margin-bottom:6px;"><strong>S6 Trade:</strong> <span style="color:var(--teal); font-family:var(--font-mono);">₱1.512B</span></p>
+          <p style="font-size:12px; margin-bottom:6px;"><strong>Plantation agri multiplier:</strong> <span style="color:var(--teal); font-family:var(--font-mono);">3.06×</span></p>
+          <p style="font-size:12px;"><strong>Biocapacity:</strong> <span style="color:var(--teal); font-family:var(--font-mono);">195,000 gha</span></p>
+          <p style="font-size:11px; color:var(--text-muted); margin-top:10px;">Source: CEESAM Validation Workbook v2</p>
+        </div>
+      </div>
+
+      <!-- GANTT -->
+      <div class="gantt-section">
+        <h3 class="section-title">📅 20-Week Programme Timeline</h3>
+        <p class="section-subtitle">Weeks 2–11: CEESAM Validation (continuous). Weeks 12–20: Knowledge Mobilisation &amp; Co-Design.</p>
+
+        <div class="gantt-controls">
+          <button class="gantt-filter active" onclick="filterGantt('all', event)">All phases</button>
+          <button class="gantt-filter" onclick="filterGantt('arc1', event)">Arc 1 · Evidence (W1–11)</button>
+          <button class="gantt-filter" onclick="filterGantt('arc2', event)">Arc 2 · Mobilisation (W12–20)</button>
+        </div>
+
+        <div class="gantt-chart">
+          <div class="gantt-timeline">
+            <div class="gantt-phase">
+              <div class="phase-label">Week 1</div>
+              <div class="phase-bar complete" title="Ethical review gate + admin kit"><span class="phase-name">Ethics gate</span></div>
+            </div>
+            <div class="gantt-phase">
+              <div class="phase-label">Week 2–3</div>
+              <div class="phase-bar complete" title="CEESAM validation begins (Week 2 or 3)"><span class="phase-name">CEESAM starts</span></div>
+              <div class="phase-bar complete" title="FPIC + community recruitment"><span class="phase-name">FPIC</span></div>
+            </div>
+            <div class="gantt-phase">
+              <div class="phase-label">Week 4–7</div>
+              <div class="phase-bar current" title="CEESAM validation continuous · KIIs + FGDs"><span class="phase-name">KII / FGD / CEESAM</span></div>
+              <div class="phase-bar current" title="Photovoice sessions"><span class="phase-name">Photovoice</span></div>
+            </div>
+            <div class="gantt-phase">
+              <div class="phase-label">Week 8–11</div>
+              <div class="phase-bar" title="CEESAM validation continues · analysis begins"><span class="phase-name">Analysis</span></div>
+              <div class="phase-bar" title="Preliminary report drafting"><span class="phase-name">Report prep</span></div>
+            </div>
+            <div class="gantt-phase">
+              <div class="phase-label">Week 12</div>
+              <div class="phase-bar" title="Community research exhibit + town hall"><span class="phase-name">Exhibit + Town Hall</span></div>
+            </div>
+            <div class="gantt-phase">
+              <div class="phase-label">Week 13–14</div>
+              <div class="phase-bar" title="CMC critical-components assessment"><span class="phase-name">CMC assessment</span></div>
+            </div>
+            <div class="gantt-phase">
+              <div class="phase-label">Week 15–17</div>
+              <div class="phase-bar" title="Co-designing intervention prototypes"><span class="phase-name">Co-design workshops</span></div>
+              <div class="phase-bar" title="Intervention design workshops"><span class="phase-name">Intervention design</span></div>
+            </div>
+            <div class="gantt-phase">
+              <div class="phase-label">Week 18–19</div>
+              <div class="phase-bar" title="Policy briefs drafting"><span class="phase-name">Policy briefs</span></div>
+            </div>
+            <div class="gantt-phase">
+              <div class="phase-label">Week 20</div>
+              <div class="phase-bar" title="Final exhibit + CMC launch"><span class="phase-name">Final exhibit + CMC launch</span></div>
+            </div>
+          </div>
+        </div>
+        <p style="font-size:12px; color:var(--text-muted); margin-top:16px;">
+          📌 <strong>Gate:</strong> End of Week 11 — analysis + preliminary report must be ready for presentation. 🟡 Gold = current window.
+        </p>
+      </div>
+
+      <!-- PROSUMER -->
+      <div>
+        <h3 style="font-family:var(--font-serif); font-size:22px; color:var(--navy); margin-bottom:8px;">💡 ProSumer Typologies (T1–T9)</h3>
+        <p style="font-size:13px; color:var(--text-muted); margin-bottom:24px;">Community participant profiles used for stratified sampling and narrative analysis.</p>
+
+        <div class="prosumer-grid">
+          <div class="prosumer-card"><span class="prosumer-code">T1</span><div class="prosumer-title">Formal Enterprise</div><div class="prosumer-description">Registered businesses with formal employment (seaweed processors, boat builders).</div></div>
+          <div class="prosumer-card"><span class="prosumer-code">T2</span><div class="prosumer-title">Informal Livelihood</div><div class="prosumer-description">Unregistered micro-enterprises and cottage industries.</div></div>
+          <div class="prosumer-card"><span class="prosumer-code">T3</span><div class="prosumer-title">Household Economy</div><div class="prosumer-description">Subsistence production for household use and local barter.</div></div>
+          <div class="prosumer-card"><span class="prosumer-code">T4</span><div class="prosumer-title">Cooperative Member</div><div class="prosumer-description">Participants in formalised groups with collective marketing.</div></div>
+          <div class="prosumer-card"><span class="prosumer-code">T5</span><div class="prosumer-title">Youth Entrepreneur</div><div class="prosumer-description">Young people (18–35) with growing businesses and tech adoption.</div></div>
+          <div class="prosumer-card"><span class="prosumer-code">T6</span><div class="prosumer-title">Women Leader</div><div class="prosumer-description">Women in household decision-making or business ownership.</div></div>
+          <div class="prosumer-card"><span class="prosumer-code">T7</span><div class="prosumer-title">Indigenous Knowledge Holder</div><div class="prosumer-description">Community members with traditional ecological knowledge.</div></div>
+          <div class="prosumer-card"><span class="prosumer-code">T8</span><div class="prosumer-title">Government/NGO Partner</div><div class="prosumer-description">LGU officials and institutional stakeholders.</div></div>
+          <div class="prosumer-card"><span class="prosumer-code">T9</span><div class="prosumer-title">Informal Economy Household</div><div class="prosumer-description">Non-working household members as consumers in the local economy.</div></div>
+        </div>
+      </div>
+
+      <h3 style="font-family:var(--font-serif); font-size:20px; color:var(--navy); margin-bottom:16px;">⚡ Institutional Quick Links</h3>
+      <div class="quick-links-grid">
+        <a href="#" class="quick-link">📊 CEESAM Validation Workbook v2</a>
+        <a href="#" class="quick-link">📈 Sector LQ Analysis (PSA 240)</a>
+        <a href="#" class="quick-link">🌍 Biocapacity &amp; Footprint Data</a>
+        <a href="#" class="quick-link">📋 Project Management Plan</a>
+        <a href="#" class="quick-link">🔐 Ethical Review Documents</a>
+        <a href="#" class="quick-link">📋 ECSOM Canvas Narrative v2</a>
+        <a href="https://sdgprivatefinance.undp.org/aligning-capital" target="_blank" class="quick-link">💰 UNDP Aligning Capital ↗</a>
+        <a href="https://dschool.stanford.edu/innovate/tools" target="_blank" class="quick-link">🎨 Stanford d.school Tools ↗</a>
+      </div>
+    </div>
+
+    <!-- COMMUNITY -->
+    <div id="community-view" class="role-view">
+      <h2 class="section-title english-only" style="margin-bottom: 32px;">👥 Community Member Dashboard</h2>
+      <h2 class="section-title tagalog-only" style="margin-bottom: 32px; display:none;">👥 Dashboard ng Miyembro ng Komunidad</h2>
+
+      <div class="dashboard-grid">
+        <div class="dashboard-card">
+          <div class="card-header english-only">
+            <div>
+              <div class="card-title">What is Community OS?</div>
+              <div class="card-description" style="margin-top: 4px;">Short intro</div>
+            </div>
+          </div>
+          <div class="card-header tagalog-only" style="display:none;">
+            <div>
+              <div class="card-title">Ano ang Komunidad OS?</div>
+              <div class="card-description" style="margin-top: 4px;">Maikling paliwanag</div>
+            </div>
+          </div>
+          <div style="width:100%; height:180px; background:linear-gradient(135deg, var(--sky-light) 0%, var(--teal-light) 100%); border-radius:8px; display:flex; align-items:center; justify-content:center; margin-bottom:12px;"><span style="font-size:48px;">▶️</span></div>
+          <a href="https://docs.google.com/presentation/d/1v-aEmZ7NcE3D9MVaMyMHxiBCt8XqUrSw/edit?usp=sharing" target="_blank" class="english-only" style="display:inline-block; padding:10px 16px; background:var(--teal); color:var(--white); text-decoration:none; border-radius:6px; font-weight:600; font-size:13px;">Open Community Deck</a>
+          <a href="https://docs.google.com/presentation/d/1v-aEmZ7NcE3D9MVaMyMHxiBCt8XqUrSw/edit?usp=sharing" target="_blank" class="tagalog-only" style="display:none; padding:10px 16px; background:var(--teal); color:var(--white); text-decoration:none; border-radius:6px; font-weight:600; font-size:13px;">Buksan ang Deck</a>
+        </div>
+
+        <div class="dashboard-card">
+          <div class="card-header english-only">
+            <div>
+              <div class="card-title">Upcoming Events</div>
+              <div class="card-description" style="margin-top: 4px;">Workshops &amp; town halls</div>
+            </div>
+          </div>
+          <div class="card-header tagalog-only" style="display:none;">
+            <div>
+              <div class="card-title">Mga Darating na Gawain</div>
+              <div class="card-description" style="margin-top: 4px;">Mga taller at pulong</div>
+            </div>
+          </div>
+          <p style="font-size:13px; color:var(--text-muted);" class="english-only">Open the Calendar tab for the full schedule.</p>
+          <p style="font-size:13px; color:var(--text-muted); display:none;" class="tagalog-only">Buksan ang Calendar tab para sa buong iskedyul.</p>
+          <a href="#" onclick="switchSectionByName('calendar'); return false;" style="display:inline-block; margin-top:12px; padding:10px 16px; background:var(--navy); color:var(--white); text-decoration:none; border-radius:6px; font-weight:600; font-size:13px;">📅 <span class="english-only">Open Calendar</span><span class="tagalog-only" style="display:none;">Buksan ang Calendar</span></a>
+        </div>
+
+        <div class="dashboard-card">
+          <div class="card-header english-only">
+            <div>
+              <div class="card-title">Contact Us</div>
+              <div class="card-description" style="margin-top: 4px;">Questions?</div>
+            </div>
+          </div>
+          <div class="card-header tagalog-only" style="display:none;">
+            <div>
+              <div class="card-title">Makipag-ugnayan</div>
+              <div class="card-description" style="margin-top: 4px;">May tanong ba?</div>
+            </div>
+          </div>
+          <p style="font-size:13px; margin-bottom:12px;"><strong>📧</strong> <span style="color:var(--teal); font-family:var(--font-mono); font-size:12px;">info@communityos.lab.ph</span></p>
+          <p style="font-size:13px;"><strong>📱</strong> <span style="color:var(--teal); font-family:var(--font-mono); font-size:12px;">+63 (0) 917 123 4567</span></p>
+        </div>
+
+        <div class="dashboard-card">
+          <div class="card-header english-only">
+            <div>
+              <div class="card-title">How to Participate</div>
+              <div class="card-description" style="margin-top: 4px;">Easy steps</div>
+            </div>
+          </div>
+          <div class="card-header tagalog-only" style="display:none;">
+            <div>
+              <div class="card-title">Paano Sumali</div>
+              <div class="card-description" style="margin-top: 4px;">Mga simpleng hakbang</div>
+            </div>
+          </div>
+          <ol style="font-size:13px; margin-left:20px; line-height:1.8;">
+            <li class="english-only" style="margin-bottom:8px;">Talk to your barangay captain</li>
+            <li class="english-only" style="margin-bottom:8px;">Sign the consent form (FPIC)</li>
+            <li class="english-only" style="margin-bottom:8px;">Attend a workshop or KII</li>
+            <li class="english-only">Share your knowledge as a co-author</li>
+            <li class="tagalog-only" style="margin-bottom:8px; display:none;">Makipag-usap sa kapitan</li>
+            <li class="tagalog-only" style="margin-bottom:8px; display:none;">Pumirma ng pahintulot (FPIC)</li>
+            <li class="tagalog-only" style="margin-bottom:8px; display:none;">Dumalo sa taller o panayam</li>
+            <li class="tagalog-only" style="display:none;">Ibahagi bilang ko-awtor</li>
+          </ol>
         </div>
       </div>
     </div>
 
-    <!-- DOCUMENT SUITE TABLE -->
-    <h3 style="font-family:var(--font-serif);font-size:22px;color:var(--navy);margin-bottom:16px;">Full Document Suite</h3>
-    <p style="font-size:13.5px;color:var(--text-muted);margin-bottom:16px;font-style:italic;">Upload documents to shared Drive folder and replace [Add link] placeholders.</p>
-    <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;">
+  </div>
+
+  <!-- ========== CALENDAR ========== -->
+  <div id="calendar-section" class="content-view">
+    <h2 class="section-title" style="margin-bottom: 8px;">📅 Community Calendar</h2>
+    <p class="section-subtitle">All times in Manila Time (GMT+8).</p>
+    <iframe src="https://calendar.google.com/calendar/embed?src=c_7e29b742c69cc115831596ff633ae64a5aff902c9736bc0cb965930ed30cb4b1%40group.calendar.google.com&ctz=Asia%2FManila"
+            style="border: 1px solid var(--border); border-radius:var(--radius-lg); width:100%; height:650px;" frameborder="0" scrolling="no"></iframe>
+  </div>
+
+  <!-- ========== PRESENTATIONS ========== -->
+  <div id="presentations-section" class="content-view">
+    <h2 class="section-title" style="margin-bottom: 32px;">🎤 Project Presentations</h2>
+
+    <div class="presentation-grid">
+      <div class="presentation-card">
+        <div class="presentation-icon">🎓</div>
+        <div class="presentation-title">Community OS — for Community</div>
+        <div class="presentation-description">Accessible introduction for community members, youth, and local leaders.</div>
+        <a href="https://docs.google.com/presentation/d/1v-aEmZ7NcE3D9MVaMyMHxiBCt8XqUrSw/edit?usp=sharing" target="_blank" class="presentation-btn">📺 Open presentation ↗</a>
+      </div>
+
+      <div class="presentation-card">
+        <div class="presentation-icon">🔬</div>
+        <div class="presentation-title">Community OS — for Research Team &amp; Institutional Stakeholders</div>
+        <div class="presentation-description">Methodology, timelines, and data frameworks for field researchers, LGU, and NGO partners.</div>
+        <a href="https://docs.google.com/presentation/d/1a-zJowqADT-xIO2BXtd6LjImyUtPLZEr/edit?usp=sharing" target="_blank" class="presentation-btn">📺 Open presentation ↗</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== RESOURCES ========== -->
+  <div id="resources-section" class="content-view">
+    <h2 class="section-title" style="margin-bottom: 8px;">📚 Resources &amp; Tools</h2>
+    <p class="section-subtitle">Documents grouped by type — briefers &amp; methodology, research instruments, and administrative kits.</p>
+
+    <!-- DYNAMIC LINKS HUB -->
+    <div class="dynamic-links-section">
+      <h3 class="section-title" style="font-size:20px;">🔗 Live Link Hub</h3>
+      <p class="dynamic-links-note">This hub can be maintained from a shared Google Drive spreadsheet — no HTML editing required.</p>
+
+      <div style="margin-bottom:24px;">
+        <div style="background:var(--white); border:1px solid var(--border); border-radius:var(--radius); padding:16px;">
+          <p style="font-size:13px; margin-bottom:10px;"><strong>Setup (one-time):</strong></p>
+          <p style="font-size:12px; color:var(--text-muted); margin-bottom:12px;">Create a shared Google Sheet with columns <code>Category · Document Name · Link · Owner · Last Updated</code>. Paste the sheet link below and anyone on the team can update documents without touching the site.</p>
+          <a href="#" style="display:inline-block; padding:10px 16px; background:var(--navy); color:var(--white); text-decoration:none; border-radius:6px; font-weight:600; font-size:13px;">📊 Open the Links Spreadsheet (replace this link)</a>
+        </div>
+      </div>
+
+      <div class="links-group">
+        <div class="link-item"><div class="link-label">🎤 Presentations</div><a href="https://docs.google.com/presentation/d/1v-aEmZ7NcE3D9MVaMyMHxiBCt8XqUrSw/edit?usp=sharing" target="_blank">cOS — Community deck ↗</a></div>
+        <div class="link-item"><div class="link-label">🎤 Presentations</div><a href="https://docs.google.com/presentation/d/1a-zJowqADT-xIO2BXtd6LjImyUtPLZEr/edit?usp=sharing" target="_blank">cOS — Research team &amp; institutional deck ↗</a></div>
+        <div class="link-item"><div class="link-label">📅 Calendar</div><a href="https://calendar.google.com/calendar/embed?src=c_7e29b742c69cc115831596ff633ae64a5aff902c9736bc0cb965930ed30cb4b1%40group.calendar.google.com&ctz=Asia%2FManila" target="_blank">Community events calendar ↗</a></div>
+        <div class="link-item"><div class="link-label">💰 Capital framework</div><a href="https://sdgprivatefinance.undp.org/aligning-capital" target="_blank">UNDP Aligning Capital ↗</a></div>
+        <div class="link-item"><div class="link-label">🎨 Design thinking</div><a href="https://dschool.stanford.edu/innovate/tools" target="_blank">Stanford d.school tools ↗</a></div>
+        <div class="link-item"><div class="link-label">📄 Methodology</div><a href="#">Field Research Methodology v2.0</a></div>
+      </div>
+    </div>
+
+    <!-- CATEGORY 1: BRIEFERS & METHODOLOGY -->
+    <div class="doc-category">
+      <div class="doc-category-header">
+        <div class="doc-category-icon">📖</div>
+        <div>
+          <div class="doc-category-title">Briefers, Methodology &amp; Frameworks</div>
+          <div class="doc-category-sub">Conceptual documents, theoretical framings, and the intellectual architecture of Community OS.</div>
+        </div>
+      </div>
+
       <table class="doc-table">
         <thead>
-          <tr>
-            <th>Document</th>
-            <th>Type</th>
-            <th>Status</th>
-            <th>Link</th>
-          </tr>
+          <tr><th>Document</th><th>Type</th><th>Status</th><th>Link</th></tr>
         </thead>
         <tbody>
-          <tr><td>Field Research Methodology v2.0</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="https://docs.google.com/document/d/1GXiqCbO7Ol2uzxN8YcXDGN8bG0o6ekSP/edit?usp=drive_link&ouid=112881937996314874224&rtpof=true&sd=true" target="_blank" style="color:var(--teal);font-size:13px;">Open</a></td></tr>
-          <tr><td>Consolidated Research Instruments (33 sheets)</td><td><span class="badge badge-sky">Excel</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="https://docs.google.com/document/d/1j2DwfKfdBdClSjm1k0Glo6h4IueeLv1C/edit?usp=drive_link&ouid=112881937996314874224&rtpof=true&sd=true" target="_blank" style="color:var(--teal);font-size:13px;">Open</a></td></tr>
-          <tr><td>CEESAM IO Matrix — Isabela 72×72</td><td><span class="badge badge-sky">Excel</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="https://docs.google.com/document/d/1Aq75STVA43DVPoozsddBJAdAtqbI8bDt/edit?usp=drive_link&ouid=112881937996314874224&rtpof=true&sd=true" target="_blank" style="color:var(--teal);font-size:13px;">Open</a></td></tr>
-          <tr><td>FPIC Kit (bilingual)</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="https://docs.google.com/document/d/1oGGSLISImOCBwxKzUnMY2x5BCzOgrm1e/edit?usp=drive_link&ouid=112881937996314874224&rtpof=true&sd=true" target="_blank" style="color:var(--teal);font-size:13px;">Open</a></td></tr>
-          <tr><td>MOA Template</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="https://docs.google.com/document/d/1E3Enhlu3-cJSfYpEO4tTLe_fcK1ZLEkA/edit?usp=drive_link&ouid=112881937996314874224&rtpof=true&sd=true" target="_blank" style="color:var(--teal);font-size:13px;">Open</a></td></tr>
-          <tr><td>Participant Worksheets (bilingual)</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="https://docs.google.com/document/d/1j2DwfKfdBdClSjm1k0Glo6h4IueeLv1C/edit?usp=drive_link&ouid=112881937996314874224&rtpof=true&sd=true" target="_blank" style="color:var(--teal);font-size:13px;">Open</a></td></tr>
-          <tr><td>Field Researcher Journals</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="https://docs.google.com/document/d/1GXiqCbO7Ol2uzxN8YcXDGN8bG0o6ekSP/edit?usp=drive_link&ouid=112881937996314874224&rtpof=true&sd=true" target="_blank" style="color:var(--teal);font-size:13px;">Open</a></td></tr>
-          <tr><td>21-Week Gantt Chart</td><td><span class="badge badge-sky">Excel</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="https://docs.google.com/document/d/1Wj0tb4aRb_vxTxLnHoxJGFnn4AvJCDyr/edit?usp=drive_link&ouid=112881937996314874224&rtpof=true&sd=true" target="_blank" style="color:var(--teal);font-size:13px;">Open</a></td></tr>
-          <tr><td>Field Kit Checklists</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="https://docs.google.com/document/d/1f_3Miw1tJrLrFJTad3frP-4hC1IyuWMp/edit?usp=drive_link&ouid=112881937996314874224&rtpof=true&sd=true" target="_blank" style="color:var(--teal);font-size:13px;">Open</a></td></tr>
-          <tr><td>ECSOM Narrative — Isabela de Basilan (Secondary Data)</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="https://docs.google.com/document/d/1Aq75STVA43DVPoozsddBJAdAtqbI8bDt/edit?usp=drive_link&ouid=112881937996314874224&rtpof=true&sd=true" target="_blank" style="color:var(--teal);font-size:13px;">Open</a></td></tr>
-          <tr><td>Field Researcher TOR</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="https://docs.google.com/document/d/1E3Enhlu3-cJSfYpEO4tTLe_fcK1ZLEkA/edit?usp=drive_link&ouid=112881937996314874224&rtpof=true&sd=true" target="_blank" style="color:var(--teal);font-size:13px;">Open</a></td></tr>
-          <tr><td>Photovoice Co-Design Methodology v1.0</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="https://docs.google.com/document/d/1j2DwfKfdBdClSjm1k0Glo6h4IueeLv1C/edit?usp=drive_link&ouid=112881937996314874224&rtpof=true&sd=true" target="_blank" style="color:var(--teal);font-size:13px;">Open</a></td></tr>
-          <tr><td>WS A1 — Photovoice Worksheet</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="https://docs.google.com/document/d/1j2DwfKfdBdClSjm1k0Glo6h4IueeLv1C/edit?usp=drive_link&ouid=112881937996314874224&rtpof=true&sd=true" target="_blank" style="color:var(--teal);font-size:13px;">Open</a></td></tr>
-          <tr><td>WS B1 — Root Cause Tree</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="https://docs.google.com/document/d/1c0hckenISyoYStHr19Et-tivc1Iu-0nV/edit?usp=drive_link&ouid=112881937996314874224&rtpof=true&sd=true" target="_blank" style="color:var(--teal);font-size:13px;">Open</a></td></tr>
-          <tr><td>WS B2 — KII Guide</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="https://docs.google.com/document/d/1u77OkkBLuxpmJYMKNv3R5z3UXtDuMNrV/edit?usp=drive_link&ouid=112881937996314874224&rtpof=true&sd=true" target="_blank" style="color:var(--teal);font-size:13px;">Open</a></td></tr>
-          <tr><td>WS C1 — Governance Mapping</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="https://docs.google.com/document/d/1mZNC8w6AZ2ZhJb9M4AKElPP0YC2mrc9c/edit?usp=drive_link&ouid=112881937996314874224&rtpof=true&sd=true" target="_blank" style="color:var(--teal);font-size:13px;">Open</a></td></tr>
-          <tr><td>WS D1 — Circular Economy Collage</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="https://docs.google.com/document/d/1WVT-cSVv7TDdL5bRv5XHhdT2sOzfeaCP/edit?usp=drive_link&ouid=112881937996314874224&rtpof=true&sd=true" target="_blank" style="color:var(--teal);font-size:13px;">Open</a></td></tr>
-          <tr><td>WS E1 — CEESAM Validation Sheet</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="https://docs.google.com/document/d/1Aq75STVA43DVPoozsddBJAdAtqbI8bDt/edit?usp=drive_link&ouid=112881937996314874224&rtpof=true&sd=true" target="_blank" style="color:var(--teal);font-size:13px;">Open</a></td></tr>
-          <tr><td>WS F1 — Knowledge Mobilisation</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="https://docs.google.com/document/d/14lpTtRndQRrf23sk0Q8OOXqRsDMmINK7/edit?usp=drive_link&ouid=112881937996314874224&rtpof=true&sd=true" target="_blank" style="color:var(--teal);font-size:13px;">Open</a></td></tr>
-          <tr><td>Checklist — Administrative Kit</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="https://docs.google.com/document/d/1f_3Miw1tJrLrFJTad3frP-4hC1IyuWMp/edit?usp=drive_link&ouid=112881937996314874224&rtpof=true&sd=true" target="_blank" style="color:var(--teal);font-size:13px;">Open</a></td></tr>
-          <tr><td>Checklist — Research Tools</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="https://docs.google.com/document/d/1otOyBp_ulMG9ZKZ6ZiHflcK9w_p5ki17/edit?usp=drive_link&ouid=112881937996314874224&rtpof=true&sd=true" target="_blank" style="color:var(--teal);font-size:13px;">Open</a></td></tr>
-          <tr><td>Checklist — Workshop Materials</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="https://docs.google.com/document/d/1MHMpuq-pW-A4hlqJwklA4b_eqiJ1-ECT/edit?usp=drive_link&ouid=112881937996314874224&rtpof=true&sd=true" target="_blank" style="color:var(--teal);font-size:13px;">Open</a></td></tr>
-          <tr><td>Checklist — Personal Safety</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="https://docs.google.com/document/d/1iWlvzWuz2vBcKtPhki8PN6ioQKn3VAu8/edit?usp=drive_link&ouid=112881937996314874224&rtpof=true&sd=true" target="_blank" style="color:var(--teal);font-size:13px;">Open</a></td></tr>
-          <tr><td>Pentahelix Action Workshop — Isabela</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="https://docs.google.com/document/d/1mzF2IXmCcQiEc5qszVgQyFuluOvx7R8m/edit?usp=drive_link&ouid=112881937996314874224&rtpof=true&sd=true" target="_blank" style="color:var(--teal);font-size:13px;">Open</a></td></tr>
+          <tr><td>Field Research Methodology v2.0</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="#" style="color:var(--teal);">Open</a></td></tr>
+          <tr><td>ECSOM Canvas Narrative v2 (March 2026)</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="#" style="color:var(--teal);">Open</a></td></tr>
+          <tr><td>Photovoice Co-Design Methodology v1.0</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="#" style="color:var(--teal);">Open</a></td></tr>
+          <tr><td>Community Psychology Reference Document</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="#" style="color:var(--teal);">Open</a></td></tr>
+          <tr><td>Consolidated Academic References (~45 APA)</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="#" style="color:var(--teal);">Open</a></td></tr>
+          <tr><td>Community OS Glossary (~80 terms)</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="#" style="color:var(--teal);">Open</a></td></tr>
+          <tr><td>UNDP Aligning Capital framework ↗</td><td><span class="badge badge-sky">External</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="https://sdgprivatefinance.undp.org/aligning-capital" target="_blank" style="color:var(--teal);">Open ↗</a></td></tr>
+          <tr><td>Stanford d.school design-thinking tools ↗</td><td><span class="badge badge-sky">External</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="https://dschool.stanford.edu/innovate/tools" target="_blank" style="color:var(--teal);">Open ↗</a></td></tr>
         </tbody>
       </table>
     </div>
 
-    <div class="alert alert-warn" style="margin-top:28px;">
-      <span style="font-size:18px;">⚠</span>
-      <p class="alert-text"><strong>Ethical Review Gate — Reminder:</strong> No primary data collection instruments (KII guides, FGD guides, household surveys, photovoice protocols, or CEESAM field validation sheets) may be administered to community participants until written ethical clearance has been received and documented. This is a non-negotiable programme-wide protocol. Research Coordinators confirm this status before Phase 2 commences.</p>
+    <!-- CATEGORY 2: RESEARCH INSTRUMENTS -->
+    <div class="doc-category">
+      <div class="doc-category-header">
+        <div class="doc-category-icon">🧪</div>
+        <div>
+          <div class="doc-category-title">Research Instruments</div>
+          <div class="doc-category-sub">Data collection tools, validation workbooks, and participatory session materials.</div>
+        </div>
+      </div>
+
+      <table class="doc-table">
+        <thead>
+          <tr><th>Document</th><th>Type</th><th>Status</th><th>Link</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>CEESAM IO Matrix — Isabela 240×240</td><td><span class="badge badge-sky">Excel</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="#" style="color:var(--teal);">Open</a></td></tr>
+          <tr><td>CEESAM Validation Workbook v2 (9 sheets)</td><td><span class="badge badge-sky">Excel</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="#" style="color:var(--teal);">Open</a></td></tr>
+          <tr><td>Consolidated Research Instruments (33 sheets)</td><td><span class="badge badge-sky">Excel</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="#" style="color:var(--teal);">Open</a></td></tr>
+          <tr><td>Participant Worksheets (bilingual)</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="#" style="color:var(--teal);">Open</a></td></tr>
+          <tr><td>WS A1 — Photovoice Worksheet</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="#" style="color:var(--teal);">Open</a></td></tr>
+          <tr><td>WS B1 — Root Cause Tree</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="#" style="color:var(--teal);">Open</a></td></tr>
+          <tr><td>WS B2 — KII Guide</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="#" style="color:var(--teal);">Open</a></td></tr>
+          <tr><td>WS C1 — Governance Mapping</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="#" style="color:var(--teal);">Open</a></td></tr>
+          <tr><td>WS D1 — Circular Economy Collage</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="#" style="color:var(--teal);">Open</a></td></tr>
+          <tr><td>WS E1 — CEESAM Validation Sheet</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="#" style="color:var(--teal);">Open</a></td></tr>
+          <tr><td>WS F1 — Knowledge Mobilisation</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="#" style="color:var(--teal);">Open</a></td></tr>
+          <tr><td>Field Researcher Journals (Reflexivity)</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="#" style="color:var(--teal);">Open</a></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- CATEGORY 3: ADMINISTRATIVE KITS -->
+    <div class="doc-category">
+      <div class="doc-category-header">
+        <div class="doc-category-icon">🗃️</div>
+        <div>
+          <div class="doc-category-title">Administrative Kits</div>
+          <div class="doc-category-sub">Consent, agreements, checklists, project management, and safety protocols.</div>
+        </div>
+      </div>
+
+      <table class="doc-table">
+        <thead>
+          <tr><th>Document</th><th>Type</th><th>Status</th><th>Link</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>FPIC Kit (bilingual)</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="#" style="color:var(--teal);">Open</a></td></tr>
+          <tr><td>MOA Template</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="#" style="color:var(--teal);">Open</a></td></tr>
+          <tr><td>Field Researcher TOR</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="#" style="color:var(--teal);">Open</a></td></tr>
+          <tr><td>Project Management Plan</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="#" style="color:var(--teal);">Open</a></td></tr>
+          <tr><td>20-Week Gantt Chart</td><td><span class="badge badge-sky">Excel</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="#" style="color:var(--teal);">Open</a></td></tr>
+          <tr><td>Milestone Gate Tracker</td><td><span class="badge badge-sky">Excel</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="#" style="color:var(--teal);">Open</a></td></tr>
+          <tr><td>Checklist — Administrative Kit</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="#" style="color:var(--teal);">Open</a></td></tr>
+          <tr><td>Checklist — Research Tools</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="#" style="color:var(--teal);">Open</a></td></tr>
+          <tr><td>Checklist — Workshop Materials</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="#" style="color:var(--teal);">Open</a></td></tr>
+          <tr><td>Checklist — Personal Safety</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="#" style="color:var(--teal);">Open</a></td></tr>
+          <tr><td>Pentahelix Action Workshop — Isabela</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="#" style="color:var(--teal);">Open</a></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- ALERT BANNER -->
+<div style="background:rgba(255, 239, 213, 0.8); border-top:3px solid var(--warning); border-bottom:3px solid var(--warning); padding:20px 24px; margin-top:40px;">
+  <div style="max-width:1280px; margin:0 auto; display:flex; gap:16px; align-items:flex-start;">
+    <span style="font-size:20px; flex-shrink:0;">⚠️</span>
+    <div>
+      <p style="font-weight:700; color:var(--navy); margin-bottom:4px;">Ethical Review Gate — Non-Negotiable</p>
+      <p style="font-size:13px; color:var(--text-mid); line-height:1.6;">No primary data collection until written ethical clearance is received. Bound by IPRA (RA 8371), FPIC, and the SKR Institute ethical review pathway. Co-authorship is a right, not a bonus.</p>
     </div>
   </div>
 </div>
 
 <!-- FOOTER -->
 <footer>
-  <div style="max-width:1280px;margin:0 auto;">
-    <p style="margin-bottom:8px;"><strong>Community OS — Research</strong> &nbsp;|&nbsp; Isabela de Basilan Pilot</p>
-    <p style="margin-bottom:8px;">
-      <a href="https://www.thelab.ph/" target="_blank">LAB.PH / Community OS Lab</a> &nbsp;·&nbsp;
-      Roxas-Kalaw Foundation &nbsp;·&nbsp;
-      SKR Institute
-    </p>
-    <p style="margin-bottom:8px;"><a href="https://isabelacity.gov.ph/about-us/" target="_blank">Isabela de Basilan, Basilan Province, Philippines</a> &nbsp;|&nbsp; BIMP-EAGA Region</p>
-    <p style="font-size:11.5px;color:rgba(255,255,255,0.3);margin-top:12px;">Site designed for field team and external stakeholder use. Content reflects programme documents as of April 2026. This page covers the research component of the Community OS initiative.</p>
-  </div>
+  <p><strong>Community OS — Research Hub &amp; Dashboard</strong> | Isabela de Basilan Pilot</p>
+  <p>
+    <a href="https://www.thelab.ph/" target="_blank">LAB.PH</a> · Roxas-Kalaw Foundation · SKR Institute
+  </p>
+  <p><a href="https://isabelacity.gov.ph/about-us/" target="_blank">Isabela de Basilan, Basilan Province, BARMM</a></p>
+  <p style="font-size:11px; opacity:0.7; margin-top:16px;">
+    Participatory • Emancipatory • Co-Authored with Indigenous Communities (Yakan, Sama Banguingui, Sama Dilaut, Tausug)
+  </p>
+  <p style="font-size:11px; opacity:0.6; margin-top:8px;">Built on PEAR, ECSOM, Sikolohiyang Pilipino, and Community Psychology frameworks. April 2026.</p>
 </footer>
+
+<script>
+  function switchSection(section) {
+    document.querySelectorAll('.content-view').forEach(v => v.classList.remove('active'));
+    document.querySelectorAll('.top-nav-tab').forEach(tab => tab.classList.remove('active'));
+    document.getElementById(section + '-section').classList.add('active');
+    if (event && event.target) event.target.classList.add('active');
+
+    const roleSelector = document.getElementById('role-selector');
+    if (section === 'dashboard') {
+      roleSelector.classList.add('show');
+    } else {
+      roleSelector.classList.remove('show');
+    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // For programmatic section switching (e.g. from "Where to go next" tiles)
+  function switchSectionByName(section) {
+    document.querySelectorAll('.content-view').forEach(v => v.classList.remove('active'));
+    document.querySelectorAll('.top-nav-tab').forEach(tab => tab.classList.remove('active'));
+    document.getElementById(section + '-section').classList.add('active');
+    // find matching tab button and activate
+    document.querySelectorAll('.top-nav-tab').forEach(tab => {
+      if (tab.getAttribute('onclick') && tab.getAttribute('onclick').includes("'" + section + "'")) {
+        tab.classList.add('active');
+      }
+    });
+    const roleSelector = document.getElementById('role-selector');
+    if (section === 'dashboard') {
+      roleSelector.classList.add('show');
+    } else {
+      roleSelector.classList.remove('show');
+    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function switchRole(role) {
+    document.querySelectorAll('.role-view').forEach(v => v.classList.remove('active'));
+    document.querySelectorAll('.role-btn').forEach(btn => btn.classList.remove('active'));
+    document.getElementById(role + '-view').classList.add('active');
+    if (event && event.target) event.target.classList.add('active');
+
+    const tagLangBtn = document.getElementById('taglang');
+    if (role === 'community') {
+      tagLangBtn.style.display = 'inline-block';
+    } else {
+      tagLangBtn.style.display = 'none';
+      setLanguage('en');
+    }
+  }
+
+  function setLanguage(lang) {
+    const englishElements = document.querySelectorAll('.english-only');
+    const tagalogElements = document.querySelectorAll('.tagalog-only');
+    const langBtns = document.querySelectorAll('.lang-btn');
+    langBtns.forEach(btn => btn.classList.remove('active'));
+    if (lang === 'en') {
+      englishElements.forEach(el => { el.style.display = ''; el.classList.remove('hide'); });
+      tagalogElements.forEach(el => { el.style.display = 'none'; el.classList.remove('show'); });
+      document.querySelectorAll('.lang-btn')[0].classList.add('active');
+      document.documentElement.lang = 'en';
+    } else if (lang === 'tl') {
+      englishElements.forEach(el => { el.style.display = 'none'; el.classList.add('hide'); });
+      tagalogElements.forEach(el => { el.style.display = ''; el.classList.add('show'); });
+      document.getElementById('taglang').classList.add('active');
+      document.documentElement.lang = 'tl';
+    }
+  }
+
+  function filterGantt(filter, ev) {
+    document.querySelectorAll('.gantt-filter').forEach(btn => btn.classList.remove('active'));
+    if (ev && ev.target) ev.target.classList.add('active');
+  }
+
+  window.addEventListener('DOMContentLoaded', () => {
+    setLanguage('en');
+  });
+</script>
 
 </body>
 </html>
