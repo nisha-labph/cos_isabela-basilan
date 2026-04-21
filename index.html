@@ -631,7 +631,7 @@
 
     .gantt-phase {
       flex: 1;
-      min-width: 160px;
+      min-width: 150px;
     }
 
     .phase-label {
@@ -673,6 +673,17 @@
       border-color: var(--gold);
     }
 
+    .phase-bar.cmc {
+      background: repeating-linear-gradient(
+        45deg,
+        var(--gold-light),
+        var(--gold-light) 8px,
+        rgba(212, 146, 58, 0.25) 8px,
+        rgba(212, 146, 58, 0.25) 16px
+      );
+      border: 2px dashed var(--gold);
+    }
+
     .phase-name {
       font-size: 11px;
       font-weight: 700;
@@ -688,60 +699,93 @@
       transition: color 0.2s;
     }
 
-    /* ── PRESENTATION CARDS ── */
-    .presentation-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 24px;
-      margin-bottom: 40px;
-    }
-
-    .presentation-card {
-      background: linear-gradient(135deg, var(--white) 0%, var(--teal-xlight) 100%);
-      border: 2px solid var(--teal);
-      border-radius: var(--radius-lg);
-      padding: 32px 24px;
-      text-align: center;
-      transition: all 0.3s;
-    }
-
-    .presentation-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 12px 32px rgba(0, 133, 124, 0.2);
-    }
-
-    .presentation-icon { font-size: 48px; margin-bottom: 16px; }
-
-    .presentation-title {
-      font-family: var(--font-serif);
-      font-size: 20px;
-      color: var(--navy);
-      margin-bottom: 8px;
-      font-weight: 600;
-    }
-
-    .presentation-description {
+    .cmc-legend {
+      background: linear-gradient(135deg, var(--gold-light) 0%, var(--teal-xlight) 100%);
+      border-left: 4px solid var(--gold);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 14px 18px;
+      margin-top: 20px;
       font-size: 13px;
-      color: var(--text-muted);
-      margin-bottom: 20px;
+      color: var(--text-mid);
       line-height: 1.6;
     }
 
-    .presentation-btn {
-      display: inline-block;
-      padding: 12px 24px;
-      background: linear-gradient(135deg, var(--teal) 0%, var(--teal-mid) 100%);
-      color: var(--white);
-      text-decoration: none;
-      border-radius: var(--radius);
-      font-weight: 600;
-      font-size: 13px;
-      transition: all 0.3s;
+    .cmc-legend strong { color: var(--navy); }
+
+    /* ── EMBEDDED PRESENTATION IFRAME ── */
+    .embedded-deck {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      margin-bottom: 40px;
     }
 
-    .presentation-btn:hover {
-      transform: scale(1.05);
-      box-shadow: 0 6px 16px rgba(0, 133, 124, 0.2);
+    .embedded-deck iframe {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+    }
+
+    .embedded-deck-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    /* ── COMMUNITY INFOGRAPHIC ── */
+    .community-infographic {
+      background: linear-gradient(135deg, var(--teal-xlight) 0%, var(--sky-light) 50%, var(--gold-light) 100%);
+      border: 1px solid var(--teal);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .infographic-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      background: var(--white);
+      padding: 14px 16px;
+      border-radius: var(--radius);
+      border-left: 4px solid var(--teal);
+    }
+
+    .infographic-icon {
+      font-size: 32px;
+      flex-shrink: 0;
+      line-height: 1;
+    }
+
+    .infographic-text {
+      flex: 1;
+    }
+
+    .infographic-text strong {
+      display: block;
+      color: var(--navy);
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+
+    .infographic-text span {
+      font-size: 13px;
+      color: var(--text-mid);
+      line-height: 1.5;
+    }
+
+    .infographic-arrow {
+      text-align: center;
+      font-size: 22px;
+      color: var(--teal);
+      line-height: 1;
     }
 
     /* ── DOCUMENT TABLE ── */
@@ -813,6 +857,14 @@
     }
 
     .doc-table tr:hover { background: var(--teal-xlight); }
+
+    .doc-code {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-muted);
+      font-weight: 600;
+      white-space: nowrap;
+    }
 
     .badge {
       display: inline-block;
@@ -887,19 +939,22 @@
       background: var(--white);
       border: 1px solid var(--border);
       border-radius: var(--radius-lg);
-      padding: 36px 28px;
+      padding: 40px 36px;
       margin-bottom: 40px;
     }
 
     .rationale-section h3 {
       font-family: var(--font-serif);
-      font-size: 22px;
+      font-size: 24px;
       color: var(--navy);
-      margin-top: 28px;
-      margin-bottom: 14px;
+      margin-top: 36px;
+      margin-bottom: 18px;
       font-weight: 600;
-      border-top: 1px solid var(--border-light);
-      padding-top: 24px;
+      border-top: 2px solid var(--teal-light);
+      padding-top: 28px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
 
     .rationale-section h3:first-of-type {
@@ -908,52 +963,172 @@
       padding-top: 0;
     }
 
+    .rationale-section h4 {
+      font-family: var(--font-sans);
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--teal);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-top: 22px;
+      margin-bottom: 12px;
+    }
+
     .rationale-section p {
-      margin-bottom: 14px;
-      line-height: 1.8;
+      margin-bottom: 16px;
+      line-height: 1.85;
       color: var(--text-mid);
+      font-size: 15px;
+    }
+
+    .rationale-section p.lead {
+      font-size: 17px;
+      color: var(--text-dark);
+      font-weight: 500;
+      line-height: 1.7;
+      padding-left: 16px;
+      border-left: 3px solid var(--teal);
+    }
+
+    .rationale-section ol,
+    .rationale-section ul.plain {
+      margin: 0 0 16px 24px;
+      line-height: 1.9;
+      color: var(--text-mid);
+    }
+
+    .rationale-section ol li,
+    .rationale-section ul.plain li {
+      margin-bottom: 8px;
     }
 
     .toc-block {
       background: var(--teal-xlight);
       border-left: 4px solid var(--teal);
-      padding: 20px 24px;
-      margin: 20px 0;
+      padding: 24px 28px;
+      margin: 24px 0;
       border-radius: 0 var(--radius) var(--radius) 0;
     }
 
-    .toc-block p { margin-bottom: 10px; }
+    .toc-block p {
+      margin-bottom: 12px;
+      line-height: 1.75;
+    }
     .toc-block p:last-child { margin-bottom: 0; }
 
     .rq-list {
       list-style: none;
       counter-reset: rq;
-      margin: 16px 0;
+      margin: 18px 0;
+      padding: 0;
     }
 
     .rq-list li {
       counter-increment: rq;
-      padding: 14px 16px 14px 52px;
+      padding: 18px 20px 18px 70px;
       position: relative;
       background: var(--stone);
       border-radius: var(--radius);
-      margin-bottom: 10px;
-      font-size: 14px;
-      line-height: 1.6;
+      margin-bottom: 12px;
+      font-size: 14.5px;
+      line-height: 1.65;
+      color: var(--text-mid);
     }
 
     .rq-list li::before {
       content: "RQ" counter(rq);
       position: absolute;
-      left: 14px;
-      top: 14px;
+      left: 16px;
+      top: 18px;
       background: var(--navy);
       color: var(--white);
-      padding: 4px 8px;
+      padding: 5px 10px;
       border-radius: 4px;
       font-family: var(--font-mono);
       font-size: 11px;
       font-weight: 700;
+    }
+
+    .phase-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin: 20px 0 16px;
+    }
+
+    @media (max-width: 700px) {
+      .phase-cards { grid-template-columns: 1fr; }
+    }
+
+    .phase-card {
+      background: linear-gradient(135deg, var(--white) 0%, var(--teal-xlight) 100%);
+      border: 2px solid var(--teal);
+      border-radius: var(--radius);
+      padding: 22px;
+    }
+
+    .phase-card.phase-2 {
+      background: linear-gradient(135deg, var(--white) 0%, var(--gold-light) 100%);
+      border-color: var(--gold);
+    }
+
+    .phase-card-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--teal);
+      letter-spacing: 0.1em;
+      margin-bottom: 6px;
+    }
+
+    .phase-card.phase-2 .phase-card-label {
+      color: var(--gold);
+    }
+
+    .phase-card-title {
+      font-family: var(--font-serif);
+      font-size: 20px;
+      color: var(--navy);
+      font-weight: 600;
+      margin-bottom: 10px;
+      line-height: 1.3;
+    }
+
+    .phase-card-weeks {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+      font-weight: 500;
+    }
+
+    .phase-card-list {
+      margin: 12px 0 0 18px;
+      font-size: 13.5px;
+      color: var(--text-mid);
+      line-height: 1.7;
+    }
+
+    .phase-card-list li {
+      margin-bottom: 6px;
+    }
+
+    .cmc-note {
+      background: var(--gold);
+      color: var(--white);
+      padding: 14px 16px;
+      border-radius: var(--radius);
+      margin-top: 16px;
+      font-size: 13px;
+      line-height: 1.6;
+      font-weight: 500;
+    }
+
+    .cmc-note strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
     }
 
     /* ── FOOTER ── */
@@ -993,6 +1168,8 @@
       .language-toggle { width: 100%; }
       .top-nav-inner { flex-wrap: wrap; }
       .top-nav-tab { flex: 1; text-align: center; padding: 12px 14px; font-size: 12px; }
+      .rationale-section { padding: 28px 22px; }
+      .rationale-section h3 { font-size: 20px; }
     }
 
     .tagalog-only { display: none; }
@@ -1005,12 +1182,11 @@
 <!-- TOP NAVIGATION TABS -->
 <div class="top-nav">
   <div class="top-nav-inner">
-    <button class="top-nav-tab active" onclick="switchSection('main')">🏠 Main</button>
-    <button class="top-nav-tab" onclick="switchSection('rationale')">📖 Rationale, ToC & RQs</button>
-    <button class="top-nav-tab" onclick="switchSection('dashboard')">📊 Dashboard</button>
-    <button class="top-nav-tab" onclick="switchSection('calendar')">📅 Calendar</button>
-    <button class="top-nav-tab" onclick="switchSection('presentations')">🎤 Presentations</button>
-    <button class="top-nav-tab" onclick="switchSection('resources')">📚 Resources</button>
+    <button class="top-nav-tab active" onclick="switchSection('main', event)">🏠 Main</button>
+    <button class="top-nav-tab" onclick="switchSection('rationale', event)">📖 Rationale, ToC &amp; RQs</button>
+    <button class="top-nav-tab" onclick="switchSection('dashboard', event)">📊 Dashboard</button>
+    <button class="top-nav-tab" onclick="switchSection('calendar', event)">📅 Calendar</button>
+    <button class="top-nav-tab" onclick="switchSection('resources', event)">📚 Resources</button>
   </div>
 </div>
 
@@ -1019,9 +1195,9 @@
   <div class="role-selector-inner">
     <span class="role-selector-label">🎯 Select Your Role</span>
     <div class="role-buttons">
-      <button class="role-btn active" onclick="switchRole('field')">🗺️ Field Researcher</button>
-      <button class="role-btn" onclick="switchRole('institutional')">🏛️ Institutional Partner</button>
-      <button class="role-btn" onclick="switchRole('community')">👥 Community Member</button>
+      <button class="role-btn active" onclick="switchRole('field', event)">🗺️ Field Researcher</button>
+      <button class="role-btn" onclick="switchRole('institutional', event)">🏛️ Institutional Partner</button>
+      <button class="role-btn" onclick="switchRole('community', event)">👥 Community Member</button>
     </div>
     <div class="language-toggle">
       <button class="lang-btn active english-only" onclick="setLanguage('en')">English</button>
@@ -1056,7 +1232,7 @@
         <div class="explainer-code">CORE · 01</div>
         <div class="explainer-title">Community OS</div>
         <div class="explainer-desc">A participatory research "operating system" that equips communities with tools, data, and decision-making frameworks to co-design their own development pathways.</div>
-        <a href="#" class="explainer-link" onclick="switchSectionByName('presentations'); return false;">Learn more →</a>
+        <a href="https://docs.google.com/presentation/d/1v-aEmZ7NcE3D9MVaMyMHxiBCt8XqUrSw/edit?usp=sharing" target="_blank" class="explainer-link">Open community deck ↗</a>
       </div>
 
       <div class="explainer-card">
@@ -1081,8 +1257,8 @@
       </div>
     </div>
 
-    <!-- KEY CONCEPTS (NEW) -->
-    <h3 style="font-family:var(--font-serif); font-size:20px; color:var(--navy); margin: 32px 0 16px;">🔑 Key Concepts & External References</h3>
+    <!-- KEY CONCEPTS -->
+    <h3 style="font-family:var(--font-serif); font-size:20px; color:var(--navy); margin: 32px 0 16px;">🔑 Key Concepts &amp; External References</h3>
     <p style="font-size:13px; color:var(--text-muted); margin-bottom:16px;">External frameworks actively referenced in our design and analysis work.</p>
 
     <div class="explainer-grid">
@@ -1118,7 +1294,7 @@
     <!-- QUICK ECSOM FINDINGS -->
     <div class="findings-banner">
       <h3>📊 Quick ECSOM Findings — Isabela de Basilan</h3>
-      <p style="font-size:14px; color:var(--text-mid);">Preliminary indicators from the ECSOM Canvas Narrative v2 (March 2026). These are <strong>desktop-derived baselines</strong> and are subject to community validation in Weeks 2–11.</p>
+      <p style="font-size:14px; color:var(--text-mid);">Preliminary indicators from the ECSOM Canvas Narrative v2 (March 2026). These are <strong>desktop-derived baselines</strong> and are subject to community validation in the Research Phase.</p>
 
       <div class="findings-grid">
         <div class="finding-item">
@@ -1138,8 +1314,8 @@
           <div class="finding-label">Total biocapacity (incl. marine block)</div>
         </div>
         <div class="finding-item">
-          <div class="finding-metric">4 Nations</div>
-          <div class="finding-label">Yakan · Sama Banguingui · Sama Dilaut · Tausug</div>
+          <div class="finding-metric">3 IPs</div>
+          <div class="finding-label">Yakan · Sama Banguingui · Sama Dilaut (plus Tausug in population mix)</div>
         </div>
         <div class="finding-item">
           <div class="finding-metric">100%</div>
@@ -1150,13 +1326,12 @@
       <p style="font-size:12px; color:var(--text-muted); margin-top:20px; font-style:italic;">Full canvas and workbook are in the <strong>Resources</strong> tab.</p>
     </div>
 
-    <!-- QUICK LINKS TO EVERYTHING -->
+    <!-- QUICK LINKS -->
     <h3 style="font-family:var(--font-serif); font-size:20px; color:var(--navy); margin: 32px 0 16px;">⚡ Where to go next</h3>
     <div class="quick-links-grid">
       <a href="#" class="quick-link" onclick="switchSectionByName('rationale'); return false;">📖 Read the research rationale</a>
       <a href="#" class="quick-link" onclick="switchSectionByName('dashboard'); return false;">📊 Open my dashboard</a>
       <a href="#" class="quick-link" onclick="switchSectionByName('calendar'); return false;">📅 See upcoming events</a>
-      <a href="#" class="quick-link" onclick="switchSectionByName('presentations'); return false;">🎤 View the decks</a>
       <a href="#" class="quick-link" onclick="switchSectionByName('resources'); return false;">📚 Download instruments</a>
     </div>
 
@@ -1168,10 +1343,12 @@
     <div class="rationale-section">
 
       <h3>📖 Research Rationale</h3>
-      <p>Isabela de Basilan sits at the intersection of four realities: deep indigenous ecological knowledge, a highly specialised fisheries economy (LQ 3.84), full diesel dependency, and two CADTs still pending for three ICCs. Economic analysis that <em>observes</em> these conditions without being co-built with the communities living them cannot produce durable, legitimate interventions.</p>
+      <p class="lead">Isabela de Basilan sits at the intersection of four realities: deep indigenous ecological knowledge, a highly specialised fisheries economy (LQ 3.84), full diesel dependency, and two CADTs still pending for three ICCs. Economic analysis that <em>observes</em> these conditions without being co-built with the communities living them cannot produce durable, legitimate interventions.</p>
+
       <p>Dr. Sixto K. Roxas III put it sharply: <em>"Economists should build economies. Not observe them — build them."</em> That is the stance of this research. Community OS treats Isabela as Pilot Community #1 of 250 — not as a data point, but as a co-designing partner whose knowledge is a <strong>primary source</strong>, not a supplementary one.</p>
-      <p>The rationale is therefore threefold:</p>
-      <ol style="margin-left:22px; margin-bottom:14px; line-height:1.9;">
+
+      <h4>The rationale is threefold</h4>
+      <ol>
         <li><strong>Empirical</strong> — existing PSA 240-sector data, BFAR, BASELCO/BAPCO, and LGU BDIP records give a credible baseline, but none of them describe the informal economy (T9) or traditional ecological knowledge (T7). CEESAM 240×240 validated with community input closes that gap.</li>
         <li><strong>Methodological</strong> — PEAR plus ECSOM plus Sikolohiyang Pilipino plus Community Psychology is, to our knowledge, a novel four-root synthesis in Philippine participatory research. Isabela is where that synthesis is stress-tested.</li>
         <li><strong>Ethical &amp; political</strong> — FPIC, IPRA, and co-authorship rights are not compliance checkboxes. They are the operating conditions under which this research is legitimate at all.</li>
@@ -1179,37 +1356,69 @@
 
       <h3>🔄 Theory of Change</h3>
       <div class="toc-block">
-        <p><strong>IF</strong> the four indigenous nations of Isabela de Basilan co-design and validate a CEESAM Input-Output matrix, co-author the ECSOM Canvas Narrative, and co-own the intervention prototypes that follow,</p>
+        <p><strong>IF</strong> the indigenous communities of Isabela de Basilan — Yakan, Sama Banguingui, and Sama Dilaut — together with the wider population mix (which includes Tausug and settler residents) co-design and validate a CEESAM Input-Output matrix, co-author the ECSOM Canvas Narrative, and co-own the intervention prototypes that follow,</p>
         <p><strong>THEN</strong> the resulting evidence base will reveal Win-Win-Win investment priorities (Solar RE, Seaweed SRC, Cold Chain + Halal Cluster, CADT Fast-Track, Digital Economy) that are simultaneously ecologically sustainable, economically productive, and culturally grounded,</p>
         <p><strong>BECAUSE</strong> community validation produces interventions that withstand political cycles, attract aligned capital (see UNDP Aligning Capital framework), and are legible to both institutional and indigenous governance systems,</p>
         <p><strong>SO THAT</strong> the Community OS model can be replicated across 250 pilot communities nationally and translated into BIMP-EAGA regional integration frameworks — with co-authorship as a right, not a bonus.</p>
       </div>
 
       <h3>❓ Research Questions</h3>
-      <p>The overarching question is: <strong>How can a participatory, four-root research architecture produce an evidence base that communities themselves recognise as their own — and that institutional actors treat as authoritative?</strong></p>
-      <p>This breaks down into five operational research questions:</p>
+      <p class="lead">How can a participatory, four-root research architecture produce an evidence base that communities themselves recognise as their own — and that institutional actors treat as authoritative?</p>
+      <p>This breaks into five operational research questions:</p>
 
       <ol class="rq-list">
         <li>How does the Isabela de Basilan economy actually function across its 240 sectors when informal, household, and indigenous-knowledge activities are made visible alongside the formal economy?</li>
-        <li>Which Win-Win-Win intervention priorities do the four indigenous nations recognise as legitimate — and how do their priorities align or diverge from the desktop-derived shortlist?</li>
+        <li>Which Win-Win-Win intervention priorities do the communities recognise as legitimate — and how do their priorities align or diverge from the desktop-derived shortlist?</li>
         <li>What governance and ethical conditions (FPIC, CADT, co-authorship protocols) need to be institutionalised for community validation to be durable beyond a single project cycle?</li>
-        <li>How does co-designing intervention prototypes in Weeks 12–20 change the structure and confidence of the CEESAM findings established in Weeks 2–11?</li>
+        <li>How does co-designing intervention prototypes in Phase 2 change the structure and confidence of the findings established in Phase 1?</li>
         <li>What elements of the Community OS toolkit transfer to the other 249 pilot communities — and what has to be re-invented locally in each?</li>
       </ol>
 
-      <h3>🧪 Research Overview</h3>
-      <p>The programme runs across <strong>20 weeks</strong>, organised around two major arcs:</p>
-      <p><strong>Weeks 1–11 · Evidence &amp; Validation.</strong> CEESAM validation ideally begins in Week 2 or Week 3 and is <strong>continuous</strong> through Week 11. This window includes desktop triangulation, administrative KIIs, FPIC documentation, community KIIs, FGDs, photovoice sessions, and co-verification of the CEESAM matrix. <strong>By the end of Week 11, the analysis and the preliminary report must be ready for presentation.</strong></p>
-      <p><strong>Weeks 12–20 · Knowledge Mobilisation &amp; Co-Design.</strong> Beginning with community research exhibits and a town hall, the second arc is where the evidence becomes action:</p>
-      <ul class="checklist" style="margin: 10px 0 18px;">
-        <li><div class="check-box"></div><strong>Community research exhibits + town hall</strong> — findings returned to the community first, before any institutional audience</li>
-        <li><div class="check-box"></div><strong>CMC (Community Management Council) critical-components assessment</strong> — what governance infrastructure needs to be in place for interventions to hold?</li>
-        <li><div class="check-box"></div><strong>Co-designing intervention prototypes</strong> — workshops with each of the four nations separately, then jointly</li>
-        <li><div class="check-box"></div><strong>Intervention design workshops</strong> — refinement, costing, and alignment with UNDP Aligning Capital framework</li>
-        <li><div class="check-box"></div><strong>Policy briefs</strong> — for LGU, BARMM, and BIMP-EAGA audiences</li>
-        <li><div class="check-box"></div><strong>Final exhibit and CMC launch</strong> — handover to the community-led governance body</li>
+      <h3>🧪 Research Overview — The 21-Week Community OS Installation</h3>
+      <p>The programme is structured as a <strong>21-week installation of the Community OS</strong> in Isabela de Basilan — not as a conventional "research project" that begins and ends. It is the <em>setup</em> of a local research-and-action capacity that the community will operate itself.</p>
+
+      <div class="phase-cards">
+        <div class="phase-card">
+          <div class="phase-card-label">PHASE 1 · WEEKS 1–5</div>
+          <div class="phase-card-title">Research &amp; Validation</div>
+          <div class="phase-card-weeks">Evidence, co-validation, and return to community</div>
+          <p style="font-size:14px; color:var(--text-mid); margin-bottom:0;">The research arc: desktop triangulation, administrative KIIs, FPIC documentation, community KIIs and FGDs, photovoice sessions, and co-verification of the CEESAM 240×240 matrix. Findings are brought back to the community before any institutional audience sees them.</p>
+          <ul class="phase-card-list">
+            <li>Week 1 — Ethical review gate, FPIC, admin kit</li>
+            <li>Weeks 2–3 — CEESAM validation begins</li>
+            <li>Weeks 4–5 — KIIs, FGDs, photovoice, community return</li>
+          </ul>
+        </div>
+
+        <div class="phase-card phase-2">
+          <div class="phase-card-label">PHASE 2 · WEEKS 6–21</div>
+          <div class="phase-card-title">Installation &amp; Co-Design</div>
+          <div class="phase-card-weeks">Knowledge mobilisation &amp; community-determined next steps</div>
+          <p style="font-size:14px; color:var(--text-mid); margin-bottom:0;">The installation arc: the evidence becomes action. Weeks 6–11 run CMC critical-components assessment and early co-design. From Week 12 onward, the specific activities are shaped by the Community Management Council (CMC).</p>
+          <ul class="phase-card-list">
+            <li>Weeks 6–8 — Community research exhibit + town hall</li>
+            <li>Weeks 9–11 — CMC critical-components assessment</li>
+            <li>Weeks 12–21 — CMC-determined: co-design, intervention design, policy briefs, final exhibit, CMC launch</li>
+          </ul>
+
+          <div class="cmc-note">
+            <strong>⚠ CMC-Determined Window</strong>
+            Weeks 12–21 will be determined by the community through the Community Management Council (CMC). The specific sequencing, depth, and focus of co-design workshops, intervention design, policy briefs, and the final exhibit are set by the community — not pre-scripted by the research team.
+          </div>
+        </div>
+      </div>
+
+      <h4>Phase 2 activities (CMC will sequence and prioritise these)</h4>
+      <ul class="plain">
+        <li>Community research exhibits and town hall</li>
+        <li>CMC critical-components assessment — what governance infrastructure needs to hold?</li>
+        <li>Co-designing intervention prototypes — workshops with each community, then jointly</li>
+        <li>Intervention design workshops — refinement, costing, alignment with UNDP Aligning Capital</li>
+        <li>Policy briefs — for LGU, BARMM, and BIMP-EAGA audiences</li>
+        <li>Final exhibit and CMC launch — handover to the community-led governance body</li>
       </ul>
-      <p>The gate between the two arcs — the Week 11 presentation — is where the community decides whether and how the research continues into Phase 2.</p>
+
+      <p style="margin-top:20px;">The gate between the two phases is the Week 5 community return and Week 6 town hall. That is where the community decides whether and how the research continues into installation.</p>
 
     </div>
 
@@ -1245,12 +1454,12 @@
           <div class="card-header">
             <div>
               <div class="card-title">Research Instruments</div>
-              <div class="card-description" style="margin-top: 4px;">Download & print</div>
+              <div class="card-description" style="margin-top: 4px;">Download &amp; print</div>
             </div>
           </div>
-          <a href="#" style="display:block; padding:10px; background:var(--sky-light); color:var(--sky); text-decoration:none; border-radius:6px; margin-bottom:8px; font-weight:500; text-align:center;">📄 KII Guide (Tagalog)</a>
-          <a href="#" style="display:block; padding:10px; background:var(--teal-light); color:var(--teal); text-decoration:none; border-radius:6px; margin-bottom:8px; font-weight:500; text-align:center;">📊 FGD Worksheet</a>
-          <a href="#" style="display:block; padding:10px; background:var(--gold-light); color:var(--gold); text-decoration:none; border-radius:6px; font-weight:500; text-align:center;">📸 Photovoice Prompt</a>
+          <a href="https://docs.google.com/document/d/1I3EgF_YTsIgZN2yREzrpJPAlzozw1vRR/edit?usp=drive_link" target="_blank" style="display:block; padding:10px; background:var(--sky-light); color:var(--sky); text-decoration:none; border-radius:6px; margin-bottom:8px; font-weight:500; text-align:center;">📄 WS B2 — KII Guide</a>
+          <a href="https://docs.google.com/document/d/1rQ6OaGs-bt-rmBBtZWufloAUZr5PGMpE/edit?usp=drive_link" target="_blank" style="display:block; padding:10px; background:var(--teal-light); color:var(--teal); text-decoration:none; border-radius:6px; margin-bottom:8px; font-weight:500; text-align:center;">📊 WS FGD — Multi-Cohort</a>
+          <a href="https://docs.google.com/document/d/1NQJBKFl-qYhPKgDFPqvQBC-f45uWgWwP/edit?usp=drive_link" target="_blank" style="display:block; padding:10px; background:var(--gold-light); color:var(--gold); text-decoration:none; border-radius:6px; font-weight:500; text-align:center;">📸 WS A1 — Photovoice</a>
         </div>
 
         <div class="dashboard-card">
@@ -1283,14 +1492,26 @@
         </div>
       </div>
 
+      <!-- EMBEDDED DECK FOR FIELD RESEARCHERS -->
+      <div class="embedded-deck">
+        <div class="embedded-deck-header">
+          <div>
+            <h3 style="font-family:var(--font-serif); font-size:20px; color:var(--navy); font-weight:600;">🔬 Research Team Brief</h3>
+            <p style="font-size:12px; color:var(--text-muted);">Methodology, timelines, and data frameworks for the field team.</p>
+          </div>
+          <a href="https://docs.google.com/presentation/d/1a-zJowqADT-xIO2BXtd6LjImyUtPLZEr/edit?usp=sharing" target="_blank" style="padding:8px 14px; background:var(--teal); color:var(--white); text-decoration:none; border-radius:6px; font-size:12px; font-weight:600;">Open in new tab ↗</a>
+        </div>
+        <iframe src="https://docs.google.com/presentation/d/1a-zJowqADT-xIO2BXtd6LjImyUtPLZEr/embed?start=false&loop=false&delayms=3000" frameborder="0" allowfullscreen></iframe>
+      </div>
+
       <h3 style="font-family:var(--font-serif); font-size:20px; color:var(--navy); margin-bottom:16px;">⚡ Quick Links</h3>
       <div class="quick-links-grid">
-        <a href="#" class="quick-link">📋 Field Research Methodology v2.0</a>
-        <a href="#" class="quick-link">🗂️ CEESAM Data Entry Template</a>
-        <a href="#" class="quick-link">📝 FPIC Kit (Bilingual)</a>
-        <a href="#" class="quick-link">📸 Photovoice Guide</a>
-        <a href="#" class="quick-link">🔐 Offline Instruments Pack</a>
-        <a href="#" class="quick-link">🆘 Emergency Contact Card</a>
+        <a href="https://docs.google.com/document/d/1fmGw-u7LLdFyinoGWHblv40OA6_wy1qp/edit?usp=drive_link" target="_blank" class="quick-link">📋 00 · Toolkit Index</a>
+        <a href="https://docs.google.com/document/d/1OxaTWl5M98LYL4wTlErrsEhGorL7odu2/edit?usp=drive_link" target="_blank" class="quick-link">📝 01 · FPIC Kit</a>
+        <a href="https://docs.google.com/document/d/1fJItae81yjBYRrHfCD127YW2fJ54yAsW/edit?usp=drive_link" target="_blank" class="quick-link">🤝 02 · MOU</a>
+        <a href="https://docs.google.com/document/d/1NQJBKFl-qYhPKgDFPqvQBC-f45uWgWwP/edit?usp=drive_link" target="_blank" class="quick-link">📸 03 · Photovoice</a>
+        <a href="https://docs.google.com/document/d/1I3EgF_YTsIgZN2yREzrpJPAlzozw1vRR/edit?usp=drive_link" target="_blank" class="quick-link">💬 05 · KII Guide</a>
+        <a href="https://docs.google.com/document/d/1BIPHOzbkP9Yznt2aOL6okUiWq9cFfd9O/edit?usp=drive_link" target="_blank" class="quick-link">🤲 17 · Trauma-Responsive Primer</a>
       </div>
     </div>
 
@@ -1302,12 +1523,12 @@
         <div class="dashboard-card">
           <div class="card-header">
             <div>
-              <div class="card-title">Current Arc</div>
-              <div class="card-description" style="margin-top: 4px;">Weeks 1–11 · Evidence &amp; Validation</div>
+              <div class="card-title">Current Phase</div>
+              <div class="card-description" style="margin-top: 4px;">Phase 1 · Research (W1–5)</div>
             </div>
-            <span class="card-badge badge-warning">Week 8</span>
+            <span class="card-badge badge-warning">W3</span>
           </div>
-          <p style="font-size:13px; color:var(--text-muted);">CEESAM Validation continuous through Week 11. Analysis &amp; preliminary report due end of Week 11.</p>
+          <p style="font-size:13px; color:var(--text-muted);">CEESAM validation begins Weeks 2–3. Community return by end of Week 5 gates entry into Phase 2 installation.</p>
           <div class="status-indicator" style="background:var(--teal-light); color:var(--teal);">
             <span class="status-dot complete"></span>
             On track
@@ -1354,62 +1575,61 @@
 
       <!-- GANTT -->
       <div class="gantt-section">
-        <h3 class="section-title">📅 20-Week Programme Timeline</h3>
-        <p class="section-subtitle">Weeks 2–11: CEESAM Validation (continuous). Weeks 12–20: Knowledge Mobilisation &amp; Co-Design.</p>
+        <h3 class="section-title">📅 21-Week Community OS Installation</h3>
+        <p class="section-subtitle">Phase 1 · Research (Weeks 1–5) → Phase 2 · Installation (Weeks 6–21). Weeks 12–21 are CMC-determined.</p>
 
         <div class="gantt-controls">
           <button class="gantt-filter active" onclick="filterGantt('all', event)">All phases</button>
-          <button class="gantt-filter" onclick="filterGantt('arc1', event)">Arc 1 · Evidence (W1–11)</button>
-          <button class="gantt-filter" onclick="filterGantt('arc2', event)">Arc 2 · Mobilisation (W12–20)</button>
+          <button class="gantt-filter" onclick="filterGantt('p1', event)">Phase 1 · Research (W1–5)</button>
+          <button class="gantt-filter" onclick="filterGantt('p2', event)">Phase 2 · Installation (W6–21)</button>
         </div>
 
         <div class="gantt-chart">
           <div class="gantt-timeline">
             <div class="gantt-phase">
               <div class="phase-label">Week 1</div>
-              <div class="phase-bar complete" title="Ethical review gate + admin kit"><span class="phase-name">Ethics gate</span></div>
+              <div class="phase-bar complete" title="Ethical review gate, FPIC, admin kit"><span class="phase-name">Ethics + FPIC</span></div>
             </div>
             <div class="gantt-phase">
               <div class="phase-label">Week 2–3</div>
-              <div class="phase-bar complete" title="CEESAM validation begins (Week 2 or 3)"><span class="phase-name">CEESAM starts</span></div>
-              <div class="phase-bar complete" title="FPIC + community recruitment"><span class="phase-name">FPIC</span></div>
+              <div class="phase-bar current" title="CEESAM validation begins"><span class="phase-name">CEESAM starts</span></div>
+              <div class="phase-bar current" title="Admin KIIs"><span class="phase-name">Admin KIIs</span></div>
             </div>
             <div class="gantt-phase">
-              <div class="phase-label">Week 4–7</div>
-              <div class="phase-bar current" title="CEESAM validation continuous · KIIs + FGDs"><span class="phase-name">KII / FGD / CEESAM</span></div>
-              <div class="phase-bar current" title="Photovoice sessions"><span class="phase-name">Photovoice</span></div>
+              <div class="phase-label">Week 4–5</div>
+              <div class="phase-bar" title="KIIs + FGDs + Photovoice"><span class="phase-name">KII / FGD / Photo</span></div>
+              <div class="phase-bar" title="Community return"><span class="phase-name">Community return</span></div>
             </div>
             <div class="gantt-phase">
-              <div class="phase-label">Week 8–11</div>
-              <div class="phase-bar" title="CEESAM validation continues · analysis begins"><span class="phase-name">Analysis</span></div>
-              <div class="phase-bar" title="Preliminary report drafting"><span class="phase-name">Report prep</span></div>
-            </div>
-            <div class="gantt-phase">
-              <div class="phase-label">Week 12</div>
+              <div class="phase-label">Week 6–8</div>
               <div class="phase-bar" title="Community research exhibit + town hall"><span class="phase-name">Exhibit + Town Hall</span></div>
             </div>
             <div class="gantt-phase">
-              <div class="phase-label">Week 13–14</div>
+              <div class="phase-label">Week 9–11</div>
               <div class="phase-bar" title="CMC critical-components assessment"><span class="phase-name">CMC assessment</span></div>
             </div>
             <div class="gantt-phase">
-              <div class="phase-label">Week 15–17</div>
-              <div class="phase-bar" title="Co-designing intervention prototypes"><span class="phase-name">Co-design workshops</span></div>
-              <div class="phase-bar" title="Intervention design workshops"><span class="phase-name">Intervention design</span></div>
+              <div class="phase-label">Week 12–15</div>
+              <div class="phase-bar cmc" title="CMC-determined: co-design workshops"><span class="phase-name">🔶 Co-design (CMC)</span></div>
             </div>
             <div class="gantt-phase">
-              <div class="phase-label">Week 18–19</div>
-              <div class="phase-bar" title="Policy briefs drafting"><span class="phase-name">Policy briefs</span></div>
+              <div class="phase-label">Week 16–18</div>
+              <div class="phase-bar cmc" title="CMC-determined: intervention design"><span class="phase-name">🔶 Intervention design (CMC)</span></div>
             </div>
             <div class="gantt-phase">
-              <div class="phase-label">Week 20</div>
-              <div class="phase-bar" title="Final exhibit + CMC launch"><span class="phase-name">Final exhibit + CMC launch</span></div>
+              <div class="phase-label">Week 19–20</div>
+              <div class="phase-bar cmc" title="CMC-determined: policy briefs"><span class="phase-name">🔶 Policy briefs (CMC)</span></div>
+            </div>
+            <div class="gantt-phase">
+              <div class="phase-label">Week 21</div>
+              <div class="phase-bar cmc" title="CMC-determined: final exhibit + CMC launch"><span class="phase-name">🔶 Final exhibit + CMC launch</span></div>
             </div>
           </div>
         </div>
-        <p style="font-size:12px; color:var(--text-muted); margin-top:16px;">
-          📌 <strong>Gate:</strong> End of Week 11 — analysis + preliminary report must be ready for presentation. 🟡 Gold = current window.
-        </p>
+
+        <div class="cmc-legend">
+          <strong>⚠ CMC-Determined Window (Weeks 12–21):</strong> Striped gold bars indicate activities whose sequencing, depth, and scope will be determined by the Community Management Council (CMC) — not pre-scripted by the research team. The specific order, duration, and focus of co-design, intervention design, policy briefs, and final exhibit will be decided through CMC deliberation.
+        </div>
       </div>
 
       <!-- PROSUMER -->
@@ -1430,13 +1650,25 @@
         </div>
       </div>
 
+      <!-- EMBEDDED DECK FOR INSTITUTIONAL -->
+      <div class="embedded-deck">
+        <div class="embedded-deck-header">
+          <div>
+            <h3 style="font-family:var(--font-serif); font-size:20px; color:var(--navy); font-weight:600;">🔬 Research Team &amp; Institutional Stakeholder Brief</h3>
+            <p style="font-size:12px; color:var(--text-muted);">Full methodology, timelines, and frameworks.</p>
+          </div>
+          <a href="https://docs.google.com/presentation/d/1a-zJowqADT-xIO2BXtd6LjImyUtPLZEr/edit?usp=sharing" target="_blank" style="padding:8px 14px; background:var(--teal); color:var(--white); text-decoration:none; border-radius:6px; font-size:12px; font-weight:600;">Open in new tab ↗</a>
+        </div>
+        <iframe src="https://docs.google.com/presentation/d/1a-zJowqADT-xIO2BXtd6LjImyUtPLZEr/embed?start=false&loop=false&delayms=3000" frameborder="0" allowfullscreen></iframe>
+      </div>
+
       <h3 style="font-family:var(--font-serif); font-size:20px; color:var(--navy); margin-bottom:16px;">⚡ Institutional Quick Links</h3>
       <div class="quick-links-grid">
+        <a href="https://docs.google.com/document/d/1fmGw-u7LLdFyinoGWHblv40OA6_wy1qp/edit?usp=drive_link" target="_blank" class="quick-link">📋 Toolkit Index</a>
         <a href="#" class="quick-link">📊 CEESAM Validation Workbook v2</a>
         <a href="#" class="quick-link">📈 Sector LQ Analysis (PSA 240)</a>
         <a href="#" class="quick-link">🌍 Biocapacity &amp; Footprint Data</a>
         <a href="#" class="quick-link">📋 Project Management Plan</a>
-        <a href="#" class="quick-link">🔐 Ethical Review Documents</a>
         <a href="#" class="quick-link">📋 ECSOM Canvas Narrative v2</a>
         <a href="https://sdgprivatefinance.undp.org/aligning-capital" target="_blank" class="quick-link">💰 UNDP Aligning Capital ↗</a>
         <a href="https://dschool.stanford.edu/innovate/tools" target="_blank" class="quick-link">🎨 Stanford d.school Tools ↗</a>
@@ -1449,22 +1681,76 @@
       <h2 class="section-title tagalog-only" style="margin-bottom: 32px; display:none;">👥 Dashboard ng Miyembro ng Komunidad</h2>
 
       <div class="dashboard-grid">
-        <div class="dashboard-card">
+        <!-- REPLACED VIDEO WITH INFOGRAPHIC -->
+        <div class="dashboard-card" style="grid-column: 1 / -1;">
           <div class="card-header english-only">
             <div>
-              <div class="card-title">What is Community OS?</div>
-              <div class="card-description" style="margin-top: 4px;">Short intro</div>
+              <div class="card-title">How Community OS works</div>
+              <div class="card-description" style="margin-top: 4px;">A simple walk-through of what we do together</div>
             </div>
           </div>
           <div class="card-header tagalog-only" style="display:none;">
             <div>
-              <div class="card-title">Ano ang Komunidad OS?</div>
-              <div class="card-description" style="margin-top: 4px;">Maikling paliwanag</div>
+              <div class="card-title">Paano gumagana ang Komunidad OS</div>
+              <div class="card-description" style="margin-top: 4px;">Simpleng paliwanag ng ating ginagawa</div>
             </div>
           </div>
-          <div style="width:100%; height:180px; background:linear-gradient(135deg, var(--sky-light) 0%, var(--teal-light) 100%); border-radius:8px; display:flex; align-items:center; justify-content:center; margin-bottom:12px;"><span style="font-size:48px;">▶️</span></div>
-          <a href="https://docs.google.com/presentation/d/1v-aEmZ7NcE3D9MVaMyMHxiBCt8XqUrSw/edit?usp=sharing" target="_blank" class="english-only" style="display:inline-block; padding:10px 16px; background:var(--teal); color:var(--white); text-decoration:none; border-radius:6px; font-weight:600; font-size:13px;">Open Community Deck</a>
-          <a href="https://docs.google.com/presentation/d/1v-aEmZ7NcE3D9MVaMyMHxiBCt8XqUrSw/edit?usp=sharing" target="_blank" class="tagalog-only" style="display:none; padding:10px 16px; background:var(--teal); color:var(--white); text-decoration:none; border-radius:6px; font-weight:600; font-size:13px;">Buksan ang Deck</a>
+
+          <div class="community-infographic">
+            <div class="infographic-row">
+              <div class="infographic-icon">🤝</div>
+              <div class="infographic-text">
+                <strong class="english-only">1 · We meet the community</strong>
+                <strong class="tagalog-only" style="display:none;">1 · Pagkikita sa komunidad</strong>
+                <span class="english-only">Barangay leaders, elders, and community members sign FPIC — we cannot start without it.</span>
+                <span class="tagalog-only" style="display:none;">Mga lider ng barangay, matatanda, at miyembro ng komunidad ang pipirma ng FPIC — hindi kami makakaumpisa kung wala ito.</span>
+              </div>
+            </div>
+            <div class="infographic-arrow">↓</div>
+
+            <div class="infographic-row">
+              <div class="infographic-icon">📋</div>
+              <div class="infographic-text">
+                <strong class="english-only">2 · We listen and learn together</strong>
+                <strong class="tagalog-only" style="display:none;">2 · Makinig at matuto nang sama-sama</strong>
+                <span class="english-only">Through interviews (KIIs), group talks (FGDs), and photo-stories (photovoice), community members share what they know.</span>
+                <span class="tagalog-only" style="display:none;">Sa pamamagitan ng panayam, usapang grupo, at kuwento-gamit-larawan, ibinabahagi ng komunidad ang kanilang nalalaman.</span>
+              </div>
+            </div>
+            <div class="infographic-arrow">↓</div>
+
+            <div class="infographic-row">
+              <div class="infographic-icon">📊</div>
+              <div class="infographic-text">
+                <strong class="english-only">3 · We check the findings with you</strong>
+                <strong class="tagalog-only" style="display:none;">3 · Tingnan natin ang mga nalaman</strong>
+                <span class="english-only">We bring the data back to the community first, before showing it to anyone else. You tell us what's right, what's wrong, and what's missing.</span>
+                <span class="tagalog-only" style="display:none;">Ibabalik muna namin ang datos sa komunidad bago ipakita sa iba. Kayo ang magsasabi kung ano ang tama, mali, o kulang.</span>
+              </div>
+            </div>
+            <div class="infographic-arrow">↓</div>
+
+            <div class="infographic-row">
+              <div class="infographic-icon">🏛️</div>
+              <div class="infographic-text">
+                <strong class="english-only">4 · The community decides next steps</strong>
+                <strong class="tagalog-only" style="display:none;">4 · Ang komunidad ang magpapasya</strong>
+                <span class="english-only">A Community Management Council (CMC) is formed. From Week 12 onward, <em>the community decides</em> what happens — not us.</span>
+                <span class="tagalog-only" style="display:none;">Mabubuo ang Community Management Council (CMC). Mula Linggo 12, <em>ang komunidad ang magpapasya</em> ng susunod na hakbang — hindi kami.</span>
+              </div>
+            </div>
+            <div class="infographic-arrow">↓</div>
+
+            <div class="infographic-row">
+              <div class="infographic-icon">🎯</div>
+              <div class="infographic-text">
+                <strong class="english-only">5 · We build something that stays</strong>
+                <strong class="tagalog-only" style="display:none;">5 · Mag-iiwan tayo ng magtatagal</strong>
+                <span class="english-only">A local Community OS — your own tools, your own council, your own evidence — that continues after our 21 weeks are done.</span>
+                <span class="tagalog-only" style="display:none;">Isang lokal na Komunidad OS — inyong sariling kagamitan, konseho, at patunay — na magpapatuloy pagkatapos ng 21 linggo.</span>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div class="dashboard-card">
@@ -1527,6 +1813,20 @@
           </ol>
         </div>
       </div>
+
+      <!-- EMBEDDED COMMUNITY DECK -->
+      <div class="embedded-deck">
+        <div class="embedded-deck-header">
+          <div>
+            <h3 style="font-family:var(--font-serif); font-size:20px; color:var(--navy); font-weight:600;" class="english-only">🎓 Community OS — for Community</h3>
+            <h3 style="font-family:var(--font-serif); font-size:20px; color:var(--navy); font-weight:600; display:none;" class="tagalog-only">🎓 Komunidad OS — para sa Komunidad</h3>
+            <p style="font-size:12px; color:var(--text-muted);" class="english-only">An accessible introduction to Community OS for community members, youth, and leaders.</p>
+            <p style="font-size:12px; color:var(--text-muted); display:none;" class="tagalog-only">Simpleng panimula sa Komunidad OS para sa miyembro ng komunidad, kabataan, at mga lider.</p>
+          </div>
+          <a href="https://docs.google.com/presentation/d/1v-aEmZ7NcE3D9MVaMyMHxiBCt8XqUrSw/edit?usp=sharing" target="_blank" style="padding:8px 14px; background:var(--teal); color:var(--white); text-decoration:none; border-radius:6px; font-size:12px; font-weight:600;"><span class="english-only">Open in new tab ↗</span><span class="tagalog-only" style="display:none;">Buksan sa bagong tab ↗</span></a>
+        </div>
+        <iframe src="https://docs.google.com/presentation/d/1v-aEmZ7NcE3D9MVaMyMHxiBCt8XqUrSw/embed?start=false&loop=false&delayms=3000" frameborder="0" allowfullscreen></iframe>
+      </div>
     </div>
 
   </div>
@@ -1537,27 +1837,6 @@
     <p class="section-subtitle">All times in Manila Time (GMT+8).</p>
     <iframe src="https://calendar.google.com/calendar/embed?src=c_7e29b742c69cc115831596ff633ae64a5aff902c9736bc0cb965930ed30cb4b1%40group.calendar.google.com&ctz=Asia%2FManila"
             style="border: 1px solid var(--border); border-radius:var(--radius-lg); width:100%; height:650px;" frameborder="0" scrolling="no"></iframe>
-  </div>
-
-  <!-- ========== PRESENTATIONS ========== -->
-  <div id="presentations-section" class="content-view">
-    <h2 class="section-title" style="margin-bottom: 32px;">🎤 Project Presentations</h2>
-
-    <div class="presentation-grid">
-      <div class="presentation-card">
-        <div class="presentation-icon">🎓</div>
-        <div class="presentation-title">Community OS — for Community</div>
-        <div class="presentation-description">Accessible introduction for community members, youth, and local leaders.</div>
-        <a href="https://docs.google.com/presentation/d/1v-aEmZ7NcE3D9MVaMyMHxiBCt8XqUrSw/edit?usp=sharing" target="_blank" class="presentation-btn">📺 Open presentation ↗</a>
-      </div>
-
-      <div class="presentation-card">
-        <div class="presentation-icon">🔬</div>
-        <div class="presentation-title">Community OS — for Research Team &amp; Institutional Stakeholders</div>
-        <div class="presentation-description">Methodology, timelines, and data frameworks for field researchers, LGU, and NGO partners.</div>
-        <a href="https://docs.google.com/presentation/d/1a-zJowqADT-xIO2BXtd6LjImyUtPLZEr/edit?usp=sharing" target="_blank" class="presentation-btn">📺 Open presentation ↗</a>
-      </div>
-    </div>
   </div>
 
   <!-- ========== RESOURCES ========== -->
@@ -1579,12 +1858,12 @@
       </div>
 
       <div class="links-group">
+        <div class="link-item"><div class="link-label">📋 Master Index</div><a href="https://docs.google.com/document/d/1fmGw-u7LLdFyinoGWHblv40OA6_wy1qp/edit?usp=drive_link" target="_blank">00 · Toolkit Index ↗</a></div>
         <div class="link-item"><div class="link-label">🎤 Presentations</div><a href="https://docs.google.com/presentation/d/1v-aEmZ7NcE3D9MVaMyMHxiBCt8XqUrSw/edit?usp=sharing" target="_blank">cOS — Community deck ↗</a></div>
-        <div class="link-item"><div class="link-label">🎤 Presentations</div><a href="https://docs.google.com/presentation/d/1a-zJowqADT-xIO2BXtd6LjImyUtPLZEr/edit?usp=sharing" target="_blank">cOS — Research team &amp; institutional deck ↗</a></div>
+        <div class="link-item"><div class="link-label">🎤 Presentations</div><a href="https://docs.google.com/presentation/d/1a-zJowqADT-xIO2BXtd6LjImyUtPLZEr/edit?usp=sharing" target="_blank">cOS — Research team deck ↗</a></div>
         <div class="link-item"><div class="link-label">📅 Calendar</div><a href="https://calendar.google.com/calendar/embed?src=c_7e29b742c69cc115831596ff633ae64a5aff902c9736bc0cb965930ed30cb4b1%40group.calendar.google.com&ctz=Asia%2FManila" target="_blank">Community events calendar ↗</a></div>
         <div class="link-item"><div class="link-label">💰 Capital framework</div><a href="https://sdgprivatefinance.undp.org/aligning-capital" target="_blank">UNDP Aligning Capital ↗</a></div>
         <div class="link-item"><div class="link-label">🎨 Design thinking</div><a href="https://dschool.stanford.edu/innovate/tools" target="_blank">Stanford d.school tools ↗</a></div>
-        <div class="link-item"><div class="link-label">📄 Methodology</div><a href="#">Field Research Methodology v2.0</a></div>
       </div>
     </div>
 
@@ -1600,17 +1879,20 @@
 
       <table class="doc-table">
         <thead>
-          <tr><th>Document</th><th>Type</th><th>Status</th><th>Link</th></tr>
+          <tr><th>Code</th><th>Document</th><th>Type</th><th>Status</th><th>Link</th></tr>
         </thead>
         <tbody>
-          <tr><td>Field Research Methodology v2.0</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="#" style="color:var(--teal);">Open</a></td></tr>
-          <tr><td>ECSOM Canvas Narrative v2 (March 2026)</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="#" style="color:var(--teal);">Open</a></td></tr>
-          <tr><td>Photovoice Co-Design Methodology v1.0</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="#" style="color:var(--teal);">Open</a></td></tr>
-          <tr><td>Community Psychology Reference Document</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="#" style="color:var(--teal);">Open</a></td></tr>
-          <tr><td>Consolidated Academic References (~45 APA)</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="#" style="color:var(--teal);">Open</a></td></tr>
-          <tr><td>Community OS Glossary (~80 terms)</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="#" style="color:var(--teal);">Open</a></td></tr>
-          <tr><td>UNDP Aligning Capital framework ↗</td><td><span class="badge badge-sky">External</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="https://sdgprivatefinance.undp.org/aligning-capital" target="_blank" style="color:var(--teal);">Open ↗</a></td></tr>
-          <tr><td>Stanford d.school design-thinking tools ↗</td><td><span class="badge badge-sky">External</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="https://dschool.stanford.edu/innovate/tools" target="_blank" style="color:var(--teal);">Open ↗</a></td></tr>
+          <tr><td><span class="doc-code">00</span></td><td>Toolkit Index</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="https://docs.google.com/document/d/1fmGw-u7LLdFyinoGWHblv40OA6_wy1qp/edit?usp=drive_link" target="_blank" style="color:var(--teal);">Open ↗</a></td></tr>
+          <tr><td><span class="doc-code">16</span></td><td>Primer — Design Thinking</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="https://docs.google.com/document/d/1gDheIqgH69nGDwbwm709w5XWDnFQuxwl/edit?usp=drive_link" target="_blank" style="color:var(--teal);">Open ↗</a></td></tr>
+          <tr><td><span class="doc-code">17</span></td><td>Primer — Trauma-Responsive Research</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="https://docs.google.com/document/d/1BIPHOzbkP9Yznt2aOL6okUiWq9cFfd9O/edit?usp=drive_link" target="_blank" style="color:var(--teal);">Open ↗</a></td></tr>
+          <tr><td><span class="doc-code">—</span></td><td>Field Research Methodology v2.0</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="#" style="color:var(--teal);">Open</a></td></tr>
+          <tr><td><span class="doc-code">—</span></td><td>ECSOM Canvas Narrative v2 (March 2026)</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="#" style="color:var(--teal);">Open</a></td></tr>
+          <tr><td><span class="doc-code">—</span></td><td>Photovoice Co-Design Methodology v1.0</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="#" style="color:var(--teal);">Open</a></td></tr>
+          <tr><td><span class="doc-code">—</span></td><td>Community Psychology Reference Document</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="#" style="color:var(--teal);">Open</a></td></tr>
+          <tr><td><span class="doc-code">—</span></td><td>Consolidated Academic References (~45 APA)</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="#" style="color:var(--teal);">Open</a></td></tr>
+          <tr><td><span class="doc-code">—</span></td><td>Community OS Glossary (~80 terms)</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="#" style="color:var(--teal);">Open</a></td></tr>
+          <tr><td><span class="doc-code">ext</span></td><td>UNDP Aligning Capital framework</td><td><span class="badge badge-sky">External</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="https://sdgprivatefinance.undp.org/aligning-capital" target="_blank" style="color:var(--teal);">Open ↗</a></td></tr>
+          <tr><td><span class="doc-code">ext</span></td><td>Stanford d.school design-thinking tools</td><td><span class="badge badge-sky">External</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="https://dschool.stanford.edu/innovate/tools" target="_blank" style="color:var(--teal);">Open ↗</a></td></tr>
         </tbody>
       </table>
     </div>
@@ -1621,27 +1903,30 @@
         <div class="doc-category-icon">🧪</div>
         <div>
           <div class="doc-category-title">Research Instruments</div>
-          <div class="doc-category-sub">Data collection tools, validation workbooks, and participatory session materials.</div>
+          <div class="doc-category-sub">Worksheets, validation tools, and participatory session materials. Numbered per Toolkit Index.</div>
         </div>
       </div>
 
       <table class="doc-table">
         <thead>
-          <tr><th>Document</th><th>Type</th><th>Status</th><th>Link</th></tr>
+          <tr><th>Code</th><th>Document</th><th>Type</th><th>Status</th><th>Link</th></tr>
         </thead>
         <tbody>
-          <tr><td>CEESAM IO Matrix — Isabela 240×240</td><td><span class="badge badge-sky">Excel</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="#" style="color:var(--teal);">Open</a></td></tr>
-          <tr><td>CEESAM Validation Workbook v2 (9 sheets)</td><td><span class="badge badge-sky">Excel</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="#" style="color:var(--teal);">Open</a></td></tr>
-          <tr><td>Consolidated Research Instruments (33 sheets)</td><td><span class="badge badge-sky">Excel</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="#" style="color:var(--teal);">Open</a></td></tr>
-          <tr><td>Participant Worksheets (bilingual)</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="#" style="color:var(--teal);">Open</a></td></tr>
-          <tr><td>WS A1 — Photovoice Worksheet</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="#" style="color:var(--teal);">Open</a></td></tr>
-          <tr><td>WS B1 — Root Cause Tree</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="#" style="color:var(--teal);">Open</a></td></tr>
-          <tr><td>WS B2 — KII Guide</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="#" style="color:var(--teal);">Open</a></td></tr>
-          <tr><td>WS C1 — Governance Mapping</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="#" style="color:var(--teal);">Open</a></td></tr>
-          <tr><td>WS D1 — Circular Economy Collage</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="#" style="color:var(--teal);">Open</a></td></tr>
-          <tr><td>WS E1 — CEESAM Validation Sheet</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="#" style="color:var(--teal);">Open</a></td></tr>
-          <tr><td>WS F1 — Knowledge Mobilisation</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="#" style="color:var(--teal);">Open</a></td></tr>
-          <tr><td>Field Researcher Journals (Reflexivity)</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="#" style="color:var(--teal);">Open</a></td></tr>
+          <tr><td><span class="doc-code">03</span></td><td>WS A1 — Photovoice</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="https://docs.google.com/document/d/1NQJBKFl-qYhPKgDFPqvQBC-f45uWgWwP/edit?usp=drive_link" target="_blank" style="color:var(--teal);">Open ↗</a></td></tr>
+          <tr><td><span class="doc-code">04</span></td><td>WS B1 — Root Cause Tree</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="https://docs.google.com/document/d/1LMZXLIOojvHPY45aDoXdGUpZK7uURdfX/edit?usp=drive_link" target="_blank" style="color:var(--teal);">Open ↗</a></td></tr>
+          <tr><td><span class="doc-code">04B</span></td><td>WS — Iceberg Model</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="https://docs.google.com/document/d/1uB68s9eX8pP6NwPa1bDoF9PoioD1N-Vh/edit?usp=drive_link" target="_blank" style="color:var(--teal);">Open ↗</a></td></tr>
+          <tr><td><span class="doc-code">04C</span></td><td>WS — Causal Loop Diagram</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="https://docs.google.com/document/d/1j54Gcb1aeJCDB8JUX8RVmTaIyjZ1ihzO/edit?usp=drive_link" target="_blank" style="color:var(--teal);">Open ↗</a></td></tr>
+          <tr><td><span class="doc-code">05</span></td><td>WS B2 — KII Guide (Multi-Stakeholder)</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="https://docs.google.com/document/d/1I3EgF_YTsIgZN2yREzrpJPAlzozw1vRR/edit?usp=drive_link" target="_blank" style="color:var(--teal);">Open ↗</a></td></tr>
+          <tr><td><span class="doc-code">05B</span></td><td>WS FGD Guides — Multi-Cohort</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="https://docs.google.com/document/d/1rQ6OaGs-bt-rmBBtZWufloAUZr5PGMpE/edit?usp=drive_link" target="_blank" style="color:var(--teal);">Open ↗</a></td></tr>
+          <tr><td><span class="doc-code">06</span></td><td>WS C1 — Governance Mapping</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="https://docs.google.com/document/d/1VfbM3Ui2OWmH2BuN5zLUBTsLpjb9ubiR/edit?usp=drive_link" target="_blank" style="color:var(--teal);">Open ↗</a></td></tr>
+          <tr><td><span class="doc-code">06B</span></td><td>WS — IAD Framework</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="https://docs.google.com/document/d/1BoBx1RmOst0skw2wi-Uq5QdO2_Gkebw1/edit?usp=drive_link" target="_blank" style="color:var(--teal);">Open ↗</a></td></tr>
+          <tr><td><span class="doc-code">07</span></td><td>WS D1 — Circular Economy</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="https://docs.google.com/document/d/1Rdut8cBPQkQ4X1leJ0vX080k2jOoEjgn/edit?usp=drive_link" target="_blank" style="color:var(--teal);">Open ↗</a></td></tr>
+          <tr><td><span class="doc-code">07B</span></td><td>WS — Pentahelix Action</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="https://docs.google.com/document/d/1qosnpdz_-v6tyLWZipWJViOM7AMTtDTM/edit?usp=drive_link" target="_blank" style="color:var(--teal);">Open ↗</a></td></tr>
+          <tr><td><span class="doc-code">08</span></td><td>WS E1 — CEESAM Validation</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="https://docs.google.com/document/d/1yW0t1dOU0e9QlTfqxfZ0cgnzLoJKpZge/edit?usp=drive_link" target="_blank" style="color:var(--teal);">Open ↗</a></td></tr>
+          <tr><td><span class="doc-code">09</span></td><td>WS F1 — Knowledge Mobilisation</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="https://docs.google.com/document/d/1MVG6DZjYvhr_7RadNyJ57Fc9XTCbP_GX/edit?usp=drive_link" target="_blank" style="color:var(--teal);">Open ↗</a></td></tr>
+          <tr><td><span class="doc-code">—</span></td><td>CEESAM IO Matrix — Isabela 240×240</td><td><span class="badge badge-sky">Excel</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="#" style="color:var(--teal);">Open</a></td></tr>
+          <tr><td><span class="doc-code">—</span></td><td>CEESAM Validation Workbook v2 (9 sheets)</td><td><span class="badge badge-sky">Excel</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="#" style="color:var(--teal);">Open</a></td></tr>
+          <tr><td><span class="doc-code">—</span></td><td>Field Researcher Journals (Reflexivity)</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="#" style="color:var(--teal);">Open</a></td></tr>
         </tbody>
       </table>
     </div>
@@ -1658,20 +1943,19 @@
 
       <table class="doc-table">
         <thead>
-          <tr><th>Document</th><th>Type</th><th>Status</th><th>Link</th></tr>
+          <tr><th>Code</th><th>Document</th><th>Type</th><th>Status</th><th>Link</th></tr>
         </thead>
         <tbody>
-          <tr><td>FPIC Kit (bilingual)</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="#" style="color:var(--teal);">Open</a></td></tr>
-          <tr><td>MOA Template</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="#" style="color:var(--teal);">Open</a></td></tr>
-          <tr><td>Field Researcher TOR</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="#" style="color:var(--teal);">Open</a></td></tr>
-          <tr><td>Project Management Plan</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="#" style="color:var(--teal);">Open</a></td></tr>
-          <tr><td>20-Week Gantt Chart</td><td><span class="badge badge-sky">Excel</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="#" style="color:var(--teal);">Open</a></td></tr>
-          <tr><td>Milestone Gate Tracker</td><td><span class="badge badge-sky">Excel</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="#" style="color:var(--teal);">Open</a></td></tr>
-          <tr><td>Checklist — Administrative Kit</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="#" style="color:var(--teal);">Open</a></td></tr>
-          <tr><td>Checklist — Research Tools</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="#" style="color:var(--teal);">Open</a></td></tr>
-          <tr><td>Checklist — Workshop Materials</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="#" style="color:var(--teal);">Open</a></td></tr>
-          <tr><td>Checklist — Personal Safety</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="#" style="color:var(--teal);">Open</a></td></tr>
-          <tr><td>Pentahelix Action Workshop — Isabela</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="#" style="color:var(--teal);">Open</a></td></tr>
+          <tr><td><span class="doc-code">01</span></td><td>FPIC Kit (bilingual)</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="https://docs.google.com/document/d/1OxaTWl5M98LYL4wTlErrsEhGorL7odu2/edit?usp=drive_link" target="_blank" style="color:var(--teal);">Open ↗</a></td></tr>
+          <tr><td><span class="doc-code">02</span></td><td>MOU Template</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="https://docs.google.com/document/d/1fJItae81yjBYRrHfCD127YW2fJ54yAsW/edit?usp=drive_link" target="_blank" style="color:var(--teal);">Open ↗</a></td></tr>
+          <tr><td><span class="doc-code">—</span></td><td>Field Researcher TOR</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="#" style="color:var(--teal);">Open</a></td></tr>
+          <tr><td><span class="doc-code">—</span></td><td>Project Management Plan</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="#" style="color:var(--teal);">Open</a></td></tr>
+          <tr><td><span class="doc-code">—</span></td><td>21-Week Gantt Chart</td><td><span class="badge badge-sky">Excel</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="#" style="color:var(--teal);">Open</a></td></tr>
+          <tr><td><span class="doc-code">—</span></td><td>Milestone Gate Tracker</td><td><span class="badge badge-sky">Excel</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="#" style="color:var(--teal);">Open</a></td></tr>
+          <tr><td><span class="doc-code">—</span></td><td>Checklist — Administrative Kit</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="#" style="color:var(--teal);">Open</a></td></tr>
+          <tr><td><span class="doc-code">—</span></td><td>Checklist — Research Tools</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="#" style="color:var(--teal);">Open</a></td></tr>
+          <tr><td><span class="doc-code">—</span></td><td>Checklist — Workshop Materials</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="#" style="color:var(--teal);">Open</a></td></tr>
+          <tr><td><span class="doc-code">—</span></td><td>Checklist — Personal Safety</td><td><span class="badge badge-navy">Word</span></td><td><span class="badge badge-teal">Current</span></td><td><a href="#" style="color:var(--teal);">Open</a></td></tr>
         </tbody>
       </table>
     </div>
@@ -1686,7 +1970,7 @@
     <span style="font-size:20px; flex-shrink:0;">⚠️</span>
     <div>
       <p style="font-weight:700; color:var(--navy); margin-bottom:4px;">Ethical Review Gate — Non-Negotiable</p>
-      <p style="font-size:13px; color:var(--text-mid); line-height:1.6;">No primary data collection until written ethical clearance is received. Bound by IPRA (RA 8371), FPIC, and the SKR Institute ethical review pathway. Co-authorship is a right, not a bonus.</p>
+      <p style="font-size:13px; color:var(--text-mid); line-height:1.6;">No primary data collection until written ethical clearance is received. Bound by IPRA (RA 8371), FPIC, and the ethical review pathway. Co-authorship is a right, not a bonus.</p>
     </div>
   </div>
 </div>
@@ -1694,22 +1978,16 @@
 <!-- FOOTER -->
 <footer>
   <p><strong>Community OS — Research Hub &amp; Dashboard</strong> | Isabela de Basilan Pilot</p>
-  <p>
-    <a href="https://www.thelab.ph/" target="_blank">LAB.PH</a> · Roxas-Kalaw Foundation · SKR Institute
-  </p>
+  <p><a href="https://www.thelab.ph/" target="_blank">LAB.PH</a></p>
   <p><a href="https://isabelacity.gov.ph/about-us/" target="_blank">Isabela de Basilan, Basilan Province, BARMM</a></p>
-  <p style="font-size:11px; opacity:0.7; margin-top:16px;">
-    Participatory • Emancipatory • Co-Authored with Indigenous Communities (Yakan, Sama Banguingui, Sama Dilaut, Tausug)
-  </p>
-  <p style="font-size:11px; opacity:0.6; margin-top:8px;">Built on PEAR, ECSOM, Sikolohiyang Pilipino, and Community Psychology frameworks. April 2026.</p>
 </footer>
 
 <script>
-  function switchSection(section) {
+  function switchSection(section, ev) {
     document.querySelectorAll('.content-view').forEach(v => v.classList.remove('active'));
     document.querySelectorAll('.top-nav-tab').forEach(tab => tab.classList.remove('active'));
     document.getElementById(section + '-section').classList.add('active');
-    if (event && event.target) event.target.classList.add('active');
+    if (ev && ev.target) ev.target.classList.add('active');
 
     const roleSelector = document.getElementById('role-selector');
     if (section === 'dashboard') {
@@ -1720,16 +1998,13 @@
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  // For programmatic section switching (e.g. from "Where to go next" tiles)
   function switchSectionByName(section) {
     document.querySelectorAll('.content-view').forEach(v => v.classList.remove('active'));
     document.querySelectorAll('.top-nav-tab').forEach(tab => tab.classList.remove('active'));
     document.getElementById(section + '-section').classList.add('active');
-    // find matching tab button and activate
     document.querySelectorAll('.top-nav-tab').forEach(tab => {
-      if (tab.getAttribute('onclick') && tab.getAttribute('onclick').includes("'" + section + "'")) {
-        tab.classList.add('active');
-      }
+      const oc = tab.getAttribute('onclick');
+      if (oc && oc.includes("'" + section + "'")) tab.classList.add('active');
     });
     const roleSelector = document.getElementById('role-selector');
     if (section === 'dashboard') {
@@ -1740,11 +2015,11 @@
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  function switchRole(role) {
+  function switchRole(role, ev) {
     document.querySelectorAll('.role-view').forEach(v => v.classList.remove('active'));
     document.querySelectorAll('.role-btn').forEach(btn => btn.classList.remove('active'));
     document.getElementById(role + '-view').classList.add('active');
-    if (event && event.target) event.target.classList.add('active');
+    if (ev && ev.target) ev.target.classList.add('active');
 
     const tagLangBtn = document.getElementById('taglang');
     if (role === 'community') {
