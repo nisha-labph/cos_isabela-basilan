@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Isabela de Basilan — 5 Kawman Zones · Community OS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --teal-50:  #E1F5EE; --teal-100: #9FE1CB; --teal-400: #1D9E75;
+    --teal-600: #0F6E56; --teal-800: #085041; --teal-900: #04342C;
+    --blue-50:  #E6F1FB; --blue-100: #B5D4F4; --blue-400: #378ADD;
+    --blue-600: #185FA5; --blue-800: #0C447C; --blue-900: #042C53;
+    --amber-50: #FAEEDA; --amber-100: #FAC775; --amber-400: #EF9F27;
+    --amber-600: #BA7517; --amber-800: #854F0B; --amber-900: #412402;
+    --coral-50: #FAECE7; --coral-100: #F5C4B3; --coral-400: #D85A30;
+    --coral-600: #993C1D; --coral-800: #712B13; --coral-900: #4A1B0C;
+    --green-50: #EAF3DE; --green-100: #C0DD97; --green-400: #639922;
+    --green-600: #3B6D11; --green-800: #27500A; --green-900: #173404;
+    --gray-50:  #F1EFE8; --gray-100: #D3D1C7; --gray-400: #888780;
+    --gray-600: #5F5E5A; --gray-800: #444441; --gray-900: #2C2C2A;
+
+    --bg: #F7F6F2;
+    --surface: #FFFFFF;
+    --border: rgba(60,58,50,0.12);
+    --border-strong: rgba(60,58,50,0.22);
+    --text: #1C1B18;
+    --text-secondary: #5A5852;
+    --text-muted: #8C8A84;
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 14px;
+    --radius-xl: 20px;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.07), 0 1px 2px rgba(0,0,0,0.05);
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.05);
+  }
+
+  body {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 24px 16px 48px;
+    line-height: 1.6;
+  }
+
+  .page {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  /* HEADER */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 24px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+  }
+  .header-left {}
+  .programme-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--teal-600);
+    background: var(--teal-50);
+    border: 1px solid var(--teal-100);
+    border-radius: 999px;
+    padding: 3px 10px;
+    margin-bottom: 10px;
+  }
+  .programme-tag::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--teal-400);
+  }
+  .page-title {
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.2;
+    margin-bottom: 4px;
+  }
+  .page-sub {
+    font-size: 14px;
+    color: var(--text-secondary);
+  }
+  .header-stats {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 12px 18px;
+    min-width: 120px;
+    box-shadow: var(--shadow-sm);
+  }
+  .stat-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 3px; }
+  .stat-value { font-size: 20px; font-weight: 600; color: var(--text); }
+  .stat-unit { font-size: 11px; color: var(--text-muted); font-weight: 400; }
+
+  /* MAIN LAYOUT */
+  .main-grid {
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 20px;
+    align-items: start;
+  }
+  @media (max-width: 900px) {
+    .main-grid { grid-template-columns: 1fr; }
+  }
+
+  /* MAP PANEL */
+  .map-panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+  }
+  .map-panel svg {
+    display: block;
+    width: 100%;
+  }
+
+  /* LEGEND */
+  .legend-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 16px;
+    padding: 14px 20px;
+    border-top: 1px solid var(--border);
+    background: var(--bg);
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11.5px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    border-radius: var(--radius-sm);
+    padding: 3px 6px;
+    transition: background 0.15s;
+  }
+  .legend-item:hover { background: var(--gray-50); }
+  .legend-item.active { background: var(--gray-100); font-weight: 500; color: var(--text); }
+  .legend-swatch {
+    width: 11px; height: 11px;
+    border-radius: 3px;
+    flex-shrink: 0;
+  }
+
+  /* RIGHT PANEL */
+  .right-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  /* DETAIL CARD */
+  .detail-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    transition: border-color 0.2s;
+  }
+  .detail-card-header {
+    padding: 16px 20px 14px;
+    border-bottom: 1px solid var(--border);
+  }
+  .detail-card-kicker {
+    font-size: 10.5px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+  }
+  .detail-card-title {
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 3px;
+  }
+  .detail-card-role {
+    font-size: 12.5px;
+    color: var(--text-secondary);
+  }
+  .detail-pop-badge {
+    display: inline-block;
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-family: 'DM Mono', monospace;
+    font-weight: 500;
+    margin-top: 8px;
+  }
+  .detail-body {
+    padding: 16px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .detail-section {}
+  .detail-section-title {
+    font-size: 10.5px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--text-muted);
+    margin-bottom: 7px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid var(--border);
+  }
+  .tag {
+    display: inline-block;
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 999px;
+    border: 1px solid;
+    margin: 2px 3px 2px 0;
+    line-height: 1.4;
+  }
+  .resource-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--text-secondary);
+    padding: 4px 0;
+    border-bottom: 1px solid var(--border);
+    line-height: 1.5;
+  }
+  .resource-item:last-child { border-bottom: none; }
+  .resource-icon {
+    font-size: 13px;
+    margin-top: 1px;
+    flex-shrink: 0;
+  }
+  .brgy-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+  .brgy-pill {
+    font-size: 10.5px;
+    background: var(--gray-50);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 2px 7px;
+    color: var(--text-secondary);
+    font-family: 'DM Mono', monospace;
+  }
+  .econ-text {
+    font-size: 12px;
+    color: var(--text-secondary);
+    line-height: 1.65;
+  }
+  .multiplier-badge {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 2px 8px;
+    border-radius: var(--radius-sm);
+    margin-left: 4px;
+    vertical-align: middle;
+  }
+  .cadt-box {
+    background: var(--amber-50);
+    border: 1px solid var(--amber-100);
+    border-radius: var(--radius-sm);
+    padding: 7px 10px;
+    font-size: 11px;
+    color: var(--amber-800);
+    line-height: 1.5;
+  }
+  .cadt-box strong { font-weight: 600; }
+
+  /* IP LEGEND CARD */
+  .ip-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 16px 20px;
+    box-shadow: var(--shadow-sm);
+  }
+  .ip-card-title {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+  }
+  .ip-group {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .ip-group:last-child { border-bottom: none; }
+  .ip-swatch {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    margin-top: 5px;
+    flex-shrink: 0;
+  }
+  .ip-name { font-size: 12.5px; font-weight: 500; color: var(--text); }
+  .ip-desc { font-size: 11px; color: var(--text-muted); margin-top: 1px; }
+  .ip-share {
+    margin-left: auto;
+    font-size: 11px;
+    font-family: 'DM Mono', monospace;
+    font-weight: 500;
+    color: var(--text-secondary);
+    white-space: nowrap;
+    padding-left: 8px;
+  }
+
+  /* PLACEHOLDER */
+  .placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 24px;
+    text-align: center;
+    gap: 10px;
+  }
+  .placeholder-icon {
+    font-size: 32px;
+    opacity: 0.3;
+  }
+  .placeholder-text {
+    font-size: 13px;
+    color: var(--text-muted);
+    max-width: 220px;
+    line-height: 1.6;
+  }
+
+  /* ZONE HOVER/ACTIVE */
+  .kawman-zone {
+    cursor: pointer;
+    transition: opacity 0.15s, filter 0.15s;
+  }
+  .kawman-zone:hover { opacity: 0.88; }
+  .kawman-zone.active path,
+  .kawman-zone.active ellipse { stroke-width: 3; filter: drop-shadow(0 0 6px rgba(0,0,0,0.18)); }
+
+  /* FOOTER */
+  .footer {
+    margin-top: 32px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .footer-left { font-size: 11px; color: var(--text-muted); line-height: 1.7; }
+  .footer-logos {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+  .footer-logo-pill {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 999px;
+    border: 1px solid var(--border-strong);
+    color: var(--text-secondary);
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-left">
+      <div class="programme-tag">Community OS · Pilot Community #1</div>
+      <h1 class="page-title">Isabela de Basilan<br>5 Kawman Zones</h1>
+      <p class="page-sub">Basilan Province · BARMM · Philippines &nbsp;·&nbsp; Click any zone to explore</p>
+    </div>
+    <div class="header-stats">
+      <div class="stat-card">
+        <div class="stat-label">Total pop.</div>
+        <div class="stat-value">134,876 <span class="stat-unit">2020</span></div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Barangays</div>
+        <div class="stat-value">45</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Kawmans</div>
+        <div class="stat-value">5</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Land area</div>
+        <div class="stat-value">~241 <span class="stat-unit">km²</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN GRID -->
+  <div class="main-grid">
+
+    <!-- MAP PANEL -->
+    <div class="map-panel">
+      <svg id="mainMap" viewBox="0 0 720 520" xmlns="http://www.w3.org/2000/svg">
+
+        <!-- Sea background -->
+        <defs>
+          <pattern id="seaPat" width="18" height="18" patternUnits="userSpaceOnUse" patternTransform="rotate(30)">
+            <line x1="0" y1="9" x2="18" y2="9" stroke="#B8D8E8" stroke-width="0.6" opacity="0.5"/>
+          </pattern>
+        </defs>
+        <rect width="720" height="520" fill="#D4EBF5"/>
+        <rect width="720" height="520" fill="url(#seaPat)" opacity="0.6"/>
+
+        <!-- Basilan Strait label -->
+        <text x="80" y="60" font-family="'DM Sans', sans-serif" font-size="10" fill="#7AAABF" font-style="italic" letter-spacing="1">Basilan Strait</text>
+        <text x="360" y="28" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="10" fill="#7AAABF" font-style="italic">← Zamboanga City (26 km)</text>
+
+        <!-- Compass rose -->
+        <g transform="translate(52, 460)">
+          <circle cx="0" cy="0" r="22" fill="white" fill-opacity="0.75" stroke="#C8C6BE" stroke-width="0.8"/>
+          <text x="0" y="-8" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="10" font-weight="600" fill="#444">N</text>
+          <line x1="0" y1="-18" x2="0" y2="18" stroke="#999" stroke-width="0.8"/>
+          <line x1="-18" y1="0" x2="18" y2="0" stroke="#999" stroke-width="0.8"/>
+          <polygon points="0,-18 -4,-5 4,-5" fill="#333"/>
+          <polygon points="0,18 -4,5 4,5" fill="#ccc"/>
+        </g>
+
+        <!-- Scale / note -->
+        <text x="700" y="510" text-anchor="end" font-family="'DM Sans', sans-serif" font-size="9" fill="#9BA0A8" font-style="italic">Schematic representation · not to exact scale</text>
+
+        <!-- ═══════════════════════════════════ -->
+        <!-- MALAMAWI ISLAND (Kawman 1 annex) -->
+        <!-- ═══════════════════════════════════ -->
+        <g class="kawman-zone" id="zoneM" onclick="showKawman(1)">
+          <ellipse cx="560" cy="62" rx="120" ry="44"
+                   fill="#1D9E75" fill-opacity="0.72"
+                   stroke="#0F6E56" stroke-width="1.8"/>
+          <text x="560" y="55" text-anchor="middle" font-family="'DM Sans', sans-serif"
+                font-size="11" font-weight="600" fill="#04342C">Malamawi Island</text>
+          <text x="560" y="70" text-anchor="middle" font-family="'DM Sans', sans-serif"
+                font-size="9.5" fill="#085041">Sama Dilaut · Mangroves · ASEAN eco-tourism</text>
+        </g>
+
+        <!-- Channel -->
+        <path d="M 345 108 Q 450 90 530 100" fill="none" stroke="#93C5D8" stroke-width="10" stroke-linecap="round" opacity="0.5"/>
+        <text x="440" y="97" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="8.5" fill="#6AAABF" font-style="italic">Isabela Channel</text>
+
+        <!-- ═══════════════════════════════════ -->
+        <!-- KAWMAN 4 — West / Industrial (left) -->
+        <!-- ═══════════════════════════════════ -->
+        <g class="kawman-zone" id="zone4" onclick="showKawman(4)">
+          <path d="M 75 165 L 55 185 L 44 230 L 48 280 L 58 325 L 82 360 L 125 370 L 180 360 L 215 330 L 225 290 L 228 250 L 215 205 L 195 170 L 162 155 Z"
+                fill="#D85A30" fill-opacity="0.72"
+                stroke="#993C1D" stroke-width="1.8"/>
+          <!-- label -->
+          <text x="138" y="265" text-anchor="middle" font-family="'DM Sans', sans-serif"
+                font-size="12" font-weight="600" fill="#4A1B0C">Kawman 4</text>
+          <text x="138" y="280" text-anchor="middle" font-family="'DM Sans', sans-serif"
+                font-size="9.5" fill="#712B13">West · Industrial Core</text>
+          <!-- barangay dots -->
+          <circle cx="118" cy="215" r="3.5" fill="#712B13" opacity="0.85"/>
+          <text x="125" y="218" font-family="'DM Sans', sans-serif" font-size="8.5" fill="#4A1B0C">Aguada</text>
+          <circle cx="102" cy="242" r="3.5" fill="#712B13" opacity="0.85"/>
+          <text x="109" y="246" font-family="'DM Sans', sans-serif" font-size="8.5" fill="#4A1B0C">Tabuk</text>
+          <circle cx="125" cy="305" r="3.5" fill="#712B13" opacity="0.85"/>
+          <text x="132" y="308" font-family="'DM Sans', sans-serif" font-size="8.5" fill="#4A1B0C">Sumagdang</text>
+          <circle cx="162" cy="322" r="3.5" fill="#712B13" opacity="0.85"/>
+          <text x="169" y="325" font-family="'DM Sans', sans-serif" font-size="8.5" fill="#4A1B0C">Cabunbata</text>
+          <circle cx="82" cy="272" r="3.5" fill="#712B13" opacity="0.85"/>
+          <text x="89" y="276" font-family="'DM Sans', sans-serif" font-size="8.5" fill="#4A1B0C">Menzi</text>
+          <circle cx="155" cy="183" r="3.5" fill="#712B13" opacity="0.85"/>
+          <text x="162" y="186" font-family="'DM Sans', sans-serif" font-size="8.5" fill="#4A1B0C">Makiri</text>
+          <!-- multiplier badge -->
+          <rect x="86" y="180" width="54" height="15" rx="3" fill="#993C1D" fill-opacity="0.85"/>
+          <text x="113" y="191" text-anchor="middle" font-family="'DM Mono', monospace" font-size="9" fill="#FAECE7">×1.76 rubber</text>
+        </g>
+
+        <!-- ═══════════════════════════════════ -->
+        <!-- KAWMAN 1 — Coastal (top strip) -->
+        <!-- ═══════════════════════════════════ -->
+        <g class="kawman-zone" id="zone1" onclick="showKawman(1)">
+          <path d="M 75 165 L 162 155 L 195 170 L 285 158 L 325 138 L 345 108 L 300 90 L 250 86 L 196 92 L 148 104 L 108 120 L 75 138 Z"
+                fill="#1D9E75" fill-opacity="0.72"
+                stroke="#0F6E56" stroke-width="1.8"/>
+          <text x="210" y="123" text-anchor="middle" font-family="'DM Sans', sans-serif"
+                font-size="12" font-weight="600" fill="#04342C">Kawman 1</text>
+          <text x="210" y="137" text-anchor="middle" font-family="'DM Sans', sans-serif"
+                font-size="9.5" fill="#085041">Coastal · Logistics &amp; Aqua</text>
+          <!-- barangay dots -->
+          <circle cx="166" cy="112" r="3.5" fill="#085041" opacity="0.9"/>
+          <text x="172" y="115" font-family="'DM Sans', sans-serif" font-size="8.5" fill="#04342C">Marang-Marang</text>
+          <circle cx="252" cy="108" r="3.5" fill="#085041" opacity="0.9"/>
+          <text x="258" y="111" font-family="'DM Sans', sans-serif" font-size="8.5" fill="#04342C">Panigayan</text>
+          <circle cx="308" cy="120" r="3.5" fill="#085041" opacity="0.9"/>
+          <text x="314" y="123" font-family="'DM Sans', sans-serif" font-size="8.5" fill="#04342C">Carbon</text>
+          <circle cx="128" cy="126" r="3.5" fill="#085041" opacity="0.9"/>
+          <text x="134" y="129" font-family="'DM Sans', sans-serif" font-size="8.5" fill="#04342C">Lukbuton</text>
+          <circle cx="198" cy="130" r="3.5" fill="#085041" opacity="0.9"/>
+          <text x="204" y="133" font-family="'DM Sans', sans-serif" font-size="8.5" fill="#04342C">Diki</text>
+          <!-- mangrove icon area -->
+          <text x="86" y="132" font-family="'DM Sans', sans-serif" font-size="13" fill="#04342C" opacity="0.8">🌿</text>
+        </g>
+
+        <!-- ═══════════════════════════════════ -->
+        <!-- KAWMAN 2 — CBD (center) -->
+        <!-- ═══════════════════════════════════ -->
+        <g class="kawman-zone" id="zone2" onclick="showKawman(2)">
+          <path d="M 285 158 L 325 138 L 415 142 L 448 162 L 445 205 L 422 232 L 385 248 L 340 244 L 298 222 L 280 200 L 278 178 Z"
+                fill="#378ADD" fill-opacity="0.72"
+                stroke="#185FA5" stroke-width="1.8"/>
+          <text x="362" y="192" text-anchor="middle" font-family="'DM Sans', sans-serif"
+                font-size="12" font-weight="600" fill="#042C53">Kawman 2</text>
+          <text x="362" y="207" text-anchor="middle" font-family="'DM Sans', sans-serif"
+                font-size="9.5" fill="#0C447C">CBD · Finance &amp; Admin</text>
+          <!-- barangay dots -->
+          <circle cx="328" cy="168" r="3.5" fill="#0C447C" opacity="0.9"/>
+          <text x="334" y="171" font-family="'DM Sans', sans-serif" font-size="8.5" fill="#042C53">Marketsite</text>
+          <circle cx="396" cy="162" r="3.5" fill="#0C447C" opacity="0.9"/>
+          <text x="402" y="165" font-family="'DM Sans', sans-serif" font-size="8.5" fill="#042C53">Port Area ⚓</text>
+          <circle cx="300" cy="182" r="3.5" fill="#0C447C" opacity="0.9"/>
+          <text x="306" y="185" font-family="'DM Sans', sans-serif" font-size="8.5" fill="#042C53">Isabela Proper</text>
+          <circle cx="408" cy="220" r="3.5" fill="#0C447C" opacity="0.9"/>
+          <text x="414" y="223" font-family="'DM Sans', sans-serif" font-size="8.5" fill="#042C53">Seaside</text>
+          <circle cx="335" cy="232" r="3.5" fill="#0C447C" opacity="0.9"/>
+          <text x="341" y="235" font-family="'DM Sans', sans-serif" font-size="8.5" fill="#042C53">Santa Cruz</text>
+          <!-- fort marker -->
+          <rect x="286" y="156" width="38" height="13" rx="2" fill="#185FA5" fill-opacity="0.9"/>
+          <text x="305" y="166" text-anchor="middle" font-family="'DM Mono', monospace" font-size="8.5" fill="#E6F1FB">Fort 1848</text>
+        </g>
+
+        <!-- ═══════════════════════════════════ -->
+        <!-- KAWMAN 3 — East -->
+        <!-- ═══════════════════════════════════ -->
+        <g class="kawman-zone" id="zone3" onclick="showKawman(3)">
+          <path d="M 415 142 L 490 128 L 545 138 L 578 168 L 578 212 L 556 248 L 520 268 L 478 272 L 445 260 L 422 232 L 445 205 Z"
+                fill="#EF9F27" fill-opacity="0.72"
+                stroke="#BA7517" stroke-width="1.8"/>
+          <text x="496" y="205" text-anchor="middle" font-family="'DM Sans', sans-serif"
+                font-size="12" font-weight="600" fill="#412402">Kawman 3</text>
+          <text x="496" y="220" text-anchor="middle" font-family="'DM Sans', sans-serif"
+                font-size="9.5" fill="#633806">East · Urban Expansion</text>
+          <!-- barangay dots -->
+          <circle cx="482" cy="155" r="3.5" fill="#633806" opacity="0.9"/>
+          <text x="488" y="158" font-family="'DM Sans', sans-serif" font-size="8.5" fill="#412402">Begang</text>
+          <circle cx="545" cy="170" r="3.5" fill="#633806" opacity="0.9"/>
+          <text x="551" y="173" font-family="'DM Sans', sans-serif" font-size="8.5" fill="#412402">Tabiawan 🌾</text>
+          <circle cx="552" cy="232" r="3.5" fill="#633806" opacity="0.9"/>
+          <text x="558" y="235" font-family="'DM Sans', sans-serif" font-size="8.5" fill="#412402">Lanote</text>
+          <circle cx="465" cy="255" r="3.5" fill="#633806" opacity="0.9"/>
+          <text x="471" y="258" font-family="'DM Sans', sans-serif" font-size="8.5" fill="#412402">Sunrise Village</text>
+          <circle cx="450" cy="178" r="3.5" fill="#633806" opacity="0.9"/>
+          <text x="456" y="181" font-family="'DM Sans', sans-serif" font-size="8.5" fill="#412402">Baluno</text>
+          <!-- PEZA marker -->
+          <rect x="524" y="240" width="46" height="13" rx="2" fill="#BA7517" fill-opacity="0.9"/>
+          <text x="547" y="250" text-anchor="middle" font-family="'DM Mono', monospace" font-size="8.5" fill="#FAEEDA">PEZA site</text>
+        </g>
+
+        <!-- ═══════════════════════════════════ -->
+        <!-- KAWMAN 5 — Upland / South (bottom) -->
+        <!-- ═══════════════════════════════════ -->
+        <g class="kawman-zone" id="zone5" onclick="showKawman(5)">
+          <path d="M 125 370 L 180 360 L 215 330 L 228 250 L 298 222 L 340 244 L 385 248 L 422 232 L 445 260 L 478 272 L 472 310 L 452 352 L 418 388 L 368 408 L 302 412 L 238 398 L 185 378 Z"
+                fill="#639922" fill-opacity="0.72"
+                stroke="#3B6D11" stroke-width="1.8"/>
+          <text x="322" y="345" text-anchor="middle" font-family="'DM Sans', sans-serif"
+                font-size="12" font-weight="600" fill="#173404">Kawman 5</text>
+          <text x="322" y="360" text-anchor="middle" font-family="'DM Sans', sans-serif"
+                font-size="9.5" fill="#27500A">South · Upland · Yakan Territory</text>
+          <!-- barangay dots -->
+          <circle cx="234" cy="310" r="3.5" fill="#27500A" opacity="0.9"/>
+          <text x="240" y="313" font-family="'DM Sans', sans-serif" font-size="8.5" fill="#173404">Kumalarang 🧵</text>
+          <circle cx="275" cy="385" r="3.5" fill="#27500A" opacity="0.9"/>
+          <text x="281" y="388" font-family="'DM Sans', sans-serif" font-size="8.5" fill="#173404">Kapayawan</text>
+          <circle cx="345" cy="395" r="3.5" fill="#27500A" opacity="0.9"/>
+          <text x="351" y="398" font-family="'DM Sans', sans-serif" font-size="8.5" fill="#173404">Kapatagan Grande</text>
+          <circle cx="418" cy="370" r="3.5" fill="#27500A" opacity="0.9"/>
+          <text x="424" y="373" font-family="'DM Sans', sans-serif" font-size="8.5" fill="#173404">Masula</text>
+          <circle cx="186" cy="308" r="3.5" fill="#27500A" opacity="0.9"/>
+          <text x="192" y="311" font-family="'DM Sans', sans-serif" font-size="8.5" fill="#173404">Panunsulan</text>
+          <circle cx="295" cy="318" r="3.5" fill="#27500A" opacity="0.9"/>
+          <text x="301" y="321" font-family="'DM Sans', sans-serif" font-size="8.5" fill="#173404">Maligue</text>
+          <circle cx="370" cy="298" r="3.5" fill="#27500A" opacity="0.9"/>
+          <text x="376" y="301" font-family="'DM Sans', sans-serif" font-size="8.5" fill="#173404">Lumbang</text>
+          <!-- SCoPSA label -->
+          <rect x="150" y="336" width="58" height="13" rx="2" fill="#3B6D11" fill-opacity="0.88"/>
+          <text x="179" y="346" text-anchor="middle" font-family="'DM Mono', monospace" font-size="8.5" fill="#EAF3DE">SCoPSA zone</text>
+        </g>
+
+      </svg>
+
+      <!-- LEGEND BAR -->
+      <div class="legend-bar">
+        <div class="legend-item" id="leg1" onclick="showKawman(1)">
+          <div class="legend-swatch" style="background:#1D9E75;"></div>K1 · Coastal
+        </div>
+        <div class="legend-item" id="leg2" onclick="showKawman(2)">
+          <div class="legend-swatch" style="background:#378ADD;"></div>K2 · CBD
+        </div>
+        <div class="legend-item" id="leg3" onclick="showKawman(3)">
+          <div class="legend-swatch" style="background:#EF9F27;"></div>K3 · East
+        </div>
+        <div class="legend-item" id="leg4" onclick="showKawman(4)">
+          <div class="legend-swatch" style="background:#D85A30;"></div>K4 · West/Industrial
+        </div>
+        <div class="legend-item" id="leg5" onclick="showKawman(5)">
+          <div class="legend-swatch" style="background:#639922;"></div>K5 · Upland
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT PANEL -->
+    <div class="right-panel">
+
+      <!-- DETAIL CARD -->
+      <div class="detail-card" id="detailCard">
+        <div id="detailContent">
+          <div class="placeholder">
+            <div class="placeholder-icon">🗺</div>
+            <p class="placeholder-text">Click any kawman zone on the map to explore its barangays, peoples, and resources.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- IP GROUPS CARD -->
+      <div class="ip-card">
+        <div class="ip-card-title">Indigenous &amp; Ethnolinguistic Communities</div>
+
+        <div class="ip-group" style="cursor:pointer;" onclick="showKawman(5)">
+          <div class="ip-swatch" style="background:#3B6D11;"></div>
+          <div>
+            <div class="ip-name">Yakan</div>
+            <div class="ip-desc">Original inhabitants · inland farmers · weaving artisans · Kawman 5 primary</div>
+          </div>
+          <div class="ip-share">42.1%</div>
+        </div>
+
+        <div class="ip-group" style="cursor:pointer;" onclick="showKawman(2)">
+          <div class="ip-swatch" style="background:#185FA5;"></div>
+          <div>
+            <div class="ip-name">Tausug</div>
+            <div class="ip-desc">Maritime traders · IC market control · halal economy · urban commercial</div>
+          </div>
+          <div class="ip-share">23.4%</div>
+        </div>
+
+        <div class="ip-group" style="cursor:pointer;" onclick="showKawman(1)">
+          <div class="ip-swatch" style="background:#1D9E75;"></div>
+          <div>
+            <div class="ip-name">Sama / Sama Dilaut / Badjao</div>
+            <div class="ip-desc">Sea nomads · stilt houses · fisherfolk · Malamawi Island · Kawman 1 &amp; 3</div>
+          </div>
+          <div class="ip-share">10.4%</div>
+        </div>
+
+        <div class="ip-group">
+          <div class="ip-swatch" style="background:#888780;"></div>
+          <div>
+            <div class="ip-name">Chavacano / Bisaya</div>
+            <div class="ip-desc">Zamboangueño settlers · civil service · education · health · Kawman 2</div>
+          </div>
+          <div class="ip-share">20.5%</div>
+        </div>
+
+        <div class="ip-group" style="cursor:pointer;" onclick="showKawman(1)">
+          <div class="ip-swatch" style="background:#5DCAA5;"></div>
+          <div>
+            <div class="ip-name">Sama Banguingui</div>
+            <div class="ip-desc">Coastal trading community · 3 CADTs pending under NCIP</div>
+          </div>
+          <div class="ip-share">—</div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-left">
+      Community Operating System · Participatory Emancipatory Action Research (PEAR) · Pilot Community #1<br>
+      Data sources: PSA 2020 Census · HAPISABELA! Strategic Plan · ECSOM Canvas Narrative v2 (March 2026) · LGU BDIP · BFAR<br>
+      Map is a schematic representation. Authoritative boundary data: CPDO Isabela City. &nbsp;·&nbsp; Generated May 2026
+    </div>
+    <div class="footer-logos">
+      <div class="footer-logo-pill">LAB.PH</div>
+      <div class="footer-logo-pill">SKRI</div>
+      <div class="footer-logo-pill">Roxas-Kalaw Foundation</div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const kawmanData = {
+  1: {
+    name: "Kawman 1",
+    subtitle: "Coastal — Logistics & Aquaculture",
+    color: "#0F6E56",
+    textColor: "#04342C",
+    bgColor: "#E1F5EE",
+    borderColor: "#5DCAA5",
+    popBadgeBg: "#085041",
+    pop: "29,852",
+    multiplier: null,
+    barangays: [
+      "Marang-Marang (1)","Lukbuton (2)","Lampinigan Island (4)",
+      "Santa Barbara (5)","Diki (10)","Panigayan (13)","Carbon (15)","Tampalan (16)",
+      "+ Malamawi Island (annex)"
+    ],
+    peoples: [
+      {name:"Sama Dilaut (Badjao)", desc:"Sea nomads · stilt houses · primary coastal"},
+      {name:"Sama Banguingui", desc:"Coastal trading community"},
+      {name:"Tausug fisherfolk", desc:"IC market consolidators"}
+    ],
+    resources: [
+      {icon:"🌿", text:"Marang-Marang Mangrove Forest — EU-UNDP sustainable tourism target"},
+      {icon:"🐠", text:"Municipal fisheries — 2,457 registered fisherfolk"},
+      {icon:"🌊", text:"Seaweed farming — ~800 growers on Malamawi Island"},
+      {icon:"⛵", text:"Traditional kumpít boats — ASEAN Community-Based Tourism Award"},
+      {icon:"🦞", text:"Lobster aquaculture (USAID GEM legacy)"},
+      {icon:"🏖", text:"Malamawi White Beach & Malamawi Lighthouse (Parola)"},
+      {icon:"♻️", text:"Circular Waste Management pilot (EU-UNDP)"}
+    ],
+    economic: "Export gate & fisheries hub. Fisheries LQ = <strong>3.84</strong> (strongly specialized). Marang-Marang mangroves targeted under EU-UNDP Green Economy Partnership. Port Area serves as the primary inter-island trade gateway to Zamboanga City.",
+    cadt: "3 CADTs pending under NCIP for Sama, Sama Banguingui, and Yakan ICCs. IPMR seats held for Sama and Badjao in LGU."
+  },
+  2: {
+    name: "Kawman 2",
+    subtitle: "CBD — Finance, Admin & Trade",
+    color: "#185FA5",
+    textColor: "#042C53",
+    bgColor: "#E6F1FB",
+    borderColor: "#85B7EB",
+    popBadgeBg: "#0C447C",
+    pop: "24,799",
+    multiplier: "×1.47 services",
+    barangays: [
+      "Kaumpurnah Zone I (8)","Kaumpurnah Zone II (6)","Kaumpurnah Zone III (7)",
+      "Marketsite (9)","Santa Cruz (14)","Port Area (17)","Seaside (19)",
+      "Isabela Proper (20)","La Piedad (23)","Riverside (24)","Timpul (26)"
+    ],
+    peoples: [
+      {name:"Chavacano / Zamboangueño", desc:"Dominant · civil service · education · commerce"},
+      {name:"Tausug commercial class", desc:"Wholesale trade · Zakat/Waqf intermediaries"},
+      {name:"Bisaya / Christian settlers", desc:"Cultural bridge role · festival economy"}
+    ],
+    resources: [
+      {icon:"🏰", text:"Fuerte dela Reina Isabela II (1848 Spanish fort) — National Heritage registered"},
+      {icon:"⚓", text:"Port of Isabela / PPA — inter-island gateway, 'Green Lane' modernization"},
+      {icon:"🧵", text:"Claretcraft gallery — Yakan textile display center"},
+      {icon:"🕌", text:"Halal economy backbone — Zakat/Waqf social protection system"},
+      {icon:"📋", text:"Local Cultural Inventory submitted to PRECUP (National Heritage Act RA 10066)"},
+      {icon:"🛒", text:"Kadiwa digital market platform"},
+      {icon:"🏛", text:"City Hall · IPMR governance seats for Sama & Badjao"}
+    ],
+    economic: "Service sector multiplier <strong>1.47</strong>. City ranks 4th nationally for Cost of Doing Business. Financial deepening remains weak (rank 111th). Serves as fiscal and administrative center — 54% transfer income dependency (IRA ₱1.84B + BARMM ₱387M). Bridge between Zamboanga Peninsula and Sulu Archipelago.",
+    cadt: "IPMR seats formally institutionalized for Sama and Badjao communities in city legislature under IPRA (RA 8371)."
+  },
+  3: {
+    name: "Kawman 3",
+    subtitle: "East Isabela — Urban Expansion",
+    color: "#BA7517",
+    textColor: "#412402",
+    bgColor: "#FAEEDA",
+    borderColor: "#FAC775",
+    popBadgeBg: "#854F0B",
+    pop: "21,414",
+    multiplier: null,
+    barangays: [
+      "Busay (3)","Baluno (11)","Isabela Eastside / Poblacion (12)","Binuangan (18)",
+      "Begang (21)","Tabiawan (22)","Sunrise Village (27)","Lanote (31)"
+    ],
+    peoples: [
+      {name:"Mixed urban", desc:"Tausug, Chavacano, Bisaya — residential and commercial"},
+      {name:"Bajau / Sama Dilaut", desc:"Coastal fringe settlements · Begang fishing cooperative node"}
+    ],
+    resources: [
+      {icon:"🌾", text:"Rice Farmers Field School — IDCAF Farm (Barangay Baluno)"},
+      {icon:"🌾", text:"Ayudahan Rice Farmers Association — Barangay Tabiawan (GAD-funded)"},
+      {icon:"🏗", text:"Proposed PEZA × Isabela Industry Innovation Hub — Lanote, 40 hectares"},
+      {icon:"🏢", text:"DTI Isabela City Office — Sunrise Village anchor"},
+      {icon:"🌊", text:"Fuego Beach eco-tourism — Fuego Fuego restaurant landmark"},
+      {icon:"🌳", text:"Agroforestry transition zone (Baluno–Busay rural-coastal fringe)"},
+      {icon:"🐟", text:"Begang: ice plant, fish landing, seaweed drying cooperative"}
+    ],
+    economic: "Urban consumption hub driving Trade & Services multiplier. Rapid urbanization of Sunrise Village and Eastside is outpacing utility grid capacity. Lanote PEZA site (40ha) is the city's primary future industrial-innovation anchor. Binuangan-Busay coastal fringe has high eco-tourism potential.",
+    cadt: "No active CADT filings specific to Kawman 3. Bajau fishing cooperative at Begang should be engaged through fisherfolk associations for any coastal interventions."
+  },
+  4: {
+    name: "Kawman 4",
+    subtitle: "West Isabela — Industrial Core",
+    color: "#993C1D",
+    textColor: "#4A1B0C",
+    bgColor: "#FAECE7",
+    borderColor: "#F0997B",
+    popBadgeBg: "#712B13",
+    pop: "41,324",
+    multiplier: "×1.76 rubber & coco",
+    barangays: [
+      "Tabuk / Poblacion (25)","Aguada (28)","Doña Ramona T. Alano (29)","San Rafael (30)",
+      "Sumagdang (33)","Menzi (34)","Balatanay & Balatanay Island (35)","Cabunbata (36)","Makiri (37)"
+    ],
+    peoples: [
+      {name:"Mixed urban — Chavacano, Tausug", desc:"Commercial & industrial workforce"},
+      {name:"Yakan peripheral communities", desc:"Adjacent to upland ancestral domain areas"}
+    ],
+    resources: [
+      {icon:"🌴", text:"Rubber & Coconut manufacturing — highest sectoral multiplier ×1.76"},
+      {icon:"🏭", text:"Menzi agro-industrial & multi-crop processing hub"},
+      {icon:"🎓", text:"Basilan State College — Sumagdang (institutional research partner)"},
+      {icon:"🌿", text:"Cabunbata watershed & bamboo plantation zone"},
+      {icon:"♻️", text:"BRICKS Program — circular economy: rubber waste → construction materials"},
+      {icon:"☀️", text:"EU-Philippines Green Economy Partnership — solar processing plants"},
+      {icon:"🏖", text:"Panigayan Beach — coastal recreation"},
+      {icon:"🌊", text:"San Rafael: urban-industrial fringe — high commercial growth"}
+    ],
+    economic: "Highest output multiplier: <strong>×1.76</strong> rubber & coconut. Every ₱1M in new exports triggers ₱760K in additional local circulation. BRICKS Program links industrial waste (rubber, plastic) to construction inputs — new 'circular linkage' in the IO matrix. Power reliability is the primary constraint: solar investment addresses the utility coefficient gap. Largest population zone at 41,324.",
+    cadt: "Legacy LARBENCO and Goodrich Plantation lands present — IP ancestral domain claims (Yakan and Sama) potentially overlapping. 3 CADTs pending under NCIP."
+  },
+  5: {
+    name: "Kawman 5",
+    subtitle: "South / Upland — Resource Base",
+    color: "#3B6D11",
+    textColor: "#173404",
+    bgColor: "#EAF3DE",
+    borderColor: "#97C459",
+    popBadgeBg: "#27500A",
+    pop: "17,487",
+    multiplier: null,
+    barangays: [
+      "Panunsulan (32)","Calvario (38)","Maligue (39)","Lumbang (40)",
+      "Kapatagan Grande (41)","Kumalarang (42)","Small Kapatagan (43)",
+      "Kapayawan (44)","Masula (45)"
+    ],
+    peoples: [
+      {name:"Yakan — primary community", desc:"Original inhabitants of Basilan interior · 42.1% of province"},
+      {name:"Yakan Council of Elders", desc:"21 tribal leaders & elders — formally engaged by MIPA"},
+      {name:"Yakan IP Women's Groups", desc:"Dual role: food production + weaving economy"}
+    ],
+    resources: [
+      {icon:"🧵", text:"Yakan traditional weaving — abaca pis & malong textiles (Kumalarang — 'Kingdom of Kumalarang' in Ming texts)"},
+      {icon:"🌾", text:"Upland rice, cassava, coconut swidden agriculture — traditional Yakan farming calendar"},
+      {icon:"🥬", text:"SCoPSA vegetable farming — target: recover 95% vegetable import leakage (₱489M/yr)"},
+      {icon:"🌿", text:"Rubber & cacao agroforestry — Kapayawan-Kapatagan corridor"},
+      {icon:"🌱", text:"Community seed bank (proposed) — indigenous crop varieties"},
+      {icon:"🏕", text:"Eco-cultural trail — Kumalarang heritage site to bamboo & cacao farms"},
+      {icon:"🌲", text:"CBFM agroforestry zones — upland forest management"}
+    ],
+    economic: "Primary input supplier for Kawman 4 processing. Vegetables: 95% currently imported from Zamboanga City — recovering just 20% would add <strong>₱115M/year</strong> in local agricultural GVA. Kapayawan–Kapatagan Grande corridor is the key raw material base for the rubber multiplier chain. Upland farmers face high farm-to-market road costs as primary productivity constraint.",
+    cadt: "Yakan Ancestral Domain — IPRA / FPIC compliance (RA 8371) required for ALL field activities. Adat (customary law) and mosque-based settlement structures are legitimate governance units. Engage Council of Elders FIRST before any external frameworks."
+  }
+};
+
+let activeKawman = null;
+
+function showKawman(id) {
+  activeKawman = id;
+  const d = kawmanData[id];
+
+  // Update zone highlights
+  document.querySelectorAll('.kawman-zone').forEach(z => z.classList.remove('active'));
+  const z1 = document.getElementById('zone' + id);
+  if (z1) z1.classList.add('active');
+  const zm = document.getElementById('zoneM');
+  if (id === 1 && zm) zm.classList.add('active');
+
+  // Update legend
+  document.querySelectorAll('.legend-item').forEach(l => l.classList.remove('active'));
+  const leg = document.getElementById('leg' + id);
+  if (leg) leg.classList.add('active');
+
+  // Build detail content
+  const brgys = d.barangays.map(b => `<span class="brgy-pill">${b}</span>`).join('');
+  const peoples = d.peoples.map(p => `
+    <div style="display:flex;align-items:flex-start;gap:8px;padding:5px 0;border-bottom:1px solid ${d.borderColor}30;">
+      <div style="width:7px;height:7px;border-radius:50%;background:${d.color};margin-top:5px;flex-shrink:0;"></div>
+      <div>
+        <div style="font-size:12.5px;font-weight:500;color:${d.textColor};">${p.name}</div>
+        <div style="font-size:11px;color:${d.color};">${p.desc}</div>
+      </div>
+    </div>
+  `).join('');
+  const resources = d.resources.map(r => `
+    <div class="resource-item">
+      <span class="resource-icon">${r.icon}</span>
+      <span>${r.text}</span>
+    </div>
+  `).join('');
+
+  const multBadge = d.multiplier
+    ? `<span class="multiplier-badge" style="background:${d.color};color:${d.bgColor};">${d.multiplier}</span>`
+    : '';
+
+  document.getElementById('detailContent').innerHTML = `
+    <div class="detail-card-header" style="border-left:4px solid ${d.color};">
+      <div class="detail-card-kicker">Kawman zone · ${d.barangays.length} barangays</div>
+      <div class="detail-card-title" style="color:${d.textColor};">${d.name} ${multBadge}</div>
+      <div class="detail-card-role">${d.subtitle}</div>
+      <div class="detail-pop-badge" style="background:${d.bgColor};color:${d.textColor};border:1px solid ${d.borderColor};">
+        ${d.pop} residents (2020)
+      </div>
+    </div>
+    <div class="detail-body">
+      <div class="detail-section">
+        <div class="detail-section-title">Barangays</div>
+        <div class="brgy-grid">${brgys}</div>
+      </div>
+      <div class="detail-section">
+        <div class="detail-section-title">Indigenous & Ethnic Peoples</div>
+        ${peoples}
+      </div>
+      <div class="detail-section">
+        <div class="detail-section-title">Eco-Cultural Resources</div>
+        ${resources}
+      </div>
+      <div class="detail-section">
+        <div class="detail-section-title">CEESAM Economic Role</div>
+        <p class="econ-text">${d.economic}</p>
+      </div>
+      <div class="cadt-box">
+        <strong>IP / CADT note:</strong> ${d.cadt}
+      </div>
+    </div>
+  `;
+
+  document.getElementById('detailCard').style.borderColor = d.borderColor;
+}
+</script>
+</body>
+</html>
