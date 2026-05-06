@@ -3,957 +3,689 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Isabela de Basilan — 5 Kawman Zones · Community OS</title>
+<title>Isabela de Basilan — Kawman Field Intelligence Map · Community OS</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --teal-50:#E1F5EE;--teal-100:#9FE1CB;--teal-400:#1D9E75;--teal-600:#0F6E56;--teal-800:#085041;--teal-900:#04342C;
+  --blue-50:#E6F1FB;--blue-100:#B5D4F4;--blue-400:#378ADD;--blue-600:#185FA5;--blue-800:#0C447C;--blue-900:#042C53;
+  --amber-50:#FAEEDA;--amber-100:#FAC775;--amber-400:#EF9F27;--amber-600:#BA7517;--amber-800:#854F0B;--amber-900:#412402;
+  --coral-50:#FAECE7;--coral-100:#F5C4B3;--coral-400:#D85A30;--coral-600:#993C1D;--coral-800:#712B13;--coral-900:#4A1B0C;
+  --green-50:#EAF3DE;--green-100:#C0DD97;--green-400:#639922;--green-600:#3B6D11;--green-800:#27500A;--green-900:#173404;
+  --gray-50:#F1EFE8;--gray-100:#D3D1C7;--gray-400:#888780;--gray-600:#5F5E5A;--gray-800:#444441;--gray-900:#2C2C2A;
+  --red-50:#FCEBEB;--red-100:#F7C1C1;--red-400:#E24B4A;--red-600:#A32D2D;
+  --bg:#F6F4EF;--surface:#FFFFFF;
+  --border:rgba(55,50,40,0.11);--border-med:rgba(55,50,40,0.2);
+  --text:#1A1916;--text-sec:#58554E;--text-muted:#8C8981;
+  --r-sm:6px;--r-md:10px;--r-lg:14px;--r-xl:20px;
+  --sh-sm:0 1px 3px rgba(0,0,0,0.06),0 1px 2px rgba(0,0,0,0.04);
+  --sh-md:0 4px 14px rgba(0,0,0,0.07),0 2px 4px rgba(0,0,0,0.04);
+}
+body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding:20px 16px 48px;line-height:1.6}
+.page{max-width:1140px;margin:0 auto}
 
-  :root {
-    --teal-50:  #E1F5EE; --teal-100: #9FE1CB; --teal-400: #1D9E75;
-    --teal-600: #0F6E56; --teal-800: #085041; --teal-900: #04342C;
-    --blue-50:  #E6F1FB; --blue-100: #B5D4F4; --blue-400: #378ADD;
-    --blue-600: #185FA5; --blue-800: #0C447C; --blue-900: #042C53;
-    --amber-50: #FAEEDA; --amber-100: #FAC775; --amber-400: #EF9F27;
-    --amber-600: #BA7517; --amber-800: #854F0B; --amber-900: #412402;
-    --coral-50: #FAECE7; --coral-100: #F5C4B3; --coral-400: #D85A30;
-    --coral-600: #993C1D; --coral-800: #712B13; --coral-900: #4A1B0C;
-    --green-50: #EAF3DE; --green-100: #C0DD97; --green-400: #639922;
-    --green-600: #3B6D11; --green-800: #27500A; --green-900: #173404;
-    --gray-50:  #F1EFE8; --gray-100: #D3D1C7; --gray-400: #888780;
-    --gray-600: #5F5E5A; --gray-800: #444441; --gray-900: #2C2C2A;
+/* HEADER */
+.hdr{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;margin-bottom:20px;flex-wrap:wrap}
+.prog-tag{display:inline-flex;align-items:center;gap:5px;font-size:10.5px;font-weight:500;letter-spacing:.07em;text-transform:uppercase;color:var(--teal-600);background:var(--teal-50);border:1px solid var(--teal-100);border-radius:999px;padding:3px 10px;margin-bottom:9px}
+.prog-tag::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--teal-400)}
+.page-title{font-size:26px;font-weight:600;line-height:1.15;margin-bottom:3px}
+.page-sub{font-size:13px;color:var(--text-sec)}
+.hdr-stats{display:flex;gap:12px;flex-wrap:wrap}
+.sc{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-md);padding:11px 16px;min-width:100px;box-shadow:var(--sh-sm)}
+.sc-l{font-size:10.5px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:2px}
+.sc-v{font-size:18px;font-weight:600;color:var(--text)}
+.sc-u{font-size:10px;color:var(--text-muted);font-weight:400}
 
-    --bg: #F7F6F2;
-    --surface: #FFFFFF;
-    --border: rgba(60,58,50,0.12);
-    --border-strong: rgba(60,58,50,0.22);
-    --text: #1C1B18;
-    --text-secondary: #5A5852;
-    --text-muted: #8C8A84;
-    --radius-sm: 6px;
-    --radius-md: 10px;
-    --radius-lg: 14px;
-    --radius-xl: 20px;
-    --shadow-sm: 0 1px 3px rgba(0,0,0,0.07), 0 1px 2px rgba(0,0,0,0.05);
-    --shadow-md: 0 4px 12px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.05);
-  }
+/* GRID */
+.main-grid{display:grid;grid-template-columns:1fr 410px;gap:18px;align-items:start}
+@media(max-width:920px){.main-grid{grid-template-columns:1fr}}
 
-  body {
-    font-family: 'DM Sans', system-ui, sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-    padding: 24px 16px 48px;
-    line-height: 1.6;
-  }
+/* MAP */
+.map-panel{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-xl);overflow:hidden;box-shadow:var(--sh-md)}
+.map-panel svg{display:block;width:100%}
+.leg-bar{display:flex;flex-wrap:wrap;gap:6px 14px;padding:12px 18px;border-top:1px solid var(--border);background:var(--bg)}
+.leg-i{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--text-sec);cursor:pointer;border-radius:var(--r-sm);padding:3px 6px;transition:background .13s}
+.leg-i:hover{background:var(--gray-50)}
+.leg-i.active{background:var(--gray-100);font-weight:500;color:var(--text)}
+.leg-sw{width:10px;height:10px;border-radius:2px;flex-shrink:0}
 
-  .page {
-    max-width: 1100px;
-    margin: 0 auto;
-  }
+/* RIGHT PANEL */
+.right-panel{display:flex;flex-direction:column;gap:14px}
 
-  /* HEADER */
-  .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 24px;
-    margin-bottom: 24px;
-    flex-wrap: wrap;
-  }
-  .header-left {}
-  .programme-tag {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.07em;
-    text-transform: uppercase;
-    color: var(--teal-600);
-    background: var(--teal-50);
-    border: 1px solid var(--teal-100);
-    border-radius: 999px;
-    padding: 3px 10px;
-    margin-bottom: 10px;
-  }
-  .programme-tag::before {
-    content: '';
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: var(--teal-400);
-  }
-  .page-title {
-    font-size: 28px;
-    font-weight: 600;
-    color: var(--text);
-    line-height: 1.2;
-    margin-bottom: 4px;
-  }
-  .page-sub {
-    font-size: 14px;
-    color: var(--text-secondary);
-  }
-  .header-stats {
-    display: flex;
-    gap: 16px;
-    flex-wrap: wrap;
-  }
-  .stat-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-md);
-    padding: 12px 18px;
-    min-width: 120px;
-    box-shadow: var(--shadow-sm);
-  }
-  .stat-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 3px; }
-  .stat-value { font-size: 20px; font-weight: 600; color: var(--text); }
-  .stat-unit { font-size: 11px; color: var(--text-muted); font-weight: 400; }
+/* DETAIL CARD */
+.dc{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-xl);overflow:hidden;box-shadow:var(--sh-md);transition:border-color .2s}
+.dc-hdr{padding:15px 18px 13px}
+.dc-kicker{font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:.07em;color:var(--text-muted);margin-bottom:5px}
+.dc-title{font-size:16px;font-weight:600;margin-bottom:2px}
+.dc-role{font-size:12px;color:var(--text-sec)}
+.pop-badge{display:inline-block;font-size:10.5px;padding:2px 8px;border-radius:999px;font-family:'DM Mono',monospace;font-weight:500;margin-top:7px;border:1px solid}
 
-  /* MAIN LAYOUT */
-  .main-grid {
-    display: grid;
-    grid-template-columns: 1fr 380px;
-    gap: 20px;
-    align-items: start;
-  }
-  @media (max-width: 900px) {
-    .main-grid { grid-template-columns: 1fr; }
-  }
+/* TABS */
+.tabs{display:flex;border-bottom:1px solid var(--border)}
+.tab-btn{flex:1;padding:9px 6px;font-size:11.5px;font-weight:500;color:var(--text-muted);background:none;border:none;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:color .13s,border-color .13s;font-family:'DM Sans',sans-serif}
+.tab-btn:hover{color:var(--text)}
+.tab-btn.active{color:var(--text);border-bottom-color:currentColor}
+.tab-body{padding:15px 18px;min-height:220px}
+.tab-pane{display:none}
+.tab-pane.active{display:block}
 
-  /* MAP PANEL */
-  .map-panel {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-xl);
-    overflow: hidden;
-    box-shadow: var(--shadow-md);
-  }
-  .map-panel svg {
-    display: block;
-    width: 100%;
-  }
+/* OVERVIEW */
+.sec-title{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--text-muted);margin-bottom:7px;padding-bottom:3px;border-bottom:1px solid var(--border)}
+.brgy-grid{display:flex;flex-wrap:wrap;gap:3px;margin-bottom:10px}
+.brgy-pill{font-size:10px;background:var(--gray-50);border:1px solid var(--border);border-radius:var(--r-sm);padding:2px 6px;color:var(--text-sec);font-family:'DM Mono',monospace}
+.tag{display:inline-block;font-size:10.5px;padding:2px 7px;border-radius:999px;border:1px solid;margin:2px 2px 2px 0;line-height:1.4}
+.res-item{display:flex;gap:7px;font-size:11.5px;color:var(--text-sec);padding:4px 0;border-bottom:1px solid var(--border);line-height:1.5}
+.res-item:last-child{border-bottom:none}
+.res-icon{flex-shrink:0;margin-top:1px}
+.econ-p{font-size:11.5px;color:var(--text-sec);line-height:1.65}
+.cadt-box{background:var(--amber-50);border:1px solid var(--amber-100);border-radius:var(--r-sm);padding:7px 10px;font-size:10.5px;color:var(--amber-800);line-height:1.55;margin-top:8px}
 
-  /* LEGEND */
-  .legend-bar {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px 16px;
-    padding: 14px 20px;
-    border-top: 1px solid var(--border);
-    background: var(--bg);
-  }
-  .legend-item {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 11.5px;
-    color: var(--text-secondary);
-    cursor: pointer;
-    border-radius: var(--radius-sm);
-    padding: 3px 6px;
-    transition: background 0.15s;
-  }
-  .legend-item:hover { background: var(--gray-50); }
-  .legend-item.active { background: var(--gray-100); font-weight: 500; color: var(--text); }
-  .legend-swatch {
-    width: 11px; height: 11px;
-    border-radius: 3px;
-    flex-shrink: 0;
-  }
+/* DATA GAPS */
+.gap-row{display:grid;grid-template-columns:auto 1fr auto;gap:8px;align-items:start;padding:7px 0;border-bottom:1px solid var(--border);font-size:11px}
+.gap-row:last-child{border-bottom:none}
+.gap-id{font-family:'DM Mono',monospace;font-size:10px;color:var(--text-muted)}
+.gap-label{color:var(--text-sec);line-height:1.5}
+.gap-label strong{font-weight:500;color:var(--text)}
+.badge-sev{display:inline-block;font-size:9.5px;font-weight:600;letter-spacing:.04em;padding:1px 6px;border-radius:3px;white-space:nowrap}
+.sev-C{background:var(--red-50);color:var(--red-600);border:1px solid var(--red-100)}
+.sev-S{background:var(--amber-50);color:var(--amber-800);border:1px solid var(--amber-100)}
+.sev-M{background:var(--gray-50);color:var(--gray-600);border:1px solid var(--gray-100)}
+.gap-validate{font-size:10px;color:var(--teal-600);background:var(--teal-50);border:1px solid var(--teal-100);border-radius:var(--r-sm);padding:3px 8px;margin-top:4px;line-height:1.5;grid-column:1/-1}
+.gap-section-hdr{font-size:9.5px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--text-muted);margin:10px 0 5px;padding-bottom:3px;border-bottom:1px solid var(--border)}
 
-  /* RIGHT PANEL */
-  .right-panel {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
+/* FACILITATOR */
+.kii-chip{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:500;padding:2px 8px;border-radius:999px;background:var(--blue-50);color:var(--blue-600);border:1px solid var(--blue-100);margin:2px 2px 2px 0}
+.fgd-chip{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:500;padding:2px 8px;border-radius:999px;background:var(--teal-50);color:var(--teal-600);border:1px solid var(--teal-100);margin:2px 2px 2px 0}
+.q-block{padding:8px 0;border-bottom:1px solid var(--border)}
+.q-block:last-child{border-bottom:none}
+.q-label{font-size:9.5px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;margin-bottom:5px}
+.q-item{display:flex;gap:6px;font-size:11px;color:var(--text-sec);padding:3px 0;line-height:1.6}
+.q-item::before{content:'›';flex-shrink:0;color:var(--text-muted)}
+.q-probe{font-size:10px;background:var(--amber-50);color:var(--amber-900);border:1px solid var(--amber-100);border-radius:var(--r-sm);padding:5px 8px;margin-top:5px;line-height:1.55}
+.q-probe strong{font-weight:600}
+.method-note{font-size:10px;color:var(--blue-600);background:var(--blue-50);border:1px solid var(--blue-100);border-radius:var(--r-sm);padding:5px 8px;margin-top:5px;line-height:1.55}
 
-  /* DETAIL CARD */
-  .detail-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-xl);
-    overflow: hidden;
-    box-shadow: var(--shadow-md);
-    transition: border-color 0.2s;
-  }
-  .detail-card-header {
-    padding: 16px 20px 14px;
-    border-bottom: 1px solid var(--border);
-  }
-  .detail-card-kicker {
-    font-size: 10.5px;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.07em;
-    color: var(--text-muted);
-    margin-bottom: 6px;
-  }
-  .detail-card-title {
-    font-size: 17px;
-    font-weight: 600;
-    margin-bottom: 3px;
-  }
-  .detail-card-role {
-    font-size: 12.5px;
-    color: var(--text-secondary);
-  }
-  .detail-pop-badge {
-    display: inline-block;
-    font-size: 11px;
-    padding: 2px 8px;
-    border-radius: 999px;
-    font-family: 'DM Mono', monospace;
-    font-weight: 500;
-    margin-top: 8px;
-  }
-  .detail-body {
-    padding: 16px 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-  }
-  .detail-section {}
-  .detail-section-title {
-    font-size: 10.5px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.07em;
-    color: var(--text-muted);
-    margin-bottom: 7px;
-    padding-bottom: 4px;
-    border-bottom: 1px solid var(--border);
-  }
-  .tag {
-    display: inline-block;
-    font-size: 11px;
-    padding: 3px 8px;
-    border-radius: 999px;
-    border: 1px solid;
-    margin: 2px 3px 2px 0;
-    line-height: 1.4;
-  }
-  .resource-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 8px;
-    font-size: 12px;
-    color: var(--text-secondary);
-    padding: 4px 0;
-    border-bottom: 1px solid var(--border);
-    line-height: 1.5;
-  }
-  .resource-item:last-child { border-bottom: none; }
-  .resource-icon {
-    font-size: 13px;
-    margin-top: 1px;
-    flex-shrink: 0;
-  }
-  .brgy-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 4px;
-  }
-  .brgy-pill {
-    font-size: 10.5px;
-    background: var(--gray-50);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-sm);
-    padding: 2px 7px;
-    color: var(--text-secondary);
-    font-family: 'DM Mono', monospace;
-  }
-  .econ-text {
-    font-size: 12px;
-    color: var(--text-secondary);
-    line-height: 1.65;
-  }
-  .multiplier-badge {
-    display: inline-block;
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    font-weight: 500;
-    padding: 2px 8px;
-    border-radius: var(--radius-sm);
-    margin-left: 4px;
-    vertical-align: middle;
-  }
-  .cadt-box {
-    background: var(--amber-50);
-    border: 1px solid var(--amber-100);
-    border-radius: var(--radius-sm);
-    padding: 7px 10px;
-    font-size: 11px;
-    color: var(--amber-800);
-    line-height: 1.5;
-  }
-  .cadt-box strong { font-weight: 600; }
+/* IP CARD */
+.ip-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:14px 18px;box-shadow:var(--sh-sm)}
+.ip-card-title{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--text-muted);margin-bottom:9px}
+.ip-row{display:flex;align-items:flex-start;gap:9px;padding:7px 0;border-bottom:1px solid var(--border);cursor:pointer}
+.ip-row:last-child{border-bottom:none}
+.ip-dot{width:7px;height:7px;border-radius:50%;margin-top:5px;flex-shrink:0}
+.ip-name{font-size:12px;font-weight:500}
+.ip-desc{font-size:10.5px;color:var(--text-muted);margin-top:1px}
+.ip-pct{margin-left:auto;font-size:10.5px;font-family:'DM Mono',monospace;font-weight:500;color:var(--text-sec);white-space:nowrap;padding-left:8px}
 
-  /* IP LEGEND CARD */
-  .ip-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    padding: 16px 20px;
-    box-shadow: var(--shadow-sm);
-  }
-  .ip-card-title {
-    font-size: 11px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.07em;
-    color: var(--text-muted);
-    margin-bottom: 10px;
-  }
-  .ip-group {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    padding: 8px 0;
-    border-bottom: 1px solid var(--border);
-  }
-  .ip-group:last-child { border-bottom: none; }
-  .ip-swatch {
-    width: 8px; height: 8px;
-    border-radius: 50%;
-    margin-top: 5px;
-    flex-shrink: 0;
-  }
-  .ip-name { font-size: 12.5px; font-weight: 500; color: var(--text); }
-  .ip-desc { font-size: 11px; color: var(--text-muted); margin-top: 1px; }
-  .ip-share {
-    margin-left: auto;
-    font-size: 11px;
-    font-family: 'DM Mono', monospace;
-    font-weight: 500;
-    color: var(--text-secondary);
-    white-space: nowrap;
-    padding-left: 8px;
-  }
+/* PLACEHOLDER */
+.placeholder{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:38px 24px;text-align:center;gap:8px}
+.ph-icon{font-size:30px;opacity:.25}
+.ph-txt{font-size:12.5px;color:var(--text-muted);max-width:210px;line-height:1.6}
 
-  /* PLACEHOLDER */
-  .placeholder {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 40px 24px;
-    text-align: center;
-    gap: 10px;
-  }
-  .placeholder-icon {
-    font-size: 32px;
-    opacity: 0.3;
-  }
-  .placeholder-text {
-    font-size: 13px;
-    color: var(--text-muted);
-    max-width: 220px;
-    line-height: 1.6;
-  }
+/* SVG zones */
+.kawman-zone{cursor:pointer;transition:opacity .15s,filter .15s}
+.kawman-zone:hover{opacity:.87}
+.kawman-zone.active path,.kawman-zone.active ellipse{stroke-width:3;filter:drop-shadow(0 0 5px rgba(0,0,0,.16))}
 
-  /* ZONE HOVER/ACTIVE */
-  .kawman-zone {
-    cursor: pointer;
-    transition: opacity 0.15s, filter 0.15s;
-  }
-  .kawman-zone:hover { opacity: 0.88; }
-  .kawman-zone.active path,
-  .kawman-zone.active ellipse { stroke-width: 3; filter: drop-shadow(0 0 6px rgba(0,0,0,0.18)); }
-
-  /* FOOTER */
-  .footer {
-    margin-top: 32px;
-    padding-top: 20px;
-    border-top: 1px solid var(--border);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 12px;
-  }
-  .footer-left { font-size: 11px; color: var(--text-muted); line-height: 1.7; }
-  .footer-logos {
-    display: flex;
-    gap: 12px;
-    align-items: center;
-  }
-  .footer-logo-pill {
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    padding: 4px 10px;
-    border-radius: 999px;
-    border: 1px solid var(--border-strong);
-    color: var(--text-secondary);
-  }
+/* FOOTER */
+.footer{margin-top:28px;padding-top:18px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+.footer-l{font-size:10.5px;color:var(--text-muted);line-height:1.7}
+.footer-logos{display:flex;gap:10px;align-items:center}
+.fpill{font-size:9.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:3px 9px;border-radius:999px;border:1px solid var(--border-med);color:var(--text-sec)}
 </style>
 </head>
 <body>
-
 <div class="page">
 
-  <!-- HEADER -->
-  <div class="header">
-    <div class="header-left">
-      <div class="programme-tag">Community OS · Pilot Community #1</div>
-      <h1 class="page-title">Isabela de Basilan<br>5 Kawman Zones</h1>
-      <p class="page-sub">Basilan Province · BARMM · Philippines &nbsp;·&nbsp; Click any zone to explore</p>
-    </div>
-    <div class="header-stats">
-      <div class="stat-card">
-        <div class="stat-label">Total pop.</div>
-        <div class="stat-value">134,876 <span class="stat-unit">2020</span></div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-label">Barangays</div>
-        <div class="stat-value">45</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-label">Kawmans</div>
-        <div class="stat-value">5</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-label">Land area</div>
-        <div class="stat-value">~241 <span class="stat-unit">km²</span></div>
-      </div>
-    </div>
+<!-- HEADER -->
+<div class="hdr">
+  <div>
+    <div class="prog-tag">Community OS · PEAR · Pilot Community #1</div>
+    <h1 class="page-title">Isabela de Basilan<br>Kawman Field Intelligence Map</h1>
+    <p class="page-sub">Basilan Province · BARMM · Philippines &nbsp;·&nbsp; Click any zone · Explore data gaps &amp; facilitator prompts</p>
   </div>
-
-  <!-- MAIN GRID -->
-  <div class="main-grid">
-
-    <!-- MAP PANEL -->
-    <div class="map-panel">
-      <svg id="mainMap" viewBox="0 0 720 520" xmlns="http://www.w3.org/2000/svg">
-
-        <!-- Sea background -->
-        <defs>
-          <pattern id="seaPat" width="18" height="18" patternUnits="userSpaceOnUse" patternTransform="rotate(30)">
-            <line x1="0" y1="9" x2="18" y2="9" stroke="#B8D8E8" stroke-width="0.6" opacity="0.5"/>
-          </pattern>
-        </defs>
-        <rect width="720" height="520" fill="#D4EBF5"/>
-        <rect width="720" height="520" fill="url(#seaPat)" opacity="0.6"/>
-
-        <!-- Basilan Strait label -->
-        <text x="80" y="60" font-family="'DM Sans', sans-serif" font-size="10" fill="#7AAABF" font-style="italic" letter-spacing="1">Basilan Strait</text>
-        <text x="360" y="28" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="10" fill="#7AAABF" font-style="italic">← Zamboanga City (26 km)</text>
-
-        <!-- Compass rose -->
-        <g transform="translate(52, 460)">
-          <circle cx="0" cy="0" r="22" fill="white" fill-opacity="0.75" stroke="#C8C6BE" stroke-width="0.8"/>
-          <text x="0" y="-8" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="10" font-weight="600" fill="#444">N</text>
-          <line x1="0" y1="-18" x2="0" y2="18" stroke="#999" stroke-width="0.8"/>
-          <line x1="-18" y1="0" x2="18" y2="0" stroke="#999" stroke-width="0.8"/>
-          <polygon points="0,-18 -4,-5 4,-5" fill="#333"/>
-          <polygon points="0,18 -4,5 4,5" fill="#ccc"/>
-        </g>
-
-        <!-- Scale / note -->
-        <text x="700" y="510" text-anchor="end" font-family="'DM Sans', sans-serif" font-size="9" fill="#9BA0A8" font-style="italic">Schematic representation · not to exact scale</text>
-
-        <!-- ═══════════════════════════════════ -->
-        <!-- MALAMAWI ISLAND (Kawman 1 annex) -->
-        <!-- ═══════════════════════════════════ -->
-        <g class="kawman-zone" id="zoneM" onclick="showKawman(1)">
-          <ellipse cx="560" cy="62" rx="120" ry="44"
-                   fill="#1D9E75" fill-opacity="0.72"
-                   stroke="#0F6E56" stroke-width="1.8"/>
-          <text x="560" y="55" text-anchor="middle" font-family="'DM Sans', sans-serif"
-                font-size="11" font-weight="600" fill="#04342C">Malamawi Island</text>
-          <text x="560" y="70" text-anchor="middle" font-family="'DM Sans', sans-serif"
-                font-size="9.5" fill="#085041">Sama Dilaut · Mangroves · ASEAN eco-tourism</text>
-        </g>
-
-        <!-- Channel -->
-        <path d="M 345 108 Q 450 90 530 100" fill="none" stroke="#93C5D8" stroke-width="10" stroke-linecap="round" opacity="0.5"/>
-        <text x="440" y="97" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="8.5" fill="#6AAABF" font-style="italic">Isabela Channel</text>
-
-        <!-- ═══════════════════════════════════ -->
-        <!-- KAWMAN 4 — West / Industrial (left) -->
-        <!-- ═══════════════════════════════════ -->
-        <g class="kawman-zone" id="zone4" onclick="showKawman(4)">
-          <path d="M 75 165 L 55 185 L 44 230 L 48 280 L 58 325 L 82 360 L 125 370 L 180 360 L 215 330 L 225 290 L 228 250 L 215 205 L 195 170 L 162 155 Z"
-                fill="#D85A30" fill-opacity="0.72"
-                stroke="#993C1D" stroke-width="1.8"/>
-          <!-- label -->
-          <text x="138" y="265" text-anchor="middle" font-family="'DM Sans', sans-serif"
-                font-size="12" font-weight="600" fill="#4A1B0C">Kawman 4</text>
-          <text x="138" y="280" text-anchor="middle" font-family="'DM Sans', sans-serif"
-                font-size="9.5" fill="#712B13">West · Industrial Core</text>
-          <!-- barangay dots -->
-          <circle cx="118" cy="215" r="3.5" fill="#712B13" opacity="0.85"/>
-          <text x="125" y="218" font-family="'DM Sans', sans-serif" font-size="8.5" fill="#4A1B0C">Aguada</text>
-          <circle cx="102" cy="242" r="3.5" fill="#712B13" opacity="0.85"/>
-          <text x="109" y="246" font-family="'DM Sans', sans-serif" font-size="8.5" fill="#4A1B0C">Tabuk</text>
-          <circle cx="125" cy="305" r="3.5" fill="#712B13" opacity="0.85"/>
-          <text x="132" y="308" font-family="'DM Sans', sans-serif" font-size="8.5" fill="#4A1B0C">Sumagdang</text>
-          <circle cx="162" cy="322" r="3.5" fill="#712B13" opacity="0.85"/>
-          <text x="169" y="325" font-family="'DM Sans', sans-serif" font-size="8.5" fill="#4A1B0C">Cabunbata</text>
-          <circle cx="82" cy="272" r="3.5" fill="#712B13" opacity="0.85"/>
-          <text x="89" y="276" font-family="'DM Sans', sans-serif" font-size="8.5" fill="#4A1B0C">Menzi</text>
-          <circle cx="155" cy="183" r="3.5" fill="#712B13" opacity="0.85"/>
-          <text x="162" y="186" font-family="'DM Sans', sans-serif" font-size="8.5" fill="#4A1B0C">Makiri</text>
-          <!-- multiplier badge -->
-          <rect x="86" y="180" width="54" height="15" rx="3" fill="#993C1D" fill-opacity="0.85"/>
-          <text x="113" y="191" text-anchor="middle" font-family="'DM Mono', monospace" font-size="9" fill="#FAECE7">×1.76 rubber</text>
-        </g>
-
-        <!-- ═══════════════════════════════════ -->
-        <!-- KAWMAN 1 — Coastal (top strip) -->
-        <!-- ═══════════════════════════════════ -->
-        <g class="kawman-zone" id="zone1" onclick="showKawman(1)">
-          <path d="M 75 165 L 162 155 L 195 170 L 285 158 L 325 138 L 345 108 L 300 90 L 250 86 L 196 92 L 148 104 L 108 120 L 75 138 Z"
-                fill="#1D9E75" fill-opacity="0.72"
-                stroke="#0F6E56" stroke-width="1.8"/>
-          <text x="210" y="123" text-anchor="middle" font-family="'DM Sans', sans-serif"
-                font-size="12" font-weight="600" fill="#04342C">Kawman 1</text>
-          <text x="210" y="137" text-anchor="middle" font-family="'DM Sans', sans-serif"
-                font-size="9.5" fill="#085041">Coastal · Logistics &amp; Aqua</text>
-          <!-- barangay dots -->
-          <circle cx="166" cy="112" r="3.5" fill="#085041" opacity="0.9"/>
-          <text x="172" y="115" font-family="'DM Sans', sans-serif" font-size="8.5" fill="#04342C">Marang-Marang</text>
-          <circle cx="252" cy="108" r="3.5" fill="#085041" opacity="0.9"/>
-          <text x="258" y="111" font-family="'DM Sans', sans-serif" font-size="8.5" fill="#04342C">Panigayan</text>
-          <circle cx="308" cy="120" r="3.5" fill="#085041" opacity="0.9"/>
-          <text x="314" y="123" font-family="'DM Sans', sans-serif" font-size="8.5" fill="#04342C">Carbon</text>
-          <circle cx="128" cy="126" r="3.5" fill="#085041" opacity="0.9"/>
-          <text x="134" y="129" font-family="'DM Sans', sans-serif" font-size="8.5" fill="#04342C">Lukbuton</text>
-          <circle cx="198" cy="130" r="3.5" fill="#085041" opacity="0.9"/>
-          <text x="204" y="133" font-family="'DM Sans', sans-serif" font-size="8.5" fill="#04342C">Diki</text>
-          <!-- mangrove icon area -->
-          <text x="86" y="132" font-family="'DM Sans', sans-serif" font-size="13" fill="#04342C" opacity="0.8">🌿</text>
-        </g>
-
-        <!-- ═══════════════════════════════════ -->
-        <!-- KAWMAN 2 — CBD (center) -->
-        <!-- ═══════════════════════════════════ -->
-        <g class="kawman-zone" id="zone2" onclick="showKawman(2)">
-          <path d="M 285 158 L 325 138 L 415 142 L 448 162 L 445 205 L 422 232 L 385 248 L 340 244 L 298 222 L 280 200 L 278 178 Z"
-                fill="#378ADD" fill-opacity="0.72"
-                stroke="#185FA5" stroke-width="1.8"/>
-          <text x="362" y="192" text-anchor="middle" font-family="'DM Sans', sans-serif"
-                font-size="12" font-weight="600" fill="#042C53">Kawman 2</text>
-          <text x="362" y="207" text-anchor="middle" font-family="'DM Sans', sans-serif"
-                font-size="9.5" fill="#0C447C">CBD · Finance &amp; Admin</text>
-          <!-- barangay dots -->
-          <circle cx="328" cy="168" r="3.5" fill="#0C447C" opacity="0.9"/>
-          <text x="334" y="171" font-family="'DM Sans', sans-serif" font-size="8.5" fill="#042C53">Marketsite</text>
-          <circle cx="396" cy="162" r="3.5" fill="#0C447C" opacity="0.9"/>
-          <text x="402" y="165" font-family="'DM Sans', sans-serif" font-size="8.5" fill="#042C53">Port Area ⚓</text>
-          <circle cx="300" cy="182" r="3.5" fill="#0C447C" opacity="0.9"/>
-          <text x="306" y="185" font-family="'DM Sans', sans-serif" font-size="8.5" fill="#042C53">Isabela Proper</text>
-          <circle cx="408" cy="220" r="3.5" fill="#0C447C" opacity="0.9"/>
-          <text x="414" y="223" font-family="'DM Sans', sans-serif" font-size="8.5" fill="#042C53">Seaside</text>
-          <circle cx="335" cy="232" r="3.5" fill="#0C447C" opacity="0.9"/>
-          <text x="341" y="235" font-family="'DM Sans', sans-serif" font-size="8.5" fill="#042C53">Santa Cruz</text>
-          <!-- fort marker -->
-          <rect x="286" y="156" width="38" height="13" rx="2" fill="#185FA5" fill-opacity="0.9"/>
-          <text x="305" y="166" text-anchor="middle" font-family="'DM Mono', monospace" font-size="8.5" fill="#E6F1FB">Fort 1848</text>
-        </g>
-
-        <!-- ═══════════════════════════════════ -->
-        <!-- KAWMAN 3 — East -->
-        <!-- ═══════════════════════════════════ -->
-        <g class="kawman-zone" id="zone3" onclick="showKawman(3)">
-          <path d="M 415 142 L 490 128 L 545 138 L 578 168 L 578 212 L 556 248 L 520 268 L 478 272 L 445 260 L 422 232 L 445 205 Z"
-                fill="#EF9F27" fill-opacity="0.72"
-                stroke="#BA7517" stroke-width="1.8"/>
-          <text x="496" y="205" text-anchor="middle" font-family="'DM Sans', sans-serif"
-                font-size="12" font-weight="600" fill="#412402">Kawman 3</text>
-          <text x="496" y="220" text-anchor="middle" font-family="'DM Sans', sans-serif"
-                font-size="9.5" fill="#633806">East · Urban Expansion</text>
-          <!-- barangay dots -->
-          <circle cx="482" cy="155" r="3.5" fill="#633806" opacity="0.9"/>
-          <text x="488" y="158" font-family="'DM Sans', sans-serif" font-size="8.5" fill="#412402">Begang</text>
-          <circle cx="545" cy="170" r="3.5" fill="#633806" opacity="0.9"/>
-          <text x="551" y="173" font-family="'DM Sans', sans-serif" font-size="8.5" fill="#412402">Tabiawan 🌾</text>
-          <circle cx="552" cy="232" r="3.5" fill="#633806" opacity="0.9"/>
-          <text x="558" y="235" font-family="'DM Sans', sans-serif" font-size="8.5" fill="#412402">Lanote</text>
-          <circle cx="465" cy="255" r="3.5" fill="#633806" opacity="0.9"/>
-          <text x="471" y="258" font-family="'DM Sans', sans-serif" font-size="8.5" fill="#412402">Sunrise Village</text>
-          <circle cx="450" cy="178" r="3.5" fill="#633806" opacity="0.9"/>
-          <text x="456" y="181" font-family="'DM Sans', sans-serif" font-size="8.5" fill="#412402">Baluno</text>
-          <!-- PEZA marker -->
-          <rect x="524" y="240" width="46" height="13" rx="2" fill="#BA7517" fill-opacity="0.9"/>
-          <text x="547" y="250" text-anchor="middle" font-family="'DM Mono', monospace" font-size="8.5" fill="#FAEEDA">PEZA site</text>
-        </g>
-
-        <!-- ═══════════════════════════════════ -->
-        <!-- KAWMAN 5 — Upland / South (bottom) -->
-        <!-- ═══════════════════════════════════ -->
-        <g class="kawman-zone" id="zone5" onclick="showKawman(5)">
-          <path d="M 125 370 L 180 360 L 215 330 L 228 250 L 298 222 L 340 244 L 385 248 L 422 232 L 445 260 L 478 272 L 472 310 L 452 352 L 418 388 L 368 408 L 302 412 L 238 398 L 185 378 Z"
-                fill="#639922" fill-opacity="0.72"
-                stroke="#3B6D11" stroke-width="1.8"/>
-          <text x="322" y="345" text-anchor="middle" font-family="'DM Sans', sans-serif"
-                font-size="12" font-weight="600" fill="#173404">Kawman 5</text>
-          <text x="322" y="360" text-anchor="middle" font-family="'DM Sans', sans-serif"
-                font-size="9.5" fill="#27500A">South · Upland · Yakan Territory</text>
-          <!-- barangay dots -->
-          <circle cx="234" cy="310" r="3.5" fill="#27500A" opacity="0.9"/>
-          <text x="240" y="313" font-family="'DM Sans', sans-serif" font-size="8.5" fill="#173404">Kumalarang 🧵</text>
-          <circle cx="275" cy="385" r="3.5" fill="#27500A" opacity="0.9"/>
-          <text x="281" y="388" font-family="'DM Sans', sans-serif" font-size="8.5" fill="#173404">Kapayawan</text>
-          <circle cx="345" cy="395" r="3.5" fill="#27500A" opacity="0.9"/>
-          <text x="351" y="398" font-family="'DM Sans', sans-serif" font-size="8.5" fill="#173404">Kapatagan Grande</text>
-          <circle cx="418" cy="370" r="3.5" fill="#27500A" opacity="0.9"/>
-          <text x="424" y="373" font-family="'DM Sans', sans-serif" font-size="8.5" fill="#173404">Masula</text>
-          <circle cx="186" cy="308" r="3.5" fill="#27500A" opacity="0.9"/>
-          <text x="192" y="311" font-family="'DM Sans', sans-serif" font-size="8.5" fill="#173404">Panunsulan</text>
-          <circle cx="295" cy="318" r="3.5" fill="#27500A" opacity="0.9"/>
-          <text x="301" y="321" font-family="'DM Sans', sans-serif" font-size="8.5" fill="#173404">Maligue</text>
-          <circle cx="370" cy="298" r="3.5" fill="#27500A" opacity="0.9"/>
-          <text x="376" y="301" font-family="'DM Sans', sans-serif" font-size="8.5" fill="#173404">Lumbang</text>
-          <!-- SCoPSA label -->
-          <rect x="150" y="336" width="58" height="13" rx="2" fill="#3B6D11" fill-opacity="0.88"/>
-          <text x="179" y="346" text-anchor="middle" font-family="'DM Mono', monospace" font-size="8.5" fill="#EAF3DE">SCoPSA zone</text>
-        </g>
-
-      </svg>
-
-      <!-- LEGEND BAR -->
-      <div class="legend-bar">
-        <div class="legend-item" id="leg1" onclick="showKawman(1)">
-          <div class="legend-swatch" style="background:#1D9E75;"></div>K1 · Coastal
-        </div>
-        <div class="legend-item" id="leg2" onclick="showKawman(2)">
-          <div class="legend-swatch" style="background:#378ADD;"></div>K2 · CBD
-        </div>
-        <div class="legend-item" id="leg3" onclick="showKawman(3)">
-          <div class="legend-swatch" style="background:#EF9F27;"></div>K3 · East
-        </div>
-        <div class="legend-item" id="leg4" onclick="showKawman(4)">
-          <div class="legend-swatch" style="background:#D85A30;"></div>K4 · West/Industrial
-        </div>
-        <div class="legend-item" id="leg5" onclick="showKawman(5)">
-          <div class="legend-swatch" style="background:#639922;"></div>K5 · Upland
-        </div>
-      </div>
-    </div>
-
-    <!-- RIGHT PANEL -->
-    <div class="right-panel">
-
-      <!-- DETAIL CARD -->
-      <div class="detail-card" id="detailCard">
-        <div id="detailContent">
-          <div class="placeholder">
-            <div class="placeholder-icon">🗺</div>
-            <p class="placeholder-text">Click any kawman zone on the map to explore its barangays, peoples, and resources.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- IP GROUPS CARD -->
-      <div class="ip-card">
-        <div class="ip-card-title">Indigenous &amp; Ethnolinguistic Communities</div>
-
-        <div class="ip-group" style="cursor:pointer;" onclick="showKawman(5)">
-          <div class="ip-swatch" style="background:#3B6D11;"></div>
-          <div>
-            <div class="ip-name">Yakan</div>
-            <div class="ip-desc">Original inhabitants · inland farmers · weaving artisans · Kawman 5 primary</div>
-          </div>
-          <div class="ip-share">42.1%</div>
-        </div>
-
-        <div class="ip-group" style="cursor:pointer;" onclick="showKawman(2)">
-          <div class="ip-swatch" style="background:#185FA5;"></div>
-          <div>
-            <div class="ip-name">Tausug</div>
-            <div class="ip-desc">Maritime traders · IC market control · halal economy · urban commercial</div>
-          </div>
-          <div class="ip-share">23.4%</div>
-        </div>
-
-        <div class="ip-group" style="cursor:pointer;" onclick="showKawman(1)">
-          <div class="ip-swatch" style="background:#1D9E75;"></div>
-          <div>
-            <div class="ip-name">Sama / Sama Dilaut / Badjao</div>
-            <div class="ip-desc">Sea nomads · stilt houses · fisherfolk · Malamawi Island · Kawman 1 &amp; 3</div>
-          </div>
-          <div class="ip-share">10.4%</div>
-        </div>
-
-        <div class="ip-group">
-          <div class="ip-swatch" style="background:#888780;"></div>
-          <div>
-            <div class="ip-name">Chavacano / Bisaya</div>
-            <div class="ip-desc">Zamboangueño settlers · civil service · education · health · Kawman 2</div>
-          </div>
-          <div class="ip-share">20.5%</div>
-        </div>
-
-        <div class="ip-group" style="cursor:pointer;" onclick="showKawman(1)">
-          <div class="ip-swatch" style="background:#5DCAA5;"></div>
-          <div>
-            <div class="ip-name">Sama Banguingui</div>
-            <div class="ip-desc">Coastal trading community · 3 CADTs pending under NCIP</div>
-          </div>
-          <div class="ip-share">—</div>
-        </div>
-
-      </div>
-
-    </div>
+  <div class="hdr-stats">
+    <div class="sc"><div class="sc-l">Total pop.</div><div class="sc-v">134,876 <span class="sc-u">2020</span></div></div>
+    <div class="sc"><div class="sc-l">Barangays</div><div class="sc-v">45</div></div>
+    <div class="sc"><div class="sc-l">Kawmans</div><div class="sc-v">5</div></div>
+    <div class="sc"><div class="sc-l">Data gaps</div><div class="sc-v">29 <span class="sc-u">items</span></div></div>
   </div>
-
-  <!-- FOOTER -->
-  <div class="footer">
-    <div class="footer-left">
-      Community Operating System · Participatory Emancipatory Action Research (PEAR) · Pilot Community #1<br>
-      Data sources: PSA 2020 Census · HAPISABELA! Strategic Plan · ECSOM Canvas Narrative v2 (March 2026) · LGU BDIP · BFAR<br>
-      Map is a schematic representation. Authoritative boundary data: CPDO Isabela City. &nbsp;·&nbsp; Generated May 2026
-    </div>
-    <div class="footer-logos">
-      <div class="footer-logo-pill">LAB.PH</div>
-      <div class="footer-logo-pill">SKRI</div>
-      <div class="footer-logo-pill">Roxas-Kalaw Foundation</div>
-    </div>
-  </div>
-
 </div>
 
+<!-- MAIN GRID -->
+<div class="main-grid">
+
+  <!-- MAP -->
+  <div class="map-panel">
+    <svg id="mainMap" viewBox="0 0 720 520" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="seaPat" width="18" height="18" patternUnits="userSpaceOnUse" patternTransform="rotate(30)">
+          <line x1="0" y1="9" x2="18" y2="9" stroke="#A8CEE0" stroke-width="0.5" opacity="0.55"/>
+        </pattern>
+      </defs>
+      <rect width="720" height="520" fill="#CBE8F5"/>
+      <rect width="720" height="520" fill="url(#seaPat)" opacity="0.6"/>
+      <text x="80" y="62" font-family="'DM Sans',sans-serif" font-size="10" fill="#6AAABF" font-style="italic" letter-spacing="1">Basilan Strait</text>
+      <text x="360" y="26" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="10" fill="#6AAABF" font-style="italic">← Zamboanga City (26 km)</text>
+
+      <!-- Compass -->
+      <g transform="translate(52,460)">
+        <circle cx="0" cy="0" r="20" fill="white" fill-opacity=".72" stroke="#C8C6BE" stroke-width=".8"/>
+        <text x="0" y="-7" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="10" font-weight="600" fill="#444">N</text>
+        <line x1="0" y1="-16" x2="0" y2="16" stroke="#999" stroke-width=".8"/>
+        <line x1="-16" y1="0" x2="16" y2="0" stroke="#999" stroke-width=".8"/>
+        <polygon points="0,-16 -3,-4 3,-4" fill="#333"/>
+        <polygon points="0,16 -3,4 3,4" fill="#ccc"/>
+      </g>
+      <text x="700" y="510" text-anchor="end" font-family="'DM Sans',sans-serif" font-size="9" fill="#9BA0A8" font-style="italic">Schematic · not to exact scale</text>
+
+      <!-- Malamawi Island (Kawman 1 annex) -->
+      <g class="kawman-zone" id="zoneM" onclick="showKawman(1)">
+        <ellipse cx="560" cy="63" rx="120" ry="44" fill="#1D9E75" fill-opacity=".72" stroke="#0F6E56" stroke-width="1.8"/>
+        <text x="560" y="56" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="10.5" font-weight="600" fill="#04342C">Malamawi Island</text>
+        <text x="560" y="71" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="9" fill="#085041">Sama Dilaut · Mangroves · ASEAN eco-tourism</text>
+      </g>
+
+      <!-- Channel -->
+      <path d="M 345 108 Q 450 90 530 100" fill="none" stroke="#93C5D8" stroke-width="10" stroke-linecap="round" opacity=".5"/>
+      <text x="440" y="97" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="8.5" fill="#6AAABF" font-style="italic">Isabela Channel</text>
+
+      <!-- Kawman 4 – West/Industrial -->
+      <g class="kawman-zone" id="zone4" onclick="showKawman(4)">
+        <path d="M 75 165 L 55 185 L 44 230 L 48 280 L 58 325 L 82 360 L 125 370 L 180 360 L 215 330 L 225 290 L 228 250 L 215 205 L 195 170 L 162 155 Z" fill="#D85A30" fill-opacity=".72" stroke="#993C1D" stroke-width="1.8"/>
+        <text x="138" y="263" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="11.5" font-weight="600" fill="#4A1B0C">Kawman 4</text>
+        <text x="138" y="277" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="9" fill="#712B13">West · Industrial Core</text>
+        <circle cx="118" cy="215" r="3.5" fill="#712B13" opacity=".85"/><text x="124" y="219" font-family="'DM Sans',sans-serif" font-size="8.5" fill="#4A1B0C">Aguada</text>
+        <circle cx="102" cy="242" r="3.5" fill="#712B13" opacity=".85"/><text x="108" y="246" font-family="'DM Sans',sans-serif" font-size="8.5" fill="#4A1B0C">Tabuk</text>
+        <circle cx="125" cy="305" r="3.5" fill="#712B13" opacity=".85"/><text x="131" y="309" font-family="'DM Sans',sans-serif" font-size="8.5" fill="#4A1B0C">Sumagdang</text>
+        <circle cx="162" cy="322" r="3.5" fill="#712B13" opacity=".85"/><text x="168" y="326" font-family="'DM Sans',sans-serif" font-size="8.5" fill="#4A1B0C">Cabunbata</text>
+        <circle cx="82" cy="272" r="3.5" fill="#712B13" opacity=".85"/><text x="88" y="276" font-family="'DM Sans',sans-serif" font-size="8.5" fill="#4A1B0C">Menzi</text>
+        <rect x="82" y="180" width="58" height="14" rx="3" fill="#993C1D" fill-opacity=".88"/>
+        <text x="111" y="191" text-anchor="middle" font-family="'DM Mono',monospace" font-size="8.5" fill="#FAECE7">×1.76 rubber</text>
+      </g>
+
+      <!-- Kawman 1 – Coastal -->
+      <g class="kawman-zone" id="zone1" onclick="showKawman(1)">
+        <path d="M 75 165 L 162 155 L 195 170 L 285 158 L 325 138 L 345 108 L 300 90 L 250 86 L 196 92 L 148 104 L 108 120 L 75 138 Z" fill="#1D9E75" fill-opacity=".72" stroke="#0F6E56" stroke-width="1.8"/>
+        <text x="210" y="122" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="11.5" font-weight="600" fill="#04342C">Kawman 1</text>
+        <text x="210" y="136" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="9" fill="#085041">Coastal · Logistics &amp; Aqua</text>
+        <circle cx="166" cy="112" r="3.5" fill="#085041" opacity=".9"/><text x="172" y="115" font-family="'DM Sans',sans-serif" font-size="8.5" fill="#04342C">Marang-Marang</text>
+        <circle cx="252" cy="108" r="3.5" fill="#085041" opacity=".9"/><text x="258" y="111" font-family="'DM Sans',sans-serif" font-size="8.5" fill="#04342C">Panigayan</text>
+        <circle cx="308" cy="120" r="3.5" fill="#085041" opacity=".9"/><text x="314" y="123" font-family="'DM Sans',sans-serif" font-size="8.5" fill="#04342C">Carbon</text>
+        <circle cx="128" cy="126" r="3.5" fill="#085041" opacity=".9"/><text x="134" y="129" font-family="'DM Sans',sans-serif" font-size="8.5" fill="#04342C">Lukbuton</text>
+        <text x="83" y="133" font-family="'DM Sans',sans-serif" font-size="12" fill="#04342C" opacity=".8">🌿</text>
+        <rect x="238" y="85" width="58" height="14" rx="3" fill="#0F6E56" fill-opacity=".88"/>
+        <text x="267" y="95" text-anchor="middle" font-family="'DM Mono',monospace" font-size="8.5" fill="#E1F5EE">LQ 3.84 fish</text>
+      </g>
+
+      <!-- Kawman 2 – CBD -->
+      <g class="kawman-zone" id="zone2" onclick="showKawman(2)">
+        <path d="M 285 158 L 325 138 L 415 142 L 448 162 L 445 205 L 422 232 L 385 248 L 340 244 L 298 222 L 280 200 L 278 178 Z" fill="#378ADD" fill-opacity=".72" stroke="#185FA5" stroke-width="1.8"/>
+        <text x="362" y="192" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="11.5" font-weight="600" fill="#042C53">Kawman 2</text>
+        <text x="362" y="206" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="9" fill="#0C447C">CBD · Finance &amp; Admin</text>
+        <circle cx="328" cy="168" r="3.5" fill="#0C447C" opacity=".9"/><text x="334" y="172" font-family="'DM Sans',sans-serif" font-size="8.5" fill="#042C53">Marketsite</text>
+        <circle cx="396" cy="162" r="3.5" fill="#0C447C" opacity=".9"/><text x="402" y="166" font-family="'DM Sans',sans-serif" font-size="8.5" fill="#042C53">Port Area ⚓</text>
+        <circle cx="300" cy="182" r="3.5" fill="#0C447C" opacity=".9"/><text x="306" y="186" font-family="'DM Sans',sans-serif" font-size="8.5" fill="#042C53">Isabela Proper</text>
+        <circle cx="408" cy="220" r="3.5" fill="#0C447C" opacity=".9"/><text x="414" y="224" font-family="'DM Sans',sans-serif" font-size="8.5" fill="#042C53">Seaside</text>
+        <rect x="284" y="156" width="40" height="14" rx="2" fill="#185FA5" fill-opacity=".9"/>
+        <text x="304" y="166" text-anchor="middle" font-family="'DM Mono',monospace" font-size="8.5" fill="#E6F1FB">Fort 1848</text>
+      </g>
+
+      <!-- Kawman 3 – East -->
+      <g class="kawman-zone" id="zone3" onclick="showKawman(3)">
+        <path d="M 415 142 L 490 128 L 545 138 L 578 168 L 578 212 L 556 248 L 520 268 L 478 272 L 445 260 L 422 232 L 445 205 Z" fill="#EF9F27" fill-opacity=".72" stroke="#BA7517" stroke-width="1.8"/>
+        <text x="496" y="204" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="11.5" font-weight="600" fill="#412402">Kawman 3</text>
+        <text x="496" y="218" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="9" fill="#633806">East · Urban Expansion</text>
+        <circle cx="482" cy="155" r="3.5" fill="#633806" opacity=".9"/><text x="488" y="158" font-family="'DM Sans',sans-serif" font-size="8.5" fill="#412402">Begang</text>
+        <circle cx="545" cy="170" r="3.5" fill="#633806" opacity=".9"/><text x="551" y="174" font-family="'DM Sans',sans-serif" font-size="8.5" fill="#412402">Tabiawan 🌾</text>
+        <circle cx="552" cy="232" r="3.5" fill="#633806" opacity=".9"/><text x="558" y="235" font-family="'DM Sans',sans-serif" font-size="8.5" fill="#412402">Lanote</text>
+        <circle cx="465" cy="255" r="3.5" fill="#633806" opacity=".9"/><text x="471" y="258" font-family="'DM Sans',sans-serif" font-size="8.5" fill="#412402">Sunrise Village</text>
+        <rect x="524" y="239" width="46" height="14" rx="2" fill="#BA7517" fill-opacity=".9"/>
+        <text x="547" y="249" text-anchor="middle" font-family="'DM Mono',monospace" font-size="8.5" fill="#FAEEDA">PEZA site</text>
+      </g>
+
+      <!-- Kawman 5 – Upland/South -->
+      <g class="kawman-zone" id="zone5" onclick="showKawman(5)">
+        <path d="M 125 370 L 180 360 L 215 330 L 228 250 L 298 222 L 340 244 L 385 248 L 422 232 L 445 260 L 478 272 L 472 310 L 452 352 L 418 388 L 368 408 L 302 412 L 238 398 L 185 378 Z" fill="#639922" fill-opacity=".72" stroke="#3B6D11" stroke-width="1.8"/>
+        <text x="322" y="345" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="11.5" font-weight="600" fill="#173404">Kawman 5</text>
+        <text x="322" y="359" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="9" fill="#27500A">South · Upland · Yakan Territory</text>
+        <circle cx="234" cy="310" r="3.5" fill="#27500A" opacity=".9"/><text x="240" y="313" font-family="'DM Sans',sans-serif" font-size="8.5" fill="#173404">Kumalarang 🧵</text>
+        <circle cx="275" cy="385" r="3.5" fill="#27500A" opacity=".9"/><text x="281" y="389" font-family="'DM Sans',sans-serif" font-size="8.5" fill="#173404">Kapayawan</text>
+        <circle cx="345" cy="395" r="3.5" fill="#27500A" opacity=".9"/><text x="351" y="399" font-family="'DM Sans',sans-serif" font-size="8.5" fill="#173404">Kapatagan Grande</text>
+        <circle cx="418" cy="370" r="3.5" fill="#27500A" opacity=".9"/><text x="424" y="374" font-family="'DM Sans',sans-serif" font-size="8.5" fill="#173404">Masula</text>
+        <circle cx="186" cy="308" r="3.5" fill="#27500A" opacity=".9"/><text x="192" y="312" font-family="'DM Sans',sans-serif" font-size="8.5" fill="#173404">Panunsulan</text>
+        <rect x="148" y="334" width="60" height="14" rx="2" fill="#3B6D11" fill-opacity=".88"/>
+        <text x="178" y="344" text-anchor="middle" font-family="'DM Mono',monospace" font-size="8.5" fill="#EAF3DE">SCoPSA zone</text>
+      </g>
+    </svg>
+
+    <!-- LEGEND BAR -->
+    <div class="leg-bar">
+      <div class="leg-i" id="leg1" onclick="showKawman(1)"><div class="leg-sw" style="background:#1D9E75"></div>K1 · Coastal</div>
+      <div class="leg-i" id="leg2" onclick="showKawman(2)"><div class="leg-sw" style="background:#378ADD"></div>K2 · CBD</div>
+      <div class="leg-i" id="leg3" onclick="showKawman(3)"><div class="leg-sw" style="background:#EF9F27"></div>K3 · East</div>
+      <div class="leg-i" id="leg4" onclick="showKawman(4)"><div class="leg-sw" style="background:#D85A30"></div>K4 · West/Industrial</div>
+      <div class="leg-i" id="leg5" onclick="showKawman(5)"><div class="leg-sw" style="background:#639922"></div>K5 · Upland</div>
+    </div>
+  </div>
+
+  <!-- RIGHT PANEL -->
+  <div class="right-panel">
+    <div class="dc" id="detailCard">
+      <div id="detailContent">
+        <div class="placeholder">
+          <div class="ph-icon">🗺</div>
+          <p class="ph-txt">Click any kawman zone on the map to view barangays, data gaps register, and facilitator prompts.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- IP CARD -->
+    <div class="ip-card">
+      <div class="ip-card-title">Indigenous &amp; Ethnolinguistic Communities</div>
+      <div class="ip-row" onclick="showKawman(5)"><div class="ip-dot" style="background:#3B6D11"></div><div><div class="ip-name">Yakan</div><div class="ip-desc">Original inhabitants · inland farmers · weaving artisans · K5 primary</div></div><div class="ip-pct">42.1%</div></div>
+      <div class="ip-row" onclick="showKawman(2)"><div class="ip-dot" style="background:#185FA5"></div><div><div class="ip-name">Tausug</div><div class="ip-desc">Maritime traders · IC market control · halal economy · urban commercial</div></div><div class="ip-pct">23.4%</div></div>
+      <div class="ip-row" onclick="showKawman(1)"><div class="ip-dot" style="background:#1D9E75"></div><div><div class="ip-name">Sama / Sama Dilaut / Badjao</div><div class="ip-desc">Sea nomads · stilt houses · fisherfolk · Malamawi Island</div></div><div class="ip-pct">10.4%</div></div>
+      <div class="ip-row"><div class="ip-dot" style="background:#888780"></div><div><div class="ip-name">Chavacano / Bisaya</div><div class="ip-desc">Zamboangueño settlers · civil service · education · K2 dominant</div></div><div class="ip-pct">20.5%</div></div>
+      <div class="ip-row" onclick="showKawman(1)"><div class="ip-dot" style="background:#5DCAA5"></div><div><div class="ip-name">Sama Banguingui</div><div class="ip-desc">Coastal trading community · 3 CADTs pending under NCIP</div></div><div class="ip-pct">—</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="footer-l">
+    Community Operating System · PEAR Framework · Pilot Community #1 · Isabela de Basilan, Basilan Province<br>
+    Data: PSA 2020 · HAPISABELA! Strategic Plan · ECSOM Canvas v2 March 2026 · LGU BDIP · BFAR · CEESAM Data Gap Register v1<br>
+    Facilitator protocols: ECSOM Facilitator's Playbook v1.0 (2026) · Schematic map · Authoritative boundaries: CPDO Isabela City
+  </div>
+  <div class="footer-logos">
+    <div class="fpill">LAB.PH</div>
+    <div class="fpill">SKRI</div>
+    <div class="fpill">Roxas-Kalaw Foundation</div>
+  </div>
+</div>
+
+</div><!-- .page -->
+
 <script>
-const kawmanData = {
-  1: {
-    name: "Kawman 1",
-    subtitle: "Coastal — Logistics & Aquaculture",
-    color: "#0F6E56",
-    textColor: "#04342C",
-    bgColor: "#E1F5EE",
-    borderColor: "#5DCAA5",
-    popBadgeBg: "#085041",
-    pop: "29,852",
-    multiplier: null,
-    barangays: [
-      "Marang-Marang (1)","Lukbuton (2)","Lampinigan Island (4)",
-      "Santa Barbara (5)","Diki (10)","Panigayan (13)","Carbon (15)","Tampalan (16)",
-      "+ Malamawi Island (annex)"
+const KD = {
+  1:{
+    name:"Kawman 1",subtitle:"Coastal — Logistics & Aquaculture",
+    color:"#0F6E56",textColor:"#04342C",bgColor:"#E1F5EE",borderColor:"#5DCAA5",popBg:"#085041",
+    pop:"29,852",
+    barangays:["Marang-Marang (1)","Lukbuton (2)","Lampinigan Island (4)","Santa Barbara (5)","Diki (10)","Panigayan (13)","Carbon (15)","Tampalan (16)","+ Malamawi Island"],
+    peoples:[
+      {name:"Sama Dilaut (Badjao)",desc:"Sea nomads · stilt houses · primary coastal"},
+      {name:"Sama Banguingui",desc:"Coastal trading community · 3 CADTs pending"},
+      {name:"Tausug fisherfolk",desc:"IC market consolidators (15–25% margin on Sama catch)"}
     ],
-    peoples: [
-      {name:"Sama Dilaut (Badjao)", desc:"Sea nomads · stilt houses · primary coastal"},
-      {name:"Sama Banguingui", desc:"Coastal trading community"},
-      {name:"Tausug fisherfolk", desc:"IC market consolidators"}
+    resources:[
+      {i:"🌿",t:"Marang-Marang Mangrove Forest — EU-UNDP Sustainable Tourism & Circular Waste pilot"},
+      {i:"🐠",t:"Municipal fisheries — 2,457 registered fisherfolk (LQ 3.84 — strongly specialized)"},
+      {i:"🌊",t:"Seaweed farming — ~800 growers, Malamawi Island"},
+      {i:"⛵",t:"ASEAN Community-Based Tourism Award — floating cottages, kumpít boat culture"},
+      {i:"🦞",t:"Lobster aquaculture (USAID GEM legacy), Malamawi"},
+      {i:"🏖",t:"Malamawi White Beach, Parola Lighthouse, Panigayan Beach"},
     ],
-    resources: [
-      {icon:"🌿", text:"Marang-Marang Mangrove Forest — EU-UNDP sustainable tourism target"},
-      {icon:"🐠", text:"Municipal fisheries — 2,457 registered fisherfolk"},
-      {icon:"🌊", text:"Seaweed farming — ~800 growers on Malamawi Island"},
-      {icon:"⛵", text:"Traditional kumpít boats — ASEAN Community-Based Tourism Award"},
-      {icon:"🦞", text:"Lobster aquaculture (USAID GEM legacy)"},
-      {icon:"🏖", text:"Malamawi White Beach & Malamawi Lighthouse (Parola)"},
-      {icon:"♻️", text:"Circular Waste Management pilot (EU-UNDP)"}
+    econ:"Export gate & fisheries hub. Fisheries LQ = <strong>3.84</strong>. Cold chain absent — all catch moves off-island fresh. Sama Dilaut price-takers to Tausug consolidators (structural equity issue). Marang-Marang mangroves targeted by EU-UNDP. Sea tenure insecure — CADTs pending.",
+    cadt:"3 CADTs pending under NCIP for Sama, Sama Banguingui, Yakan ICCs. IPMR seats held for Sama and Badjao in LGU. FPIC required before any coastal mapping or documentation activity.",
+    gaps:[
+      {id:"G-01",sev:"C",label:"Fish catch volumes (kg/day, seasonal)",desc:"LQ 3.84 is model-calibrated from PSA proxy. No primary BFAR catch landing data for Isabela City fisherfolk.",validate:"KII with BFAR Isabela City fishery officer. Request Fish Catch Monitoring System (FCMS) records. FGD: ask fisherfolk for estimated daily/seasonal catch per boat type."},
+      {id:"G-02",sev:"S",label:"Seaweed farm area (ha) and yield",desc:"~800 growers is an estimate with no confirmed CAgO or BFAR barangay-level survey.",validate:"KII with Malamawi Island cooperative officers. Request DA/BFAR seaweed production data by barangay."},
+      {id:"G-03",sev:"S",label:"Cold chain infrastructure — exact capacity and operator",desc:"Cold chain absence confirmed qualitatively. No data on nearest cold storage capacity or logistics cost.",validate:"KII with PPA Port Area officer and private fish traders. Map: where does the catch go from landing to sale?"},
+      {id:"G-04",sev:"S",label:"Mangrove area (ha) — Marang-Marang",desc:"Mentioned as a key ecological asset but no confirmed DENR/LGU area figure.",validate:"DENR CENRO Basilan or NAMRIA satellite data. Community map exercise during workshop."},
+      {id:"G-05",sev:"S",label:"Tausug–Sama price margin in fish value chain",desc:"15–25% margin is a structural observation from the ECSOM narrative; not confirmed by primary survey.",validate:"FGD with Sama Dilaut fisherfolk (separate from Tausug traders). Compare selling price at landing vs. market price. KII: fish trader (Tausug IC market)."},
+      {id:"G-06",sev:"M",label:"CADT boundary coordinates for Sama Banguingui ICC",desc:"3 CADTs pending under NCIP; no confirmed geographic delineation available.",validate:"KII with NCIP Basilan Provincial Office. Request CADT application status and coverage map."},
     ],
-    economic: "Export gate & fisheries hub. Fisheries LQ = <strong>3.84</strong> (strongly specialized). Marang-Marang mangroves targeted under EU-UNDP Green Economy Partnership. Port Area serves as the primary inter-island trade gateway to Zamboanga City.",
-    cadt: "3 CADTs pending under NCIP for Sama, Sama Banguingui, and Yakan ICCs. IPMR seats held for Sama and Badjao in LGU."
+    kii:{
+      targets:["BFAR Isabela City fishery officer","Port Authority (PPA) officer","Sama/Badjao IPMR (LGU legislative body)","EU-UNDP Green Economy Partnership field coordinator","Seaweed cooperative officer — Malamawi Island","Mangrove management body / CENRO Basilan"],
+      questions:[
+        "Describe the flow of fish from landing to first buyer here — who handles it, where does it go, and who sets the price?",
+        "What has happened to catch volumes over the last 10 years? Are there seasons when fish are now scarce that used to be productive?",
+        "What is the status of the 3 CADT applications for coastal communities? What is the main obstacle to resolution?",
+        "Does the PPA have records of cargo volumes by commodity type? Can these be shared for the CEESAM model?",
+        "What is the EU-UNDP's current intervention in Marang-Marang — what has been assessed and what is being piloted?",
+        "If you could change one thing about how the fish value chain is organized here, what would it be?"
+      ],
+      probe:"Ask specifically: What is a typical daily catch (kilos) per boat type (banca, motorized, trawl)? What was it 5 years ago? This directly feeds the fisheries sector coefficient in the IO matrix."
+    },
+    fgd:{
+      groups:["Sama Dilaut / Badjao fisherfolk (separate from Tausug)","Sama Banguingui coastal traders","Malamawi Island women's mariculture & seaweed group","Mangrove community users (Marang-Marang)"],
+      questions:[
+        "Can you describe what this coastline looked like when your parents were young? What has changed most — the fish, the mangroves, the sea itself?",
+        "Who does your household sell to after a catch? How is the price decided? Has this arrangement changed in recent years?",
+        "When you sell to a buyer here, how much of the final market price does your household receive? Who takes the rest?",
+        "Are there fishing grounds or areas that are now off-limits — by regulation, by custom, or because they are depleted?",
+        "What would it take for your community to have secure rights over the waters you fish? What would change if you had that?",
+        "If this community had funding to invest in one thing that would most improve your fishing livelihood, what would it be?"
+      ],
+      probe:"Use pebble scoring to rank: fish catch trend (up/flat/down), mangrove health (good/degraded/critical), market access (good/difficult/blocked). These three scores feed directly into biocapacity and IO matrix calibration.",
+      method:"Conduct Sama Dilaut FGD separately from any session that includes Tausug traders. Use a Sama-speaking co-facilitator. Heightened FPIC protocol for any discussion of traditional marine tenure or sacred fishing grounds."
+    }
   },
-  2: {
-    name: "Kawman 2",
-    subtitle: "CBD — Finance, Admin & Trade",
-    color: "#185FA5",
-    textColor: "#042C53",
-    bgColor: "#E6F1FB",
-    borderColor: "#85B7EB",
-    popBadgeBg: "#0C447C",
-    pop: "24,799",
-    multiplier: "×1.47 services",
-    barangays: [
-      "Kaumpurnah Zone I (8)","Kaumpurnah Zone II (6)","Kaumpurnah Zone III (7)",
-      "Marketsite (9)","Santa Cruz (14)","Port Area (17)","Seaside (19)",
-      "Isabela Proper (20)","La Piedad (23)","Riverside (24)","Timpul (26)"
+
+  2:{
+    name:"Kawman 2",subtitle:"CBD — Finance, Admin & Trade",
+    color:"#185FA5",textColor:"#042C53",bgColor:"#E6F1FB",borderColor:"#85B7EB",popBg:"#0C447C",
+    pop:"24,799",
+    barangays:["Kaumpurnah Zone I (8)","Kaumpurnah Zone II (6)","Kaumpurnah Zone III (7)","Marketsite (9)","Santa Cruz (14)","Port Area (17)","Seaside (19)","Isabela Proper (20)","La Piedad (23)","Riverside (24)","Timpul (26)"],
+    peoples:[
+      {name:"Chavacano / Zamboangueño",desc:"Dominant · civil service · education · commerce"},
+      {name:"Tausug commercial class",desc:"Wholesale trade · Zakat/Waqf intermediaries · political economy"},
+      {name:"Bisaya / Christian settlers",desc:"Cultural bridge · festival economy contribution"}
     ],
-    peoples: [
-      {name:"Chavacano / Zamboangueño", desc:"Dominant · civil service · education · commerce"},
-      {name:"Tausug commercial class", desc:"Wholesale trade · Zakat/Waqf intermediaries"},
-      {name:"Bisaya / Christian settlers", desc:"Cultural bridge role · festival economy"}
+    resources:[
+      {i:"🏰",t:"Fuerte dela Reina Isabela II (1848 Spanish fort) — National Heritage registered (PRECUP)"},
+      {i:"⚓",t:"Port of Isabela / PPA — inter-island gateway; 'Green Lane' modernization pipeline"},
+      {i:"🧵",t:"Claretcraft gallery — Yakan textile display center; needs connection to live production in K5"},
+      {i:"🕌",t:"Halal economy backbone — Zakat / Waqf social protection system"},
+      {i:"📋",t:"Local Cultural Inventory (LCI) submitted to Philippine Registry of Cultural Property"},
+      {i:"🛒",t:"Kadiwa digital market platform (operational status to confirm)"},
     ],
-    resources: [
-      {icon:"🏰", text:"Fuerte dela Reina Isabela II (1848 Spanish fort) — National Heritage registered"},
-      {icon:"⚓", text:"Port of Isabela / PPA — inter-island gateway, 'Green Lane' modernization"},
-      {icon:"🧵", text:"Claretcraft gallery — Yakan textile display center"},
-      {icon:"🕌", text:"Halal economy backbone — Zakat/Waqf social protection system"},
-      {icon:"📋", text:"Local Cultural Inventory submitted to PRECUP (National Heritage Act RA 10066)"},
-      {icon:"🛒", text:"Kadiwa digital market platform"},
-      {icon:"🏛", text:"City Hall · IPMR governance seats for Sama & Badjao"}
+    econ:"Service sector multiplier <strong>1.47</strong>. City ranked 4th nationally for Cost of Doing Business but 111th for financial deepening. Fiscal base 54% transfer-dependent (IRA + BARMM block grant). OFW remittances estimated at ₱312M but model-derived — no BSP primary source. Bridge between Zamboanga Peninsula and Sulu Archipelago.",
+    cadt:"IPMR seats formally institutionalized for Sama and Badjao communities in the city legislature under IPRA (RA 8371). No active CADT filings in the CBD zone itself.",
+    gaps:[
+      {id:"G-10",sev:"S",label:"OFW remittances: ₱312M — no primary source (Gap #10 in register)",desc:"Figure is model-derived. Plausible range is ₱150–500M. SE→HC CEESAM flow heavily dependent on this.",validate:"KII with BSP Zamboanga regional office: request provincial OFW remittance data for Basilan. FGD probe: 'Does any household member work abroad? How much do they send monthly?'"},
+      {id:"G-11",sev:"S",label:"Zakat ₱84M/yr — rough estimate, no NCMF primary source (Gap #11)",desc:"Actual Zakat redistribution may be ₱20–250M. SE→SE redistribution analysis and T7 ProSumer scoring affected.",validate:"KII with NCMF-BARMM Isabela representative. Tausug Council of Elders or mosque-based Zakat committee. Ask: How is Zakat collected, by whom, and how distributed?"},
+      {id:"G-12",sev:"S",label:"Community Net Worth ₱25–35B — ₱10B range too wide (Gap #12)",desc:"Cannot be used for capital market structuring without narrower estimate. Asset valuation methodology undocumented.",validate:"KII with City Assessor's Office: request Real Property Tax database for assessed land values. KII with City Planning Officer for CLUP property valuations."},
+      {id:"G-14",sev:"S",label:"IRA ₱1,842M — no DBM SARO reference cited (Gap #14)",desc:"Fiscal dependency analysis could be based on incorrect figure. BARMM block grant ₱387M needs separate line.",validate:"KII with City Budget Officer / City Treasurer: request DBM IRA Computation letter for 2023 fiscal year and BARMM block grant SARO."},
+      {id:"G-15",sev:"M",label:"S6 Trade output inconsistency in IO table",desc:"S6 (services/trade) output in the 7-sector IO matrix shows internal inconsistency: row balance differs from column balance by ₱166M.",validate:"KII with City Treasurer / Revenue Office: request BIR tax receipts by sector for 2022-2024. Cross-check BPLS (Business Permit & Licensing System) active establishments count."},
+      {id:"G-16",sev:"M",label:"Port cargo throughput volumes — no confirmed PPA data",desc:"Port cited as key export gate but no confirmed ton/year or container volume data in the CEESAM model.",validate:"KII with PPA Port of Isabela harbormaster: request cargo manifest summary data by commodity type, 2022-2024."},
     ],
-    economic: "Service sector multiplier <strong>1.47</strong>. City ranks 4th nationally for Cost of Doing Business. Financial deepening remains weak (rank 111th). Serves as fiscal and administrative center — 54% transfer income dependency (IRA ₱1.84B + BARMM ₱387M). Bridge between Zamboanga Peninsula and Sulu Archipelago.",
-    cadt: "IPMR seats formally institutionalized for Sama and Badjao communities in city legislature under IPRA (RA 8371)."
+    kii:{
+      targets:["City Treasurer / Revenue Office","City Budget Officer (IRA/BARMM transfer documentation)","BSP Zamboanga regional office (OFW remittances)","NCMF-BARMM Isabela City representative (Zakat/Waqf)","City Assessor's Office (Real Property Tax database)","PPA Isabela harbormaster","NCCA / LCI officer (Cultural Inventory compliance)"],
+      questions:[
+        "What are the city's top three local revenue sources, and how have they trended over the last three years?",
+        "Can you walk me through how the IRA and BARMM block grant are computed and allocated here? What documentation can be shared?",
+        "What is the actual Zakat collection and redistribution process in the city — who holds it, who receives it, and is it tracked?",
+        "Does the City Assessor have a digitized real property tax database? What is the assessed value of land in the major commercial zones?",
+        "What is the current status of the Port 'Green Lane' modernization? What cargo data is available from the PPA?",
+        "What types of businesses have been leaving or arriving in the city in the last two years, and why?"
+      ],
+      probe:"Press for specific peso figures and source documents. The three largest gaps (OFW remittances, Zakat, IRA basis) can only be resolved through official records — these KIIs are data-acquisition sessions as much as they are interviews."
+    },
+    fgd:{
+      groups:["Market vendors and retail traders (Marketsite)","Cooperative members — savings & credit, consumer co-ops","Tausug commercial household representatives","Women in trade and small enterprise"],
+      questions:[
+        "Describe a normal week of business — what do you buy, from whom, and where does it come from? What do you sell, to whom?",
+        "When you need a loan or capital, where do you go? Is the bank useful to you, or do you rely on something else?",
+        "How important are remittances from family abroad to households here? Would most families survive without that income?",
+        "Who benefits most from trade in this city? Are there groups who consistently do better or worse?",
+        "If the city invested in one thing to make trade and business easier here, what would make the biggest difference?",
+        "What happens to the Zakat collected from businesses and households here — where does it go and who decides?"
+      ],
+      probe:"Use dotmocracy or pebble scoring to rank: reliance on remittances vs. local income vs. Zakat/government transfers. This helps triangulate the SE→HC flow in the CEESAM block matrix.",
+      method:"Run a separate FGD with Tausug commercial households and a separate one with market vendors (mixed). The Tausug commercial FGD is the primary source for Zakat/Waqf data and IC market structure."
+    }
   },
-  3: {
-    name: "Kawman 3",
-    subtitle: "East Isabela — Urban Expansion",
-    color: "#BA7517",
-    textColor: "#412402",
-    bgColor: "#FAEEDA",
-    borderColor: "#FAC775",
-    popBadgeBg: "#854F0B",
-    pop: "21,414",
-    multiplier: null,
-    barangays: [
-      "Busay (3)","Baluno (11)","Isabela Eastside / Poblacion (12)","Binuangan (18)",
-      "Begang (21)","Tabiawan (22)","Sunrise Village (27)","Lanote (31)"
+
+  3:{
+    name:"Kawman 3",subtitle:"East Isabela — Urban Expansion",
+    color:"#BA7517",textColor:"#412402",bgColor:"#FAEEDA",borderColor:"#FAC775",popBg:"#854F0B",
+    pop:"21,414",
+    barangays:["Busay (3)","Baluno (11)","Isabela Eastside / Poblacion (12)","Binuangan (18)","Begang (21)","Tabiawan (22)","Sunrise Village (27)","Lanote (31)"],
+    peoples:[
+      {name:"Mixed urban",desc:"Tausug, Chavacano, Bisaya — residential and commercial workforce"},
+      {name:"Bajau / Sama Dilaut",desc:"Coastal fringe settlements · Begang fishing cooperative node"}
     ],
-    peoples: [
-      {name:"Mixed urban", desc:"Tausug, Chavacano, Bisaya — residential and commercial"},
-      {name:"Bajau / Sama Dilaut", desc:"Coastal fringe settlements · Begang fishing cooperative node"}
+    resources:[
+      {i:"🌾",t:"Rice Farmers Field School — IDCAF Farm, Barangay Baluno (City Agriculture Office)"},
+      {i:"🌾",t:"Ayudahan Rice Farmers Association — Barangay Tabiawan (GAD-funded, People's Council link)"},
+      {i:"🏗",t:"Proposed PEZA × Isabela Industry Innovation Hub — Lanote, 40 hectares (R&D, prototyping, SME incubation)"},
+      {i:"🏢",t:"DTI Isabela City Office — Sunrise Village anchor"},
+      {i:"🌊",t:"Fuego Beach eco-tourism — Fuego Fuego restaurant landmark"},
+      {i:"🐟",t:"Begang: ice plant, fish landing, seaweed drying cooperative node"},
     ],
-    resources: [
-      {icon:"🌾", text:"Rice Farmers Field School — IDCAF Farm (Barangay Baluno)"},
-      {icon:"🌾", text:"Ayudahan Rice Farmers Association — Barangay Tabiawan (GAD-funded)"},
-      {icon:"🏗", text:"Proposed PEZA × Isabela Industry Innovation Hub — Lanote, 40 hectares"},
-      {icon:"🏢", text:"DTI Isabela City Office — Sunrise Village anchor"},
-      {icon:"🌊", text:"Fuego Beach eco-tourism — Fuego Fuego restaurant landmark"},
-      {icon:"🌳", text:"Agroforestry transition zone (Baluno–Busay rural-coastal fringe)"},
-      {icon:"🐟", text:"Begang: ice plant, fish landing, seaweed drying cooperative"}
+    econ:"Urban consumption hub. Construction & utilities demand high — rapid urbanization in Sunrise outpacing utility grid. Lanote PEZA 40ha site is the city's primary future industrial anchor. Binuangan-Busay coastal fringe has eco-tourism potential. IMR data flagged as almost certainly a raw count, not a rate.",
+    cadt:"No active CADT filings specific to Kawman 3 barangays. Bajau fishing cooperative at Begang should be engaged through fisherfolk associations for any coastal intervention. Heightened sensitivity around the Tabiawan and Baluno communities' land tenure status.",
+    gaps:[
+      {id:"G-04",sev:"C",label:"IMR 1.61 — almost certainly raw deaths count, not rate per 1,000 LBs (Gap #4)",desc:"National IMR ≈22/1,000. Misinterpretation of Isabela City figure inflates L3 health Social Foundation score and invalidates national comparison.",validate:"KII with City Civil Registrar / City Health Officer: obtain total live births 2020 and infant deaths 2020. Compute rate = infant deaths / LBs × 1,000. Request DOH FHSIS data for cross-check."},
+      {id:"G-08",sev:"S",label:"Poverty incidence: 22.2% (2015) vs 41.6% (2018) — 87% jump unreconciled (Gap #8)",desc:"Different survey instruments not aligned. Time-series comparison invalid. GINI/poverty trend analysis unreliable.",validate:"KII with City Social Welfare Office / DSWD: request CBMS (Community-Based Monitoring System) data for Kawman 3 barangays specifically. Note methodology revision in PSA 2018 round."},
+      {id:"G-13",sev:"S",label:"Senior citizens: 8,975 registered vs ~10,430 census estimate — ~14% underregistration (Gap #13)",desc:"OSCA service gap for ~1,400 unregistered elderly. Social equity indicator underestimates elderly vulnerability.",validate:"KII with OSCA (Office for Senior Citizens Affairs) officer: compare OSCA registry with 2020 Census age structure. FGD probe for elderly caregivers."},
+      {id:"G-17",sev:"M",label:"PEZA 40ha site (Lanote) — proposed status unconfirmed",desc:"Status of PEZA proclamation, LGU endorsement, and land acquisition not verified in current documents.",validate:"KII with DTI Isabela City Office and LGU CPDO: request update on PEZA application timeline and current land classification of Lanote site."},
+      {id:"G-18",sev:"M",label:"Rice yield data — Tabiawan / Baluno farmer associations",desc:"Ayudahan Rice Farmers Association and IDCAF Field School cited but no confirmed yield (cav/ha), area cultivated, or membership count.",validate:"KII with City Agriculture Office (CAgO): request rice production data by barangay for 2022-2024. FGD with Ayudahan association officers."},
     ],
-    economic: "Urban consumption hub driving Trade & Services multiplier. Rapid urbanization of Sunrise Village and Eastside is outpacing utility grid capacity. Lanote PEZA site (40ha) is the city's primary future industrial-innovation anchor. Binuangan-Busay coastal fringe has high eco-tourism potential.",
-    cadt: "No active CADT filings specific to Kawman 3. Bajau fishing cooperative at Begang should be engaged through fisherfolk associations for any coastal interventions."
+    kii:{
+      targets:["City Health Officer / Civil Registrar (IMR, health facility data)","City Social Welfare Office / OSCA (poverty, elderly)","DTI Isabela City Office (PEZA site status, business registration)","City Agriculture Office — CAgO (rice production, field schools)","DSWD CBMS focal person","Lanote barangay captain (site situation on the ground)"],
+      questions:[
+        "What is the actual infant mortality rate for the city, computed per 1,000 live births? Can you share the raw birth and death registry data for 2020?",
+        "How many senior citizens are registered with OSCA versus how many the 2020 Census implies exist in this age group? What services are they receiving?",
+        "What is the current status of the proposed PEZA Innovation Hub in Lanote — is land acquisition complete? Who owns the 40 hectares?",
+        "What is the average rice yield per hectare for Tabiawan and Baluno farms? How does it compare to the provincial average?",
+        "What percentage of households in this kawman are in the DSWD LISTAHANAN register? How many are receiving 4Ps?",
+        "What infrastructure investments have been made in Sunrise Village in the last three years — utilities, roads, drainage?"
+      ],
+      probe:"The IMR data gap (Gap #4) is CRITICAL — it affects the Social Foundation health scoring. Prioritize this KII with the City Health Officer early in the field schedule."
+    },
+    fgd:{
+      groups:["Rice farmers — Tabiawan / Baluno (Ayudahan association and Field School participants)","Bajau fishing cooperative members — Begang","Urban informal settlers — Sunrise Village / Eastside","Women / caregivers (elderly and children care economy)"],
+      questions:[
+        "Describe how your household made its living five years ago versus today — what has changed?",
+        "What services does your family rely on most from the government or barangay? Which ones are hardest to access?",
+        "When rice season comes, what is a typical harvest? What do you do with what you produce — how much do you sell and how much do you keep?",
+        "For the Begang community: who do you sell your catch to, and where does the ice come from? Has the ice plant here helped?",
+        "Are there households in this barangay that are particularly left out of community projects or government programmes? Who are they?",
+        "If this community had one investment to improve everyday life for the most vulnerable families, what would it be?"
+      ],
+      probe:"Run the CEESAM ProSumer diagnostic: ask rice farmers what % of their crop they consume at home vs. sell. A household that consumes >70% of its production is Stage 1 (subsistence) — this feeds the S1 agricultural sector coefficient.",
+      method:"The Bajau FGD at Begang should be conducted at the barangay level, not at a central venue. Use a Sama-speaking facilitator. Avoid venues associated with the dominant Tausug commercial class."
+    }
   },
-  4: {
-    name: "Kawman 4",
-    subtitle: "West Isabela — Industrial Core",
-    color: "#993C1D",
-    textColor: "#4A1B0C",
-    bgColor: "#FAECE7",
-    borderColor: "#F0997B",
-    popBadgeBg: "#712B13",
-    pop: "41,324",
-    multiplier: "×1.76 rubber & coco",
-    barangays: [
-      "Tabuk / Poblacion (25)","Aguada (28)","Doña Ramona T. Alano (29)","San Rafael (30)",
-      "Sumagdang (33)","Menzi (34)","Balatanay & Balatanay Island (35)","Cabunbata (36)","Makiri (37)"
+
+  4:{
+    name:"Kawman 4",subtitle:"West Isabela — Industrial Core",
+    color:"#993C1D",textColor:"#4A1B0C",bgColor:"#FAECE7",borderColor:"#F0997B",popBg:"#712B13",
+    pop:"41,324",
+    barangays:["Tabuk / Poblacion (25)","Aguada (28)","Doña Ramona T. Alano (29)","San Rafael (30)","Sumagdang (33)","Menzi (34)","Balatanay & Balatanay Island (35)","Cabunbata (36)","Makiri (37)"],
+    peoples:[
+      {name:"Mixed urban — Chavacano, Tausug",desc:"Commercial and industrial workforce · largest population zone"},
+      {name:"Yakan peripheral communities",desc:"Adjacent to upland ancestral domain areas · plantation interface"}
     ],
-    peoples: [
-      {name:"Mixed urban — Chavacano, Tausug", desc:"Commercial & industrial workforce"},
-      {name:"Yakan peripheral communities", desc:"Adjacent to upland ancestral domain areas"}
+    resources:[
+      {i:"🌴",t:"Rubber & Coconut manufacturing — highest sectoral multiplier ×1.76"},
+      {i:"🏭",t:"Menzi agro-industrial & multi-crop processing hub"},
+      {i:"🎓",t:"Basilan State College — Sumagdang (institutional research partner, Dr. Hidalgo-Cruz)"},
+      {i:"🌿",t:"Cabunbata watershed & bamboo plantation zone"},
+      {i:"♻️",t:"BRICKS Program circular economy pilot — rubber waste to construction materials"},
+      {i:"☀️",t:"EU-Philippines Green Economy Partnership — solar processing plants initiative"},
     ],
-    resources: [
-      {icon:"🌴", text:"Rubber & Coconut manufacturing — highest sectoral multiplier ×1.76"},
-      {icon:"🏭", text:"Menzi agro-industrial & multi-crop processing hub"},
-      {icon:"🎓", text:"Basilan State College — Sumagdang (institutional research partner)"},
-      {icon:"🌿", text:"Cabunbata watershed & bamboo plantation zone"},
-      {icon:"♻️", text:"BRICKS Program — circular economy: rubber waste → construction materials"},
-      {icon:"☀️", text:"EU-Philippines Green Economy Partnership — solar processing plants"},
-      {icon:"🏖", text:"Panigayan Beach — coastal recreation"},
-      {icon:"🌊", text:"San Rafael: urban-industrial fringe — high commercial growth"}
+    econ:"Highest output multiplier: <strong>×1.76</strong> rubber & coconut. Every ₱1M in new exports generates ₱760K additional local activity. BRICKS Program creates a new IO circular linkage (S2 manufacturing waste → S5 construction input). Power reliability is the primary production constraint. Leontief inverse is hand-calibrated — not yet computed from the corrected A matrix.",
+    cadt:"Legacy LARBENCO and Goodrich Plantation lands present — IP ancestral domain claims (Yakan and Sama Banguingui) potentially overlapping with plantation perimeter. 3 CADTs pending under NCIP. Any plantation boundary or land tenure documentation requires prior NCIP consultation.",
+    gaps:[
+      {id:"G-06",sev:"S",label:"Leontief inverse (LEO7) — hand-calibrated, not computed from A matrix (Gap #6)",desc:"Output multipliers are directionally correct but exact magnitudes unvalidated. ×1.76 rubber multiplier may shift when corrected.",validate:"Field data needed: KII with rubber/coconut processing plants for actual input-output ratios (electricity per ton rubber, labour per ton output). This feeds direct computation of A matrix coefficients."},
+      {id:"G-07",sev:"S",label:"EF coefficients applied to gross output, not final demand (Gap #7)",desc:"Carbon EF and cropland EF overstated by est. 15–25%. Policy conclusions directionally correct but magnitudes inflated for K4 manufacturing sector.",validate:"KII with BASELCO/BAPCO: request actual kWh consumed by rubber/coconut processing sector 2022-2024. This allows EF recalculation on final demand basis."},
+      {id:"G-19",sev:"S",label:"Rubber production volumes (tons/year) and plantation area (ha) — no verified primary data",desc:"Rubber is the highest-multiplier sector but actual production volume is PSA-estimated, not CAgO-confirmed at barangay level.",validate:"KII with CAgO Isabela City and DA Region IX: request rubber smallholder census data. KII with Menzi hub and rubber processing plant operators for processing volumes."},
+      {id:"G-20",sev:"S",label:"BASELCO electricity reliability data — power outage frequency and duration",desc:"Solar processing investment is premised on power instability but no confirmed BASELCO outage record cited.",validate:"KII with BASELCO/BAPCO operations: request outage frequency and duration data for industrial zone (Aguada-Menzi-Cabunbata corridor) 2022-2024."},
+      {id:"G-21",sev:"M",label:"BRICKS Program quantified outputs — no confirmed circular economy tonnage",desc:"BRICKS cited as creating a new IO circular linkage but no confirmed waste-to-construction volume data available.",validate:"KII with BRICKS Program coordinator (EU-UNDP): request pilot outputs — tons rubber waste diverted, construction inputs produced, participating households."},
+      {id:"G-22",sev:"M",label:"LARBENCO / Goodrich plantation boundary — no confirmed legal area or tenure status",desc:"Legacy plantation infrastructure present but actual land area, legal status, and IP overlap are undocumented in CEESAM model.",validate:"KII with NCIP Basilan Provincial Office and LGU CPDO: request cadastral map of plantation lots and IP claim overlap assessment."},
     ],
-    economic: "Highest output multiplier: <strong>×1.76</strong> rubber & coconut. Every ₱1M in new exports triggers ₱760K in additional local circulation. BRICKS Program links industrial waste (rubber, plastic) to construction inputs — new 'circular linkage' in the IO matrix. Power reliability is the primary constraint: solar investment addresses the utility coefficient gap. Largest population zone at 41,324.",
-    cadt: "Legacy LARBENCO and Goodrich Plantation lands present — IP ancestral domain claims (Yakan and Sama) potentially overlapping. 3 CADTs pending under NCIP."
+    kii:{
+      targets:["BASELCO/BAPCO operations manager (electricity reliability data)","Rubber/coconut processing plant manager — Menzi or Aguada area","Basilan State College faculty — Dr. Heidi Faith Hidalgo-Cruz","BRICKS Program coordinator (EU-UNDP)","City Agriculture Office (CAgO) — rubber/coconut production data","NCIP Basilan — plantation boundary / CADT overlap","LARBENCO or Goodrich estate administrator (if accessible)"],
+      questions:[
+        "What is the actual volume of rubber processed annually in this kawman — in wet latex, dry crumb rubber, and final export weight?",
+        "What are your main production inputs per ton of output — electricity (kWh), water (m³), labour (person-days)? This is the core data for the IO coefficient matrix.",
+        "How often does the power go out here, and for how long? What does an outage cost you in lost production?",
+        "What is the BRICKS Program actually producing — how many tons of industrial waste have been diverted and into what construction products?",
+        "What is the legal status of the LARBENCO and Goodrich plantation lands? Are there any IP ancestral domain claims overlapping with the plantation perimeter?",
+        "What research partnerships does Basilan State College have with local industries in this zone? What data do they hold on rubber and coconut productivity?"
+      ],
+      probe:"Ask rubber processors: 'For every 1 ton of finished crumb rubber you produce, how much raw latex do you need, and where does it come from?' This is the a_21 technical coefficient in the IO matrix — currently unverified."
+    },
+    fgd:{
+      groups:["Rubber smallholder cooperative members","Industrial workers — processing plants (Menzi/Aguada)","Yakan peripheral community members at plantation fringe","Women in agro-processing and packaging"],
+      questions:[
+        "Describe your rubber farming from tapping to sale — how many trees, how many kilos per week, who buys it, and what price do you get?",
+        "What inputs do you have to buy for your rubber farm — fertilizer, tools, transport? Where do you get them from?",
+        "How much of your income comes from rubber versus other sources? Has the income from rubber changed in the last five years?",
+        "When rubber prices drop, what do households here do to survive? Are there safety nets — cooperative, mosque, barangay?",
+        "Has the plantation (LARBENCO/Goodrich) land affected your community's access to land or resources? How?",
+        "If a processing facility were built here, who in this community would benefit? Who might be left out?"
+      ],
+      probe:"Use a seasonal calendar for rubber tapping — ask: what months do you tap, what months do you rest, what months does the price change? This feeds the seasonality coefficient in the IO matrix and identifies climate risk exposure.",
+      method:"Conduct the Yakan peripheral community FGD at a venue and time agreed with the imam and Council of Elders — not at the processing plant or LGU offices. Follow adat protocols. Do not record discussions about land claims or ancestral domain without specific elder consent."
+    }
   },
-  5: {
-    name: "Kawman 5",
-    subtitle: "South / Upland — Resource Base",
-    color: "#3B6D11",
-    textColor: "#173404",
-    bgColor: "#EAF3DE",
-    borderColor: "#97C459",
-    popBadgeBg: "#27500A",
-    pop: "17,487",
-    multiplier: null,
-    barangays: [
-      "Panunsulan (32)","Calvario (38)","Maligue (39)","Lumbang (40)",
-      "Kapatagan Grande (41)","Kumalarang (42)","Small Kapatagan (43)",
-      "Kapayawan (44)","Masula (45)"
+
+  5:{
+    name:"Kawman 5",subtitle:"South / Upland — Resource Base & Yakan Territory",
+    color:"#3B6D11",textColor:"#173404",bgColor:"#EAF3DE",borderColor:"#97C459",popBg:"#27500A",
+    pop:"17,487",
+    barangays:["Panunsulan (32)","Calvario (38)","Maligue (39)","Lumbang (40)","Kapatagan Grande (41)","Kumalarang (42)","Small Kapatagan (43)","Kapayawan (44)","Masula (45)"],
+    peoples:[
+      {name:"Yakan — primary community",desc:"Original inhabitants of Basilan interior · 42.1% of province"},
+      {name:"Yakan Council of Elders",desc:"21 tribal leaders — formally engaged by MIPA · legitimate governance unit"},
+      {name:"Yakan IP Women's Groups",desc:"Dual role: food production + weaving economy (abaca pis & malong)"}
     ],
-    peoples: [
-      {name:"Yakan — primary community", desc:"Original inhabitants of Basilan interior · 42.1% of province"},
-      {name:"Yakan Council of Elders", desc:"21 tribal leaders & elders — formally engaged by MIPA"},
-      {name:"Yakan IP Women's Groups", desc:"Dual role: food production + weaving economy"}
+    resources:[
+      {i:"🧵",t:"Yakan traditional weaving — Kumalarang ('Kingdom of Kumalarang' in Ming China texts; 'place for celebrations')"},
+      {i:"🌾",t:"Upland rice, cassava, coconut swidden agriculture — traditional Yakan farming calendar"},
+      {i:"🥬",t:"SCoPSA vegetable farming initiative — 95% vegetable import leakage target"},
+      {i:"🌿",t:"Rubber & cacao agroforestry — Kapayawan-Kapatagan Grande corridor"},
+      {i:"🌱",t:"Community seed bank (proposed) — indigenous crop varieties"},
+      {i:"🌲",t:"CBFM agroforestry zones — upland forest management"},
     ],
-    resources: [
-      {icon:"🧵", text:"Yakan traditional weaving — abaca pis & malong textiles (Kumalarang — 'Kingdom of Kumalarang' in Ming texts)"},
-      {icon:"🌾", text:"Upland rice, cassava, coconut swidden agriculture — traditional Yakan farming calendar"},
-      {icon:"🥬", text:"SCoPSA vegetable farming — target: recover 95% vegetable import leakage (₱489M/yr)"},
-      {icon:"🌿", text:"Rubber & cacao agroforestry — Kapayawan-Kapatagan corridor"},
-      {icon:"🌱", text:"Community seed bank (proposed) — indigenous crop varieties"},
-      {icon:"🏕", text:"Eco-cultural trail — Kumalarang heritage site to bamboo & cacao farms"},
-      {icon:"🌲", text:"CBFM agroforestry zones — upland forest management"}
+    econ:"Primary input supplier for Kawman 4 processing. 95% of vegetables currently imported from Zamboanga (₱489M/yr food import bill). Recovering 20% of this market would add <strong>₱115M/year</strong> in local GVA. Kapayawan-Kapatagan corridor: key raw material base for the rubber multiplier chain. Farm-to-market road cost is the primary productivity constraint.",
+    cadt:"Yakan Ancestral Domain — IPRA / FPIC compliance (RA 8371) required for ALL field activities without exception. Adat (customary law) and mosque-based settlement structures are legitimate governance units. Engage the Council of Elders FIRST, minimum two weeks before any field session. Do not photograph weaving patterns, ritual spaces, or oral genealogies without designated knowledge holder consent.",
+    gaps:[
+      {id:"G-05",sev:"C",label:"Biocapacity: 88,990 gha (sub-block sum) vs claimed 195,000 gha — 106,010 gha gap (Gap #5)",desc:"Overstates biocapacity by 2.2×. All EF deficit calculations understated. Upland land cover is the primary unresolved component.",validate:"Community resource map during workshop: ask Yakan community to mark agricultural, fallow, forest, and degraded land. Cross-reference with NAMRIA land cover map. KII with DENR CENRO Basilan for forest cover data."},
+      {id:"G-09",sev:"S",label:"Vegetable data: 58.4 kg/cap total consumption conflated with 4.8 kg/cap local supply (Gap #9)",desc:"Narrative conflation understates the true food self-sufficiency gap. SCoPSA intervention scale depends on accurate gap figure.",validate:"FGD with upland farmers: ask 'How much of the vegetables your family eats do you grow yourselves?' Separate production from consumption in the pebble-scoring exercise. KII with CAgO for vegetable supply balance sheet."},
+      {id:"G-23",sev:"S",label:"Upland agricultural land area (ha) — community estimate only",desc:"No confirmed CAgO or BSWM survey of cultivated area in Kawman 5 barangays. Agri sector coefficient underpinned by proxy.",validate:"Workshop resource map: mark all cultivated plots. KII with CAgO and BSWM for any existing soil / land capability survey in the upland zone."},
+      {id:"G-24",sev:"S",label:"Yakan weaving economy scale — TEV (Total Economic Value) estimate unreliable",desc:"~500 Yakan weaving artisans cited with no income survey. Weaving linked to Zakat estimate (₱84M Gap #11) but independently unverified.",validate:"FGD with Yakan IP Women's weaving groups (Kumalarang): ask how many pieces per month, what price per piece, who buys. KII with Claretcraft gallery for sales data."},
+      {id:"G-25",sev:"S",label:"Farm-to-market road condition — qualitative description only, no km or condition rating",desc:"Road cost is identified as the primary productivity constraint but no confirmed barangay-level road inventory data.",validate:"KII with City Engineering Office / DPWH: request farm-to-market road inventory for Kawman 5 barangays. Transect walk during workshop to assess road condition."},
+      {id:"G-26",sev:"M",label:"Rubber / cacao yields (tons/ha) at barangay level — no primary data",desc:"Kapayawan-Kapatagan corridor cited as key raw material base but yields are PSA provincial averages, not local.",validate:"KII with CAgO and Yakan rubber smallholder groups: ask yield per hectare per year, number of productive trees, age of plantation. Compare to DA benchmark yield."},
     ],
-    economic: "Primary input supplier for Kawman 4 processing. Vegetables: 95% currently imported from Zamboanga City — recovering just 20% would add <strong>₱115M/year</strong> in local agricultural GVA. Kapayawan–Kapatagan Grande corridor is the key raw material base for the rubber multiplier chain. Upland farmers face high farm-to-market road costs as primary productivity constraint.",
-    cadt: "Yakan Ancestral Domain — IPRA / FPIC compliance (RA 8371) required for ALL field activities. Adat (customary law) and mosque-based settlement structures are legitimate governance units. Engage Council of Elders FIRST before any external frameworks."
+    kii:{
+      targets:["Yakan Council of Elders — initial consultation FIRST (two weeks before field work)","NCIP Basilan Provincial Office — CADT status and FPIC process","City Agriculture Office (CAgO) — vegetable supply balance, upland crops","DENR CENRO Basilan — forest cover, CBFM zone boundaries","Yakan weaving cooperative leader / Claretcraft gallery contact","BSWM (Bureau of Soils and Water Management) — soil survey data","DA / DA-BSWM for any SCoPSA feasibility study data"],
+      questions:[
+        "Could you describe the traditional Yakan system for managing land and farming — how are decisions made about who cultivates where, and how is this passed on?",
+        "What is the status of the Yakan Ancestral Domain CADT application? What are the main obstacles? What area does the claimed domain cover?",
+        "How much of the vegetables consumed in this community are grown here versus bought from Zamboanga? Has this changed in recent years?",
+        "What are the main reasons why upland farmers here cannot earn more from what they produce — is it road access, price, storage, buyers, or inputs?",
+        "Does CAgO have barangay-level data on cultivated area, crop yields, and farm household counts for Kawman 5?",
+        "What is the realistic price that a Yakan weaving piece sells for — at the cooperative level, at the gallery level, and at the export level?"
+      ],
+      probe:"For the biocapacity gap (CRITICAL): 'How much land in this barangay is still productive forest? How much has been cleared in the last 10 years? How much is now fallow?' Mark these on the community map. This directly resolves Gap #5."
+    },
+    fgd:{
+      groups:["Yakan women's weaving group — Kumalarang (with IP women's group facilitator)","Yakan upland rice farmers — cross-barangay (Maligue, Lumbang, Kapayawan)","Youth — Yakan young adults on livelihood transitions","Council of Elders — separate session on traditional ecological knowledge"],
+      questions:[
+        "What did this land look like when your grandparents farmed it? What has changed in the forest, the soil, the water, the animals?",
+        "When you plant your rice or cassava, what signs from nature do you follow — what tells you it is the right time to plant or harvest?",
+        "How many kilos of rice does your household harvest in a year? How many kilos do you need for the whole year? Where does the rest come from?",
+        "For weavers: how long does one pis or malong take to complete? What price do you receive? Who buys it? Has the price changed?",
+        "What is the biggest obstacle preventing you from earning more from your farm or your weaving? Is it road access, buyers, storage, materials, or something else?",
+        "What does this community need to protect — land, knowledge, forest, or practice — that is most at risk of being lost?"
+      ],
+      probe:"Use a seasonal calendar for the full agricultural cycle: planting, tending, harvest, fallow. Map against rainfall pattern and trade months. This is the most critical biocapacity data input for Kawman 5 and resolves Gaps #9, #23, and #26 simultaneously.",
+      method:"Conduct all Yakan FGDs in Yakan language with a bilingual community facilitator. Seek the imam's blessing before starting sessions. The Council of Elders session is a separate, more formal engagement — not a standard FGD. Do not mix the elders session with youth or women's groups. Do not photograph weaving patterns without explicit consent from the knowledge holder, not the barangay captain."
+    }
   }
 };
 
-let activeKawman = null;
+let activeK=null;
+let activeTab={};
 
-function showKawman(id) {
-  activeKawman = id;
-  const d = kawmanData[id];
+function showKawman(id){
+  activeK=id;
+  const d=KD[id];
 
-  // Update zone highlights
-  document.querySelectorAll('.kawman-zone').forEach(z => z.classList.remove('active'));
-  const z1 = document.getElementById('zone' + id);
-  if (z1) z1.classList.add('active');
-  const zm = document.getElementById('zoneM');
-  if (id === 1 && zm) zm.classList.add('active');
+  document.querySelectorAll('.kawman-zone').forEach(z=>z.classList.remove('active'));
+  const z=document.getElementById('zone'+id);
+  if(z) z.classList.add('active');
+  const zm=document.getElementById('zoneM');
+  if(id===1&&zm) zm.classList.add('active');
 
-  // Update legend
-  document.querySelectorAll('.legend-item').forEach(l => l.classList.remove('active'));
-  const leg = document.getElementById('leg' + id);
-  if (leg) leg.classList.add('active');
+  document.querySelectorAll('.leg-i').forEach(l=>l.classList.remove('active'));
+  const leg=document.getElementById('leg'+id);
+  if(leg) leg.classList.add('active');
 
-  // Build detail content
-  const brgys = d.barangays.map(b => `<span class="brgy-pill">${b}</span>`).join('');
-  const peoples = d.peoples.map(p => `
-    <div style="display:flex;align-items:flex-start;gap:8px;padding:5px 0;border-bottom:1px solid ${d.borderColor}30;">
-      <div style="width:7px;height:7px;border-radius:50%;background:${d.color};margin-top:5px;flex-shrink:0;"></div>
-      <div>
-        <div style="font-size:12.5px;font-weight:500;color:${d.textColor};">${p.name}</div>
-        <div style="font-size:11px;color:${d.color};">${p.desc}</div>
-      </div>
+  if(!activeTab[id]) activeTab[id]='overview';
+
+  renderCard(id);
+  document.getElementById('detailCard').style.borderColor=d.borderColor;
+}
+
+function switchTab(id,tab){
+  activeTab[id]=tab;
+  renderCard(id);
+}
+
+function renderCard(id){
+  const d=KD[id];
+  const tab=activeTab[id]||'overview';
+
+  const brgys=d.barangays.map(b=>`<span class="brgy-pill">${b}</span>`).join('');
+  const peoples=d.peoples.map(p=>`<div style="display:flex;align-items:flex-start;gap:7px;padding:4px 0;border-bottom:1px solid ${d.borderColor}30;"><div style="width:6px;height:6px;border-radius:50%;background:${d.color};margin-top:5px;flex-shrink:0;"></div><div><div style="font-size:12px;font-weight:500;color:${d.textColor};">${p.name}</div><div style="font-size:10.5px;color:${d.color};">${p.desc}</div></div></div>`).join('');
+  const resources=d.resources.map(r=>`<div class="res-item"><span class="res-icon">${r.i}</span><span>${r.t}</span></div>`).join('');
+
+  const gapRows=d.gaps.map(g=>`
+    <div class="gap-row">
+      <span class="gap-id">${g.id}</span>
+      <div class="gap-label"><strong>${g.label}</strong><br>${g.desc}</div>
+      <span class="badge-sev sev-${g.sev}">${g.sev==='C'?'CRITICAL':g.sev==='S'?'SIGNIFICANT':'MINOR'}</span>
+      <div class="gap-validate">▸ Field action: ${g.validate}</div>
+    </div>`).join('');
+
+  const kiiTargets=d.kii.targets.map(t=>`<span class="kii-chip">⬤ ${t}</span>`).join('');
+  const kiiQs=d.kii.questions.map(q=>`<div class="q-item">${q}</div>`).join('');
+  const fgdGroups=d.fgd.groups.map(g=>`<span class="fgd-chip">◆ ${g}</span>`).join('');
+  const fgdQs=d.fgd.questions.map(q=>`<div class="q-item">${q}</div>`).join('');
+
+  const tabBtns=['overview','gaps','facilitator'].map(t=>`<button class="tab-btn${tab===t?' active':''}" onclick="switchTab(${id},'${t}')">${t==='overview'?'Overview':t==='gaps'?`Data Gaps (${d.gaps.length})`:'Facilitator Guide'}</button>`).join('');
+
+  let tabContent='';
+  if(tab==='overview'){
+    tabContent=`
+      <div class="tab-pane active">
+        <div class="sec-title" style="margin-bottom:6px">Barangays</div>
+        <div class="brgy-grid" style="margin-bottom:12px">${brgys}</div>
+        <div class="sec-title">Peoples</div>
+        <div style="margin-bottom:12px">${peoples}</div>
+        <div class="sec-title">Eco-Cultural Resources</div>
+        <div style="margin-bottom:8px">${resources}</div>
+        <div class="sec-title">CEESAM Economic Role</div>
+        <p class="econ-p" style="margin-bottom:8px">${d.econ}</p>
+        <div class="cadt-box"><strong>IP / CADT:</strong> ${d.cadt}</div>
+      </div>`;
+  } else if(tab==='gaps'){
+    tabContent=`
+      <div class="tab-pane active">
+        <div class="gap-section-hdr">Data gaps requiring field validation — Kawman ${id}</div>
+        ${gapRows}
+        <div style="margin-top:10px;font-size:10px;color:var(--text-muted);">Severity: CRITICAL = correct before policy use · SIGNIFICANT = resolve before next data round · MINOR = informational. Source: CEESAM Data Gap Register v1 (March 2026), 29 items total.</div>
+      </div>`;
+  } else {
+    tabContent=`
+      <div class="tab-pane active">
+        <div class="q-block">
+          <div class="q-label" style="color:var(--blue-600)">KII — Key Informant Interview targets</div>
+          <div style="margin-bottom:8px">${kiiTargets}</div>
+          <div class="q-label" style="margin-top:8px">KII questions</div>
+          ${kiiQs}
+          <div class="q-probe" style="margin-top:8px"><strong>Data probe:</strong> ${d.kii.probe}</div>
+        </div>
+        <div class="q-block">
+          <div class="q-label" style="color:var(--teal-600)">FGD — Focus Group Discussion groups</div>
+          <div style="margin-bottom:8px">${fgdGroups}</div>
+          <div class="q-label" style="margin-top:8px">FGD questions</div>
+          ${fgdQs}
+          <div class="q-probe" style="margin-top:8px"><strong>Quantitative probe:</strong> ${d.fgd.probe}</div>
+          ${d.fgd.method?`<div class="method-note" style="margin-top:5px"><strong>Cultural / method note:</strong> ${d.fgd.method}</div>`:''}
+        </div>
+      </div>`;
+  }
+
+  document.getElementById('detailContent').innerHTML=`
+    <div class="dc-hdr" style="border-left:4px solid ${d.color}">
+      <div class="dc-kicker">Kawman zone · ${d.barangays.length} barangays</div>
+      <div class="dc-title" style="color:${d.textColor}">${d.name}</div>
+      <div class="dc-role">${d.subtitle}</div>
+      <span class="pop-badge" style="background:${d.bgColor};color:${d.textColor};border-color:${d.borderColor}">${d.pop} residents (2020)</span>
     </div>
-  `).join('');
-  const resources = d.resources.map(r => `
-    <div class="resource-item">
-      <span class="resource-icon">${r.icon}</span>
-      <span>${r.text}</span>
-    </div>
-  `).join('');
-
-  const multBadge = d.multiplier
-    ? `<span class="multiplier-badge" style="background:${d.color};color:${d.bgColor};">${d.multiplier}</span>`
-    : '';
-
-  document.getElementById('detailContent').innerHTML = `
-    <div class="detail-card-header" style="border-left:4px solid ${d.color};">
-      <div class="detail-card-kicker">Kawman zone · ${d.barangays.length} barangays</div>
-      <div class="detail-card-title" style="color:${d.textColor};">${d.name} ${multBadge}</div>
-      <div class="detail-card-role">${d.subtitle}</div>
-      <div class="detail-pop-badge" style="background:${d.bgColor};color:${d.textColor};border:1px solid ${d.borderColor};">
-        ${d.pop} residents (2020)
-      </div>
-    </div>
-    <div class="detail-body">
-      <div class="detail-section">
-        <div class="detail-section-title">Barangays</div>
-        <div class="brgy-grid">${brgys}</div>
-      </div>
-      <div class="detail-section">
-        <div class="detail-section-title">Indigenous & Ethnic Peoples</div>
-        ${peoples}
-      </div>
-      <div class="detail-section">
-        <div class="detail-section-title">Eco-Cultural Resources</div>
-        ${resources}
-      </div>
-      <div class="detail-section">
-        <div class="detail-section-title">CEESAM Economic Role</div>
-        <p class="econ-text">${d.economic}</p>
-      </div>
-      <div class="cadt-box">
-        <strong>IP / CADT note:</strong> ${d.cadt}
-      </div>
-    </div>
-  `;
-
-  document.getElementById('detailCard').style.borderColor = d.borderColor;
+    <div class="tabs">${tabBtns}</div>
+    <div class="tab-body">${tabContent}</div>`;
 }
 </script>
 </body>
